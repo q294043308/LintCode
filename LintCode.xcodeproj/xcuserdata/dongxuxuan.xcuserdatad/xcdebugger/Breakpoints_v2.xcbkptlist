@@ -14,9 +14,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "6326"
-            endingLineNumber = "6326"
-            landmarkName = "convertToTitle(int n)"
-            landmarkType = "9">
+            endingLineNumber = "6326">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -30,9 +28,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "6327"
-            endingLineNumber = "6327"
-            landmarkName = "convertToTitle(int n)"
-            landmarkType = "9">
+            endingLineNumber = "6327">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -46,9 +42,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "6345"
-            endingLineNumber = "6345"
-            landmarkName = "numberOfLines(vector&lt;int&gt; &amp;widths, string &amp;S)"
-            landmarkType = "9">
+            endingLineNumber = "6345">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -62,9 +56,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "6341"
-            endingLineNumber = "6341"
-            landmarkName = "numberOfLines(vector&lt;int&gt; &amp;widths, string &amp;S)"
-            landmarkType = "9">
+            endingLineNumber = "6341">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -78,9 +70,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "6350"
-            endingLineNumber = "6350"
-            landmarkName = "numberOfLines(vector&lt;int&gt; &amp;widths, string &amp;S)"
-            landmarkType = "9">
+            endingLineNumber = "6350">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -94,9 +84,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "6365"
-            endingLineNumber = "6365"
-            landmarkName = "findDisappearedNumbers(vector&lt;int&gt; &amp;nums)"
-            landmarkType = "9">
+            endingLineNumber = "6365">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -110,9 +98,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "6399"
-            endingLineNumber = "6399"
-            landmarkName = "findRestaurant(vector&lt;string&gt; &amp;list1, vector&lt;string&gt; &amp;list2)"
-            landmarkType = "9">
+            endingLineNumber = "6399">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -126,9 +112,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "6375"
-            endingLineNumber = "6375"
-            landmarkName = "findDisappearedNumbers(vector&lt;int&gt; &amp;nums)"
-            landmarkType = "9">
+            endingLineNumber = "6375">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -142,9 +126,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "6390"
-            endingLineNumber = "6390"
-            landmarkName = "findRestaurant(vector&lt;string&gt; &amp;list1, vector&lt;string&gt; &amp;list2)"
-            landmarkType = "9">
+            endingLineNumber = "6390">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -158,9 +140,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "6380"
-            endingLineNumber = "6380"
-            landmarkName = "findRestaurant(vector&lt;string&gt; &amp;list1, vector&lt;string&gt; &amp;list2)"
-            landmarkType = "9">
+            endingLineNumber = "6380">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -174,9 +154,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "6386"
-            endingLineNumber = "6386"
-            landmarkName = "findRestaurant(vector&lt;string&gt; &amp;list1, vector&lt;string&gt; &amp;list2)"
-            landmarkType = "9">
+            endingLineNumber = "6386">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -190,9 +168,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "6388"
-            endingLineNumber = "6388"
-            landmarkName = "findRestaurant(vector&lt;string&gt; &amp;list1, vector&lt;string&gt; &amp;list2)"
-            landmarkType = "9">
+            endingLineNumber = "6388">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -206,9 +182,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "6398"
-            endingLineNumber = "6398"
-            landmarkName = "findRestaurant(vector&lt;string&gt; &amp;list1, vector&lt;string&gt; &amp;list2)"
-            landmarkType = "9">
+            endingLineNumber = "6398">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -222,9 +196,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "6440"
-            endingLineNumber = "6440"
-            landmarkName = "countPrimes(int n)"
-            landmarkType = "9">
+            endingLineNumber = "6440">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -238,9 +210,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "6405"
-            endingLineNumber = "6405"
-            landmarkName = "findRestaurant(vector&lt;string&gt; &amp;list1, vector&lt;string&gt; &amp;list2)"
-            landmarkType = "9">
+            endingLineNumber = "6405">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -254,9 +224,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "6407"
-            endingLineNumber = "6407"
-            landmarkName = "findRestaurant(vector&lt;string&gt; &amp;list1, vector&lt;string&gt; &amp;list2)"
-            landmarkType = "9">
+            endingLineNumber = "6407">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -270,9 +238,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "6408"
-            endingLineNumber = "6408"
-            landmarkName = "findRestaurant(vector&lt;string&gt; &amp;list1, vector&lt;string&gt; &amp;list2)"
-            landmarkType = "9">
+            endingLineNumber = "6408">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -286,9 +252,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "6409"
-            endingLineNumber = "6409"
-            landmarkName = "findRestaurant(vector&lt;string&gt; &amp;list1, vector&lt;string&gt; &amp;list2)"
-            landmarkType = "9">
+            endingLineNumber = "6409">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -302,9 +266,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "6415"
-            endingLineNumber = "6415"
-            landmarkName = "countPrimes(int n)"
-            landmarkType = "9">
+            endingLineNumber = "6415">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -318,9 +280,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "6484"
-            endingLineNumber = "6484"
-            landmarkName = "lowestCommonAncestorII(ParentTreeNode&lt;int&gt; * root, ParentTreeNode&lt;int&gt; * A, ParentTreeNode&lt;int&gt; * B)"
-            landmarkType = "9">
+            endingLineNumber = "6484">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -334,9 +294,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "6475"
-            endingLineNumber = "6475"
-            landmarkName = "lowestCommonAncestorII(ParentTreeNode&lt;int&gt; * root, ParentTreeNode&lt;int&gt; * A, ParentTreeNode&lt;int&gt; * B)"
-            landmarkType = "9">
+            endingLineNumber = "6475">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -350,9 +308,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "6463"
-            endingLineNumber = "6463"
-            landmarkName = "lowestCommonAncestorII(ParentTreeNode&lt;int&gt; * root, ParentTreeNode&lt;int&gt; * A, ParentTreeNode&lt;int&gt; * B)"
-            landmarkType = "9">
+            endingLineNumber = "6463">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -366,9 +322,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "6459"
-            endingLineNumber = "6459"
-            landmarkName = "lowestCommonAncestorII(ParentTreeNode&lt;int&gt; * root, ParentTreeNode&lt;int&gt; * A, ParentTreeNode&lt;int&gt; * B)"
-            landmarkType = "9">
+            endingLineNumber = "6459">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -382,9 +336,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "6462"
-            endingLineNumber = "6462"
-            landmarkName = "lowestCommonAncestorII(ParentTreeNode&lt;int&gt; * root, ParentTreeNode&lt;int&gt; * A, ParentTreeNode&lt;int&gt; * B)"
-            landmarkType = "9">
+            endingLineNumber = "6462">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -398,9 +350,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "6491"
-            endingLineNumber = "6491"
-            landmarkName = "licenseKeyFormatting(string &amp;S, int K)"
-            landmarkType = "9">
+            endingLineNumber = "6491">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -414,9 +364,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "6513"
-            endingLineNumber = "6513"
-            landmarkName = "licenseKeyFormatting(string &amp;S, int K)"
-            landmarkType = "9">
+            endingLineNumber = "6513">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -430,9 +378,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "6554"
-            endingLineNumber = "6554"
-            landmarkName = "hammingWeight(unsigned int n)"
-            landmarkType = "9">
+            endingLineNumber = "6554">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -446,9 +392,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "6554"
-            endingLineNumber = "6554"
-            landmarkName = "hammingWeight(unsigned int n)"
-            landmarkType = "9">
+            endingLineNumber = "6554">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -462,9 +406,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "6554"
-            endingLineNumber = "6554"
-            landmarkName = "hammingWeight(unsigned int n)"
-            landmarkType = "9">
+            endingLineNumber = "6554">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -478,9 +420,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "6554"
-            endingLineNumber = "6554"
-            landmarkName = "hammingWeight(unsigned int n)"
-            landmarkType = "9">
+            endingLineNumber = "6554">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -494,9 +434,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "6543"
-            endingLineNumber = "6543"
-            landmarkName = "removeDuplicateLetters(string &amp;s)"
-            landmarkType = "9">
+            endingLineNumber = "6543">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -510,9 +448,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "6528"
-            endingLineNumber = "6528"
-            landmarkName = "removeDuplicateLetters(string &amp;s)"
-            landmarkType = "9">
+            endingLineNumber = "6528">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -526,9 +462,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "6535"
-            endingLineNumber = "6535"
-            landmarkName = "removeDuplicateLetters(string &amp;s)"
-            landmarkType = "9">
+            endingLineNumber = "6535">
             <Locations>
                <Location
                   shouldBeEnabled = "No"
@@ -574,9 +508,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "6564"
-            endingLineNumber = "6564"
-            landmarkName = "findTheDifferenceError(string &amp;s, string &amp;t)"
-            landmarkType = "9">
+            endingLineNumber = "6564">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -590,9 +522,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "6559"
-            endingLineNumber = "6559"
-            landmarkName = "hammingWeight(unsigned int n)"
-            landmarkType = "9">
+            endingLineNumber = "6559">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -606,9 +536,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "6598"
-            endingLineNumber = "6598"
-            landmarkName = "findTheDifferenceError(string &amp;s, string &amp;t)"
-            landmarkType = "9">
+            endingLineNumber = "6598">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -622,9 +550,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "6605"
-            endingLineNumber = "6605"
-            landmarkName = "findTheDifference(string &amp;s, string &amp;t)"
-            landmarkType = "9">
+            endingLineNumber = "6605">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -638,9 +564,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "6619"
-            endingLineNumber = "6619"
-            landmarkName = "findTheDifference(string &amp;s, string &amp;t)"
-            landmarkType = "9">
+            endingLineNumber = "6619">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -654,9 +578,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "6617"
-            endingLineNumber = "6617"
-            landmarkName = "findTheDifference(string &amp;s, string &amp;t)"
-            landmarkType = "9">
+            endingLineNumber = "6617">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -670,9 +592,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "6616"
-            endingLineNumber = "6616"
-            landmarkName = "findTheDifference(string &amp;s, string &amp;t)"
-            landmarkType = "9">
+            endingLineNumber = "6616">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -686,9 +606,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "6675"
-            endingLineNumber = "6675"
-            landmarkName = "main(int argc, char* argv[])"
-            landmarkType = "9">
+            endingLineNumber = "6675">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
