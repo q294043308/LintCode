@@ -10,5 +10,6 @@
 
 int main(int argc, char* argv[])
 {
-
+    string tmp = "abaddeff";
+    char t = firstUniqChar(tmp);
 };

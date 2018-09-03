@@ -4,8 +4,8 @@
 //  Created by 董旭轩 on 2018/8/21.
 //  Copyright © 2018年 董旭轩. All rights reserved.
 
-#ifndef define.h
-#define define.h
+#ifndef define
+#define define
 
 #include "stdio.h"
 #include "iostream"
@@ -36,6 +36,44 @@ typedef unsigned int                                    uint;
 #define MIN_LEN                                       0x7fffffff
 #define CIRCLE_PI                                       3.14
 #define THIRTY                                       30
+
+template<class val_type> class TreeNode {
+public:
+    val_type val;
+    TreeNode *left, *right;
+    TreeNode(val_type val)
+    {
+        this->val = val;
+        this->left = this->right = NULL;
+    }
+};
+
+template<class val_type> class ParentTreeNode {
+public:
+    val_type val;
+    ParentTreeNode *parent, *left, *right;
+    ParentTreeNode(val_type val)
+    {
+        this->val = val;
+        this->parent = this->left = this->right = NULL;
+    }
+};
+
+template<class val_type> class ListNode
+{
+public:
+    val_type val;
+    ListNode *next;
+    ListNode(val_type val)
+    {
+        this->val = val;
+        this->next = NULL;
+    }
+    ~ListNode()
+    {
+        cout << "delete node" << endl;
+    }
+};
 
 template<class val_type> bool IsEqual(TreeNode<val_type> * T1, TreeNode<val_type> * T2)
 {
@@ -120,44 +158,6 @@ template<class val_type> int CountNodes(ListNode<val_type> * head) //  LintCode 
     }
     return count;
 }
-
-template<class val_type> class ListNode
-{
-public:
-    val_type val;
-    ListNode *next;
-    ListNode(val_type val)
-    {
-        this->val = val;
-        this->next = NULL;
-    }
-    ~ListNode()
-    {
-        cout << "delete node" << endl;
-    }
-};
-
-template<class val_type> class TreeNode {
-public:
-    val_type val;
-    TreeNode *left, *right;
-    TreeNode(val_type val)
-    {
-        this->val = val;
-        this->left = this->right = NULL;
-    }
-};
-
-template<class val_type> class ParentTreeNode {
-public:
-    val_type val;
-    ParentTreeNode *parent, *left, *right;
-    ParentTreeNode(val_type val)
-    {
-        this->val = val;
-        this->parent = this->left = this->right = NULL;
-    }
-};
 
 template<class val_type> vector<vector<val_type>> CreatDoubleVector(val_type argc[][256], int size)
 {

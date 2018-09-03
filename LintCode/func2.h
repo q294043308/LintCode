@@ -4,8 +4,8 @@
 //  Created by 董旭轩 on 2018/8/21.
 //  Copyright © 2018年 董旭轩. All rights reserved.
 
-#ifndef func2.h
-#define func2.h
+#ifndef func2
+#define func2
 
 #include "define.h"
 
@@ -31,6 +31,34 @@ int countPrimeSetBits(int L, int R) // LintCode 1046. Prime Number of Set Bits i
     return res;
 }
 
+char firstUniqChar(string &str) // 209. First Unique Character in a String
+{
+    map<char, int> strMap;
+    queue<char> strQue;
 
+    for(auto cha : str)
+    {
+        if(strMap.count(cha) == 0)
+        {
+            strQue.push(cha);
+            strMap[cha] = 1;
+        }
+        else
+        {
+            strMap[cha]++;
+        }
+    }
+
+    while(!strQue.empty())
+    {
+        char curCha = strQue.front();
+        strQue.pop();
+        if(strMap[curCha] == 1)
+        {
+            return curCha;
+        }
+    }
+    return '0';
+}
 
 #endif

@@ -4,8 +4,8 @@
 //  Created by 董旭轩 on 2018/8/21.
 //  Copyright © 2018年 董旭轩. All rights reserved.
 
-#ifndef func1.h
-#define func1.h
+#ifndef func1
+#define func1
 
 #include "define.h"
 
