@@ -61,4 +61,38 @@ char firstUniqChar(string &str) // 209. First Unique Character in a String
     return '0';
 }
 
+void findSecondMinimumValueSub(TreeNode<int> * root, int& res, int& secondRes)
+{
+    if(!root)
+    {
+        return;
+    }
+
+    findSecondMinimumValueSub(root->left, res, secondRes);
+    if(res > root->val)
+    {
+        secondRes = res;
+        res = root->val;
+    }
+    else if(res < root->val && root->val < secondRes)
+    {
+        secondRes = root->val;
+    }
+    findSecondMinimumValueSub(root->right, res, secondRes);
+}
+
+int findSecondMinimumValue(TreeNode<int> * root) // 1094. Second Minimum Node In a Binary Tree
+{
+    int res = MAXINTNUM;
+    int secondRes = MAXINTNUM;
+    findSecondMinimumValueSub(root, res, secondRes);
+
+    if(secondRes == MAXINTNUM)
+    {
+        return -1;
+    }
+
+    return secondRes;
+}
+
 #endif
