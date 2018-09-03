@@ -35,6 +35,7 @@ typedef unsigned int                                    uint;
 #define SMALL_ENGLISH_CHAR_NUM      26
 #define MIN_LEN                                       0x7fffffff
 #define CIRCLE_PI                                       3.14
+#define THIRTY                                       30
 
 template<class val_type> bool IsEqual(TreeNode<val_type> * T1, TreeNode<val_type> * T2)
 {
