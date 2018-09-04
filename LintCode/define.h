@@ -27,8 +27,9 @@
 using namespace std;
 typedef unsigned int                                    uint;
 
-#define MAXINTNUM                               pow(2, 31) - 1
-#define MININTNUM                                - (pow(2, 31)) + 1
+#define MAXWINTNUM                               (int)pow(2, 61) - 1
+#define MAXINTNUM                               (int)pow(2, 31) - 1
+#define MININTNUM                                - (int)(pow(2, 31)) + 1
 #define CHARNUM                                     128
 #define ENGLISH_CHAR_NUM                    (26 * 2)
 #define BIG_ENGLISH_CHAR_NUM            26

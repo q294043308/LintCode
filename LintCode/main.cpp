@@ -10,8 +10,4 @@
 
 int main(int argc, char* argv[])
 {
-    TreeNode<int> * root = new TreeNode<int>(2);
-    root->left = new TreeNode<int>(2);
-    root->right = new TreeNode<int>(2);
-    int tmp = findSecondMinimumValue(root);
 };

@@ -6048,7 +6048,7 @@ vector<string> subdomainVisits(vector<string> &cpdomains) // LintCode 1006. Subd
     char numStr[10];
     for (auto strIt : strMap)
     {
-        sprintf(numStr, "%d", strIt.second);
+        //sprintf(numStr, "%d", strIt.second); vs中sprintf会报错
         result.push_back(numStr + string(" ") + strIt.first);
     }
     
@@ -6068,7 +6068,7 @@ int findNthDigit(int n) // LintCode 1256. Nth Digit
     }
     
     char curVal[15];
-    sprintf(curVal, "%d", (int)(pow(10, curDex - 1) + (n - 1) / curDex));
+    //sprintf(curVal, "%d", (int)(pow(10, curDex - 1) + (n - 1) / curDex)); vs中报错
     return curVal[(n - 1) % curDex] - '0';
 }
 
@@ -6172,8 +6172,7 @@ vector<string> findRestaurant(vector<string> &list1, vector<string> &list2) // L
 {
     unordered_map<string, size_t> listSet;
     vector<string> result;
-    size_t curIndexSum = SIZE_T_MAX;
-    
+    size_t curIndexSum = MAXWINTNUM;
 
     for (size_t i = 0; i < list1.size(); i++)
     {
@@ -6210,11 +6209,11 @@ int countPrimes(int n) //LintCode 1324. Count Primes
     bool* numPtr = new bool[n - 2];
     int result = 0;
 
-    for (uint i = 0; i < n - 2; i++)
+    for (int i = 0; i < n - 2; i++)
     {
         numPtr[i] = true;
     }
-    for (uint i = 0; i < n - 2; i++)
+    for (int i = 0; i < n - 2; i++)
     {
         if(numPtr[i])
         {
@@ -6226,7 +6225,7 @@ int countPrimes(int n) //LintCode 1324. Count Primes
         }
     }
 
-    for (uint i = 0; i < n - 2; i++)
+    for (int i = 0; i < n - 2; i++)
     {
         if(numPtr[i])
         {
