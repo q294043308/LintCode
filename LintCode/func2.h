@@ -380,6 +380,249 @@ int judgeTheLastNumber(string &str) // 1459. Judge the last number
   return str.length() <= i ? 2 : 1;
 }
 
+int minCostClimbingStairs(vector<int> &cost) // 1054. Min Cost Climbing Stairs 动态规划
+{
+  int minOneStep = 0;
+  int minTwoStep = MAXINTNUM;
 
+  for (uint i = 0; i < cost.size() - 1; i++)
+  {
+    int tmp = minOneStep;
+    minOneStep = min(minTwoStep, minOneStep + cost[i]);
+    minTwoStep = tmp + cost[i + 1];
+  }
+  return min(minOneStep, minTwoStep);
+}
+
+int findLUSlength(string &a, string &b) // 1192. Longest Uncommon Subsequence I
+{
+  if (a.size() != b.size())
+  {
+    return a.size() > b.size() ? a.size() : b.size();
+  }
+
+  int res = 0;
+  int tem = 0;
+  for (uint i = 0; i < a.size(); i++)
+  {
+    if (a[i] == b[i])
+    {
+      res = max(tem, res);
+      tem = 0;
+      continue;
+    }
+
+    tem++;
+    res = max(tem, res);
+  }
+
+  return res == 0 ? -1 : res;
+}
+
+vector<int> constructRectangle(int area) // 1209. Construct the Rectangle
+{
+  int lenth = (int)sqrt(area);
+  int width = lenth;
+
+  for (; width > 0; width--)
+  {
+    for (int i = lenth; i <= area; i++)
+    {
+      if (width * i > area)
+      {
+        break;
+      }
+
+      if (width * i == area)
+      {
+        return vector<int>{i, width};
+      }
+    }
+  }
+  return vector<int>{area, 1};
+}
+
+void letterCasePermutationSub(string &S, vector<string> &res, vector<int> &chrIndex, int curIndex, bool isBig)
+{
+  if (isBig)
+  {
+    if (S[chrIndex[curIndex]] >= 'a' && S[chrIndex[curIndex]] <= 'z')
+    {
+      S[chrIndex[curIndex]] = S[chrIndex[curIndex]] - 'a' + 'A';
+    }
+  }
+  else
+  {
+    if (S[chrIndex[curIndex]] >= 'A' && S[chrIndex[curIndex]] <= 'Z')
+    {
+      S[chrIndex[curIndex]] = S[chrIndex[curIndex]] - 'A' + 'a';
+    }
+  }
+
+  if (curIndex == chrIndex.size() - 1)
+  {
+    res.push_back(S);
+    return;
+  }
+  letterCasePermutationSub(S, res, chrIndex, curIndex + 1, true);
+  letterCasePermutationSub(S, res, chrIndex, curIndex + 1, false);
+  return;
+}
+
+vector<string> letterCasePermutation(string &S) // 1032. Letter Case Permutation
+{
+  vector<string> res;
+  vector<int> chrIndex;
+
+  for (uint i = 0; i < S.size(); i++)
+  {
+    if ((S[i] <= 'z' && S[i] >= 'a')
+      || (S[i] <= 'Z' && S[i] >= 'A'))
+    {
+      chrIndex.push_back(i);
+    }
+  }
+
+  if (chrIndex.empty())
+  {
+    res.push_back(S);
+    return res;
+  }
+
+  letterCasePermutationSub(S, res, chrIndex, 0, true);
+  letterCasePermutationSub(S, res, chrIndex, 0, false);
+
+  return res;
+}
+
+vector<int> getRow(int rowIndex) // 1354. Pascal's Triangle II
+{
+  vector<int> out;
+  if (rowIndex < 0)
+  {
+    return out;
+  }
+
+  out.assign(rowIndex + 1, 0);
+  for (int i = 0; i <= rowIndex; ++i)
+  {
+    if (i == 0)
+    {
+      out[0] = 1;
+      continue;
+    }
+    for (int j = rowIndex; j >= 1; --j)
+    {
+      out[j] = out[j] + out[j - 1];
+    }
+  }
+  return out;
+}
+
+vector<int> findWordsInit()
+{
+  vector<int> lowVec = vector<int>(BIG_ENGLISH_CHAR_NUM, 0);
+  string oneCha = "qwertyuiop";
+  string twoCha = "asdfghjkl";
+  string threeCha = "zxcvbnm";
+  for (auto i : oneCha)
+  {
+    lowVec[i - 'a'] = 1;
+  }
+  for (auto i : twoCha)
+  {
+    lowVec[i - 'a'] = 2;
+  }
+  for (auto i : threeCha)
+  {
+    lowVec[i - 'a'] = 3;
+  }
+  return lowVec;
+}
+
+vector<string> findWords(vector<string> &words) // 1204. Keyboard Row
+{
+  vector<int> lowArr = findWordsInit();
+  vector<string> res;
+
+  for (auto str : words)
+  {
+    int line = 0;
+    bool isSameLine = true;
+    for (auto cha : str)
+    {
+      int index = 0;
+
+      if (cha <= 'z' && cha >= 'a')
+      {
+        index = cha - 'a';
+      }
+      else
+      {
+        index = cha - 'A';
+      }
+
+      if (line == 0)
+      {
+        line = lowArr[index];
+      }
+      else if (line != lowArr[index])
+      {
+        isSameLine = false;
+        break;
+      }
+    }
+
+    if (isSameLine)
+    {
+      res.push_back(str);
+    }
+  }
+  return res;
+}
+
+int maxAreaOfIslandSub(vector<vector<int>> &grid, int i, int j) // 这种递归减少了内存的申请，但破坏其原本数据，如果不想可以申请块内存记录是否访问
+{
+  grid[i][j] = 0;
+  int curArea = 1;
+  if (i - 1 >= 0 && grid[i - 1][j] == 1)
+  {
+    curArea += maxAreaOfIslandSub(grid, i - 1, j);
+  }
+  if (j - 1 >= 0 && grid[i][j - 1] == 1)
+  {
+    curArea += maxAreaOfIslandSub(grid, i, j - 1);
+  }
+  if (i + 1 < (int)grid.size() && grid[i + 1][j] == 1)
+  {
+    curArea += maxAreaOfIslandSub(grid, i + 1, j);
+  }
+  if (j + 1 < (int)grid[i].size() && grid[i][j + 1] == 1)
+  {
+    curArea += maxAreaOfIslandSub(grid, i, j + 1);
+  }
+  return curArea;
+}
+
+int maxAreaOfIsland(vector<vector<int>> &grid) // 1080. Max Area of Island
+{
+  int res = 0;
+
+  for (uint i = 0; i < grid.size(); i++)
+  {
+    for (uint j = 0; j < grid[i].size(); j++)
+    {
+      if (grid[i][j] == 1)
+      {
+        res = max(res, maxAreaOfIslandSub(grid, i, j));
+      }
+    }
+  }
+  return res;
+}
+
+int diameterOfBinaryTree(TreeNode<int> * root) // 1181. Diameter of Binary Tree
+{
+}
 
 #endif
