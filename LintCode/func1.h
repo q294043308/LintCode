@@ -1,15 +1,15 @@
 //  func1.h
 //  LintCode
 //
-//  Created by 董旭轩 on 2018/8/21.
-//  Copyright © 2018年 董旭轩. All rights reserved.
+//  Created by DongXuxuan on 2018/8/21.
+//  Copyright © 2018 DongXuxuan. All rights reserved.
 
 #ifndef func1
 #define func1
 
 #include "define.h"
 
-int MinimumTotal(vector<vector<int>> &triangle) //  LintCode 109  ˝◊÷»˝Ω«–Œ
+int MinimumTotal(vector<vector<int>> &triangle) //  LintCode 109
 {
     int n = triangle.size();
     vector<int> MinNum;
@@ -29,7 +29,7 @@ int MinimumTotal(vector<vector<int>> &triangle) //  LintCode 109  ˝◊÷»˝Ω
     return MinNum[0];
 }
 
-ListNode<int> * DeleteDuplicates(ListNode<int> * head) // LintCode 112 …æ≥˝≈≈–Ú¡¥±Ì÷–µƒ÷ÿ∏¥‘™Àÿ
+ListNode<int> * DeleteDuplicates(ListNode<int> * head) // LintCode 112
 {
     if (head == NULL || head->next == NULL)
     {
@@ -56,7 +56,7 @@ ListNode<int> * DeleteDuplicates(ListNode<int> * head) // LintCode 112 …æ≥�
     return head;
 }
 
-int RemoveDuplicates(vector<int> &nums) // LintCode 101 …æ≥˝≈≈–Ú ˝◊È÷–µƒ÷ÿ∏¥ ˝◊÷
+int RemoveDuplicates(vector<int> &nums) // LintCode 101
 {
     if (nums.size() == 0)
     {
@@ -86,7 +86,7 @@ int RemoveDuplicates(vector<int> &nums) // LintCode 101 …æ≥˝≈≈–Ú �
     return nums.size();
 }
 
-template<class val_type> ListNode<val_type> * RemoveNthFromEnd(ListNode<val_type> * head, int n) // …æ≥˝¡¥±Ì÷–µπ ˝µ⁄n∏ˆΩ⁄µ„
+template<class val_type> ListNode<val_type> * RemoveNthFromEnd(ListNode<val_type> * head, int n) //
 {
     if (head == NULL)
     {
@@ -123,7 +123,7 @@ template<class val_type> ListNode<val_type> * RemoveNthFromEnd(ListNode<val_type
     return head;
 }
 
-bool Anagram(string s, string t) // LintCode 158  ¡Ω∏ˆ◊÷∑˚¥Æ «±‰Œª¥
+bool Anagram(string s, string t) // LintCode 158
 {
     if (s.size() != t.size())
     {
@@ -151,7 +151,7 @@ bool Anagram(string s, string t) // LintCode 158  ¡Ω∏ˆ◊÷∑˚¥Æ «±�
     return true;
 }
 
-string ReverseWords_error(string &s) // LintCode 53 ∑≠◊™◊÷∑˚¥Æ(error –¥¥Ì≥…∑¥◊™√ø∏ˆµ•¥ )
+string ReverseWords_error(string &s) // LintCode 53
 {
     char last_char = s[1];
     for (int i = s.size() - 1; i >= 0;)
@@ -217,7 +217,7 @@ string ReverseWords_error(string &s) // LintCode 53 ∑≠◊™◊÷∑˚¥Æ(e
     return s;
 }
 
-string ReverseWords(string &s) // LintCode 53 ∑≠◊™◊÷∑˚¥Æ
+string ReverseWords(string &s) // LintCode 53
 {
     char last_char = s[0];
     for (int i = s.size() - 1; i >= 0;)
@@ -283,7 +283,7 @@ string ReverseWords(string &s) // LintCode 53 ∑≠◊™◊÷∑˚¥Æ
     return result;
 }
 
-int UniquePaths(int m, int n) // LintCode 114 ≤ªÕ¨µƒ¬∑æ∂
+int UniquePaths(int m, int n) // LintCode 114
 {
     int **path_argv = (int **)malloc(sizeof(int*)* m);
     for (int i = 0; i < m; i++)
@@ -308,7 +308,7 @@ int UniquePaths(int m, int n) // LintCode 114 ≤ªÕ¨µƒ¬∑æ∂
     return path_argv[m - 1][n - 1];
 }
 
-vector<int> TwoSum(vector<int> &numbers, int target) // LintCode 56 ¡Ω ˝÷Æ∫Õ
+vector<int> TwoSum(vector<int> &numbers, int target) // LintCode 56
 {
     vector<int> result;
     map<int, int> hash_map;
@@ -359,7 +359,7 @@ int* KMPGetNext(string base_str)
     return next;
 }
 
-int KMP(const char *source, const char *target)// KMP À„∑®
+int KMP(const char *source, const char *target)// KMP
 {
     if (source == NULL || target == NULL)
     {
@@ -399,7 +399,7 @@ int KMP(const char *source, const char *target)// KMP À„∑®
     }
 }
 
-int LongestPalindrome(string s) // LintCode 627 ◊Ó≥§ªÿŒƒ¥Æ
+int LongestPalindrome(string s) // LintCode 627
 {
     uint result_len = 0;
     bool appear[ENGLISH_CHAR_NUM] = { false };
@@ -455,7 +455,7 @@ string Rearrange(string &str) // LintCode 720. Rearrange a String With Integers
     return str;
 }
 
-int Sqrt(uint x) // LintCode 141. xµƒ∆Ω∑Ω∏˘
+int Sqrt(uint x) // LintCode 141
 {
     uint result = 0;
     while (true)
@@ -475,7 +475,7 @@ int Sqrt(uint x) // LintCode 141. xµƒ∆Ω∑Ω∏˘
     }
 }
 
-vector<int> SubarraySum(vector<int> &nums) // LintCode 138. ◊” ˝◊È÷Æ∫Õ
+vector<int> SubarraySum(vector<int> &nums) // LintCode 138
 {
     vector<int> result;
     int n = 0;
@@ -501,7 +501,7 @@ vector<int> SubarraySum(vector<int> &nums) // LintCode 138. ◊” ˝◊È÷Æ�
     return result;
 }
 
-void RecoverRotatedSortedArray(vector<int> &nums) // LintCode 39 ª÷∏¥–˝◊™≈≈–Ú ˝◊È
+void RecoverRotatedSortedArray(vector<int> &nums) // LintCode 39
 {
     int n = 0;
     int dex = 0;
@@ -529,7 +529,7 @@ void RecoverRotatedSortedArray(vector<int> &nums) // LintCode 39 ª÷∏¥–˝�
     Recover(nums, 0, n - 1);
 }
 
-string ConcatenetedString(string &s1, string &s2) // LintCode 702. ¡¨Ω”¡Ω∏ˆ◊÷∑˚¥Æ÷–µƒ≤ªÕ¨◊÷∑˚
+string ConcatenetedString(string &s1, string &s2) // LintCode 702
 {
     vector<int> s1_map[CHARNUM];
     vector<int> s1_deletes;
@@ -567,7 +567,7 @@ string ConcatenetedString(string &s1, string &s2) // LintCode 702. ¡¨Ω”¡Ω
     return s1 + s2;
 }
 
-bool IsValidSudoku(vector<vector<char>> &board) // LintCode 389. ≈–∂œ ˝∂¿ «∑Ò∫œ∑®
+bool IsValidSudoku(vector<vector<char>> &board) // LintCode 389
 {
     if (board.size() != 9)
     {
@@ -667,7 +667,7 @@ bool IsValidSudoku(vector<vector<char>> &board) // LintCode 389. ≈–∂œ ˝
     return true;
 }
 
-bool IsSubtree(TreeNode<int> * T1, TreeNode<int> * T2) //LintCode 245. ◊” ˜
+bool IsSubtree(TreeNode<int> * T1, TreeNode<int> * T2) //LintCode 245
 {
     if (T1 == NULL)
     {
@@ -727,7 +727,7 @@ int FindElements(vector<vector<int>> &Matrix) // LintCode 737. Find Elements in 
     return -1;
 }
 
-bool SearchMatrix(vector<vector<int>> &matrix, int target) // LintCode 28. À—À˜∂˛Œ¨æÿ’Û
+bool SearchMatrix(vector<vector<int>> &matrix, int target) // LintCode 28
 {
     if (matrix.size() == 0 || matrix[0].size() == 0)
     {
@@ -772,7 +772,7 @@ bool SearchMatrix(vector<vector<int>> &matrix, int target) // LintCode 28. À—
     return matrix[start_coor.i][start_coor.j] == target;
 }
 
-int RemoveElement(vector<int> &A, int elem) //LintCode 172. …æ≥˝‘™Àÿ
+int RemoveElement(vector<int> &A, int elem) //LintCode 172
 {
     for (int i = A.size() - 1; i >= 0; i--)
     {
@@ -784,7 +784,7 @@ int RemoveElement(vector<int> &A, int elem) //LintCode 172. …æ≥˝‘™Àÿ
     return A.size();
 }
 
-int RemoveDuplicates2(vector<int> &nums) // LintCode 100. …æ≥˝≈≈–Ú ˝◊È÷–µƒ÷ÿ∏¥ ˝◊÷
+int RemoveDuplicates2(vector<int> &nums) // LintCode 100
 {
     if (nums.size() == 0)
     {
@@ -806,7 +806,7 @@ int RemoveDuplicates2(vector<int> &nums) // LintCode 100. …æ≥˝≈≈–Ú�
     return nums.size();
 }
 
-bool IsValidParentheses(string &s) //LintCode 423. ”––ßµƒ¿®∫≈–Ú¡–
+bool IsValidParentheses(string &s) //LintCode 423
 {
     stack<char> str_sta;
     for (uint i = 0; i < s.size(); i++)
@@ -863,7 +863,7 @@ void ErgodicTreePaths(TreeNode<int>* root, vector<string> &path_map, vector<int>
     cur_path.pop_back();
 }
 
-vector<string> BinaryTreePaths(TreeNode<int>* root) // LintCode 480. ∂˛≤Ê ˜µƒÀ˘”–¬∑æ∂
+vector<string> BinaryTreePaths(TreeNode<int>* root) // LintCode 480
 {
     vector<string> result;
     vector<int> cur_route;
@@ -878,7 +878,7 @@ vector<string> BinaryTreePaths(TreeNode<int>* root) // LintCode 480. ∂˛≤Ê�
 
 bool IsRotateWords(string word1, string word2)
 {
-    if (word1.length() != word2.length()) //¥À¥¶ π”√size() ‘⁄LintCodeæÕª·±®¥Ì£¨≤¬≤‚ «Stl‘¥¬Îø‚∞Ê±æ≤ªÕ¨µƒŒ Ã‚£¨æª≥∂µ≠~~~ πÌ÷™µ¿ ≤√¥‘≠“Ú°£
+    if (word1.length() != word2.length()) //
     {
         return false;
     }
@@ -893,7 +893,7 @@ bool IsRotateWords(string word1, string word2)
     }
 }
 
-int CountRotateWords(vector<string> words) // LintCode 671. —≠ª∑µ•¥
+int CountRotateWords(vector<string> words) // LintCode 671
 {
     if (words.empty())
     {
@@ -927,7 +927,7 @@ int CountRotateWords(vector<string> words) // LintCode 671. —≠ª∑µ•¥
     return count;
 }
 
-vector<int> PlusOne(vector<int> &digits) // LintCode 407. º”“ª
+vector<int> PlusOne(vector<int> &digits) // LintCode 407
 {
     if (digits.empty())
     {
@@ -955,7 +955,7 @@ vector<int> PlusOne(vector<int> &digits) // LintCode 407. º”“ª
     return digits;
 }
 
-void RotateString(string &str, int offset) //LintCode 8. –˝◊™◊÷∑˚¥Æ
+void RotateString(string &str, int offset) //LintCode 8
 {
     if (str.empty())
     {
@@ -968,7 +968,7 @@ void RotateString(string &str, int offset) //LintCode 8. –˝◊™◊÷∑˚¥
     str.erase(str.begin() + length, str.end());
 }
 
-int SearchInsert(vector<int> &A, int target) // LintCode 60. À—À˜≤Â»ÎŒª÷√
+int SearchInsert(vector<int> &A, int target) // LintCode 60
 {
     if (A.empty())
     {
@@ -995,7 +995,7 @@ int SearchInsert(vector<int> &A, int target) // LintCode 60. À—À˜≤Â»Î�
     return end_dex + 1;
 }
 
-ListNode<int> * Reverse(ListNode<int> * head)  // LintCode 35. ∑≠◊™¡¥±Ì
+ListNode<int> * Reverse(ListNode<int> * head)  // LintCode 35
 {
     if (head == NULL || head->next == NULL)
     {
@@ -1015,12 +1015,12 @@ ListNode<int> * Reverse(ListNode<int> * head)  // LintCode 35. ∑≠◊™¡¥�
     return new_head;
 }
 
-void SortIntegers2(vector<int> &A) // LintCode 464. ’˚ ˝≈≈–Ú II
+void SortIntegers2(vector<int> &A) // LintCode 464
 {
     sort(A.begin(), A.end());
 }
 
-long long TrailingZeros(long long n) // LintCode 2. Œ≤≤øµƒ¡„
+long long TrailingZeros(long long n) // LintCode 2
 {
     long long count = 0;
     while (n>0){
@@ -1030,7 +1030,7 @@ long long TrailingZeros(long long n) // LintCode 2. Œ≤≤øµƒ¡„
     return count;
 }
 
-int SingleNumber(vector<int> &A) // LintCode 82. ¬‰µ•µƒ ˝
+int SingleNumber(vector<int> &A) // LintCode 82
 {
     int Sum = 0;
     for (uint i = 0; i < A.size(); i++)
@@ -1056,7 +1056,7 @@ void SplitStringSub(string& s, uint pos, vector<string> cur_str, vector<vector<s
     }
 }
 
-vector<vector<string>> SplitString(string& s) // LintCode 680. ∑÷∏Ó◊÷∑˚¥Æ
+vector<vector<string>> SplitString(string& s) // LintCode 680
 {
     vector<vector<string>> result;
     vector<string> cur_str;
@@ -1069,7 +1069,7 @@ vector<vector<string>> SplitString(string& s) // LintCode 680. ∑÷∏Ó◊÷�
     return result;
 }
 
-int SubSum(int n) // LintCode 730. À˘”–◊”ºØµƒ∫Õ
+int SubSum(int n) // LintCode 730
 {
     if (n == 0)
     {
@@ -1083,7 +1083,7 @@ int SubSum(int n) // LintCode 730. À˘”–◊”ºØµƒ∫Õ
     return result * (int)pow(2, n - 1);
 }
 
-bool IsIsomorphic(string s, string t) // LintCode 638. ◊÷∑˚Õ¨ππ
+bool IsIsomorphic(string s, string t) // LintCode 638
 {
     if (s.length() != t.length())
     {
@@ -1117,7 +1117,7 @@ bool IsIsomorphic(string s, string t) // LintCode 638. ◊÷∑˚Õ¨ππ
     return true;
 }
 
-int ReverseInteger(int n) // LintCode 413. ∑¥◊™’˚ ˝
+int ReverseInteger(int n) // LintCode 413
 {
     string n_tmp = to_string(n);
     int len = n_tmp.length();
@@ -1173,7 +1173,7 @@ void UniquePathsWithObstaclesSub(vector<vector<int>> obstacleGrid, uint cur_x, u
     return;
 }
 
-int UniquePathsWithObstaclesError(vector<vector<int>> &obstacleGrid) // LintCode 115. ≤ªÕ¨µƒ¬∑æ∂ II µ›πÈ≥¨ ±
+int UniquePathsWithObstaclesError(vector<vector<int>> &obstacleGrid) // LintCode 115
 {
     int n = 0;
     if (obstacleGrid.empty() || obstacleGrid[0].empty() || obstacleGrid[0][0] == 1)
@@ -1184,7 +1184,7 @@ int UniquePathsWithObstaclesError(vector<vector<int>> &obstacleGrid) // LintCode
     return n;
 }
 
-int UniquePathsWithObstacles(vector<vector<int>> &obstacleGrid) // LintCode 115. ≤ªÕ¨µƒ¬∑æ∂ II ∂ØÃ¨πÊªÆ
+int UniquePathsWithObstacles(vector<vector<int>> &obstacleGrid) // LintCode 115
 {
     int a[100][100] = { 0 };
     int x_len = obstacleGrid.size();
@@ -1230,7 +1230,7 @@ int UniquePathsWithObstacles(vector<vector<int>> &obstacleGrid) // LintCode 115.
     return a[x_len - 1][y_len - 1];
 }
 
-bool CheckSumOfSquareNumbers(int num) // LintCode 697. ≈–∂œ «∑ÒŒ™∆Ω∑Ω ˝÷Æ∫Õ
+bool CheckSumOfSquareNumbers(int num) // LintCode 697
 {
     if (num < 0)
     {
@@ -1270,7 +1270,7 @@ void ConvertBSTSub(TreeNode<int> * root, int &cur_sum)
     }
 }
 
-TreeNode<int> * ConvertBST(TreeNode<int> * root) // LintCode 661. ∞—∂˛≤ÊÀ—À˜ ˜◊™ªØ≥…∏¸¥Ûµƒ ˜
+TreeNode<int> * ConvertBST(TreeNode<int> * root) // LintCode 661
 {
     if (root == NULL)
     {
@@ -1281,7 +1281,7 @@ TreeNode<int> * ConvertBST(TreeNode<int> * root) // LintCode 661. ∞—∂˛≤
     return root;
 }
 
-ListNode<int> * Partition(ListNode<int> * head, int x) // LintCode 96. ¡¥±ÌªÆ∑÷
+ListNode<int> * Partition(ListNode<int> * head, int x) // LintCode 96
 {
     ListNode<int> * small_nodes = NULL;
     ListNode<int> * last_node = NULL;
@@ -1314,7 +1314,7 @@ ListNode<int> * Partition(ListNode<int> * head, int x) // LintCode 96. ¡¥±Ì�
     return result;
 }
 
-bool IsPalindrome(string &s) //LintCode 415. ”––ßªÿŒƒ¥Æ
+bool IsPalindrome(string &s) //LintCode 415
 {
     int j = s.length() - 1;
     int i = 0;
@@ -1371,7 +1371,7 @@ int guess(int num, int ans)
     }
 }
 
-int GuessNumber(int n, int ans) // LintCode 662. ≤¬ ˝”Œœ∑
+int GuessNumber(int n, int ans) // LintCode 662
 {
     int min_num = 1;
     int max_num = n;
@@ -1395,7 +1395,7 @@ int GuessNumber(int n, int ans) // LintCode 662. ≤¬ ˝”Œœ∑
     return -1;
 }
 
-string AddStrings(string &num1, string &num2) // LintCode 655. ¥Û’˚ ˝º”∑®
+string AddStrings(string &num1, string &num2) // LintCode 655
 {
     string s;
     int len1, len2;
@@ -1491,7 +1491,7 @@ int ReplaceBlankError(char string[], int length)
     return new_lenth;
 }
 
-int ReplaceBlank(char string[], int length) // LintCode 212. ø’∏ÒÃÊªª
+int ReplaceBlank(char string[], int length) // LintCode 212
 {
     if (string == NULL)
     {
@@ -1530,7 +1530,7 @@ int ReplaceBlank(char string[], int length) // LintCode 212. ø’∏ÒÃÊªª
     return new_lenth;
 }
 
-long long PermutationIndex(vector<int> &A) //LintCode 197. ≈≈¡––Ú∫≈
+long long PermutationIndex(vector<int> &A) //LintCode 197
 {
     if (A.empty())
     {
@@ -1559,7 +1559,7 @@ long long PermutationIndex(vector<int> &A) //LintCode 197. ≈≈¡––Ú∫�
     return result;
 }
 
-bool IsUnique(string &str) // LintCode 157. ≈–∂œ◊÷∑˚¥Æ «∑Ò√ª”–÷ÿ∏¥◊÷∑˚
+bool IsUnique(string &str) // LintCode 157
 {
     for (uint i = 0; i < str.length(); i++)
     {
@@ -1574,7 +1574,7 @@ bool IsUnique(string &str) // LintCode 157. ≈–∂œ◊÷∑˚¥Æ «∑Ò�
     return true;
 }
 
-void PartitionArray(vector<int> &nums) // LintCode 373. ∆Ê≈º∑÷∏Ó ˝◊È
+void PartitionArray(vector<int> &nums) // LintCode 373
 {
     int start_dex = 0;
     int end_dex = nums.size() - 1;
@@ -1603,7 +1603,7 @@ void PartitionArray(vector<int> &nums) // LintCode 373. ∆Ê≈º∑÷∏Ó ˝
     }
 }
 
-ListNode<int> * SwapPairs(ListNode<int> * head) // LintCode 451. ¡Ω¡ΩΩªªª¡¥±Ì÷–µƒΩ⁄µ„
+ListNode<int> * SwapPairs(ListNode<int> * head) // LintCode 451
 {
     if (head == NULL)
     {
@@ -1636,7 +1636,7 @@ ListNode<int> * SwapPairs(ListNode<int> * head) // LintCode 451. ¡Ω¡ΩΩªª�
     return head;
 }
 
-bool IsUgly(int num) // LintCode 517. ≥Û ˝
+bool IsUgly(int num) // LintCode 517
 {
     if (num == 0)
     {
@@ -1669,7 +1669,7 @@ bool IsUgly(int num) // LintCode 517. ≥Û ˝
     return false;
 }
 
-vector<long long> ProductExcludeItself(vector<int> &nums) // LintCode 50.  ˝◊ÈÃﬁ≥˝‘™Àÿ∫Ûµƒ≥Àª˝
+vector<long long> ProductExcludeItself(vector<int> &nums) // LintCode 50
 {
     vector<long long> Result;
     for (uint i = 0; i < nums.size(); i++)
@@ -1687,7 +1687,7 @@ vector<long long> ProductExcludeItself(vector<int> &nums) // LintCode 50.  ˝�
     return Result;
 }
 
-vector<string> MissingString(string str1, string str2) // LintCode 684. »±…Ÿµƒ◊÷∑˚¥Æ
+vector<string> MissingString(string str1, string str2) // LintCode 684
 {
     vector<string> Result;
     int pos_1 = 0, pos_2 = 0;
@@ -1742,7 +1742,7 @@ vector<string> MissingString(string str1, string str2) // LintCode 684. »±…�
     return Result;
 }
 
-int FirstUniqChar(string &s) // LintCode 646. µ⁄“ª∏ˆ∂¿Ãÿ◊÷∑˚Œª÷√
+int FirstUniqChar(string &s) // LintCode 646
 {
     int len = s.length();
     map<char, int> mp;
@@ -1760,14 +1760,14 @@ int FirstUniqChar(string &s) // LintCode 646. µ⁄“ª∏ˆ∂¿Ãÿ◊÷∑˚
     return -1;
 }
 
-bool Permutation(string &A, string &B) // LintCode 211. ◊÷∑˚¥Æ÷√ªª /// hahahaha  ∫‹¥Ïµ´ «Œ“œ≤ª∂£¨◊Ó∫Û“ªµ¿ºÚµ•Ã‚£¨œ¬¿¥æÕ «ƒ—µ√¡À£¨À˚¬Ë–¥◊≈ºÚµ•ªπƒ«√¥ƒ—
+bool Permutation(string &A, string &B) // LintCode 211
 {
     sort(A.begin(), A.end());
     sort(B.begin(), B.end());
     return A == B;
 }
 
-vector<ListNode<int>*> Rehashing(vector<ListNode<int>*> hashTable) //LintCode 129. ÷ÿπ˛œ£
+vector<ListNode<int>*> Rehashing(vector<ListNode<int>*> hashTable) //LintCode 129
 {
     vector<ListNode<int>*> hash_last_node;
     int old_size = hashTable.size();
@@ -1830,7 +1830,7 @@ bool isBadVersion(int n, int fal)
     return n >= fal;
 }
 
-int FindFirstBadVersion(int n, int fal) // LintCode 74. µ⁄“ª∏ˆ¥ÌŒÛµƒ¥˙¬Î∞Ê±æ
+int FindFirstBadVersion(int n, int fal) // LintCode 74
 {
     int start_ver = 1;
     int end_ver = n;
@@ -1856,7 +1856,7 @@ int FindFirstBadVersion(int n, int fal) // LintCode 74. µ⁄“ª∏ˆ¥ÌŒÛ�
     return start_ver;
 }
 
-string Serialize(TreeNode<int> * root) // LintCode 7. ∂˛≤Ê ˜µƒ–Ú¡–ªØ∫Õ∑¥–Ú¡–ªØ
+string Serialize(TreeNode<int> * root) // LintCode 7
 {
     static string result;
     if (!root)
@@ -1916,7 +1916,7 @@ void DeserializeSub(string &data, uint &token, TreeNode<int> * root)
     }
 }
 
-TreeNode<int> * Deserialize(string &data) // LintCode 7. ∂˛≤Ê ˜µƒ–Ú¡–ªØ∫Õ∑¥–Ú¡–ªØ
+TreeNode<int> * Deserialize(string &data) // LintCode 7
 {
     if (data.empty())
     {
@@ -1948,7 +1948,7 @@ TreeNode<int> * Deserialize(string &data) // LintCode 7. ∂˛≤Ê ˜µƒ–Ú
     return result_root;
 }
 
-int FindPeak(vector<int>& A) // LintCode 75. —∞’“∑Â÷µ
+int FindPeak(vector<int>& A) // LintCode 75
 {
     int start_dex = 1;
     int end_dex = A.size() - 1;
@@ -1971,7 +1971,7 @@ int FindPeak(vector<int>& A) // LintCode 75. —∞’“∑Â÷µ
     return start_dex;
 }
 
-int LongestIncreasingSubsequence(vector<int> &nums) // LintCode 76. ◊Ó≥§…œ…˝◊”–Ú¡–
+int LongestIncreasingSubsequence(vector<int> &nums) // LintCode 76
 {
     int size = nums.size();
     int *map = new int[size];
@@ -2025,7 +2025,7 @@ void RootToString(TreeNode<int> * root, string * root_str, int cur_dex, int node
     RootToString(root->right, root_str, 2 * cur_dex + 1, node_num);
 }
 
-vector<vector<int>> ZigzagLevelOrder(TreeNode<int> * root) // LIntCode 71. ∂˛≤Ê ˜µƒæ‚≥›–Œ≤„¥Œ±È¿˙
+vector<vector<int>> ZigzagLevelOrder(TreeNode<int> * root) // LIntCode 71
 {
     vector<vector<int>> result;
     if (root == NULL)
@@ -2087,7 +2087,7 @@ bool LadderLengthSub(string a1, string a2)
     return different_num == 1;
 }
 
-int LadderLengthError(string &start, string &end, unordered_set<string> &dict) // LintCode 120. µ•¥ Ω”¡˙ ≥¨ ±¡À £¨≤‹ƒ·¬Í£°£°£°
+int LadderLengthError(string &start, string &end, unordered_set<string> &dict) // LintCode 120
 {
     int size = dict.size();
     int cur_size = 1;
@@ -2121,7 +2121,7 @@ int LadderLengthError(string &start, string &end, unordered_set<string> &dict) /
     return 0;
 }
 
-int LadderLength(string &start, string &end, unordered_set<string> &dict) // LintCode 120. µ•¥ Ω”¡˙ Œ“ µ‘⁄≤ª∂Æ’‚÷÷∂Ò–ƒµƒ–¥∑®æ”»ª±»Œ“µƒøÏ
+int LadderLength(string &start, string &end, unordered_set<string> &dict) // LintCode 120
 {
     vector<vector<string>> result;
     if (start.size() == 0 || end.size() == 0 || dict.size() == 0) {
@@ -2190,7 +2190,7 @@ public:
     }
 };
 
-int Query(SegmentTreeNode * root, int start, int end) // LintCode 202. œﬂ∂Œ ˜µƒ≤È—Ø
+int Query(SegmentTreeNode * root, int start, int end) // LintCode 202
 {
     if (root == NULL)
     {
@@ -2217,7 +2217,7 @@ int Query(SegmentTreeNode * root, int start, int end) // LintCode 202. œﬂ∂�
     }
 }
 
-int Query2(SegmentTreeNode * root, int start, int end) // LintCode 247. œﬂ∂Œ ˜≤È—Ø II
+int Query2(SegmentTreeNode * root, int start, int end) // LintCode 247
 {
     if (root == NULL)
     {
@@ -2252,7 +2252,7 @@ int Query2(SegmentTreeNode * root, int start, int end) // LintCode 247. œﬂ∂
     }
 }
 
-void Modify(SegmentTreeNode * root, int index, int value) // LintCode 203. œﬂ∂Œ ˜µƒ–ﬁ∏ƒ
+void Modify(SegmentTreeNode * root, int index, int value) // LintCode 203
 {
     if (root == NULL)
     {
@@ -2286,7 +2286,7 @@ void Modify(SegmentTreeNode * root, int index, int value) // LintCode 203. œﬂ
     root->max = cur_max;
 }
 
-SegmentTreeNode * Build(int start, int end) // LintCode 201. œﬂ∂Œ ˜µƒππ‘Ï
+SegmentTreeNode * Build(int start, int end) // LintCode 201
 {
     SegmentTreeNode * root = new SegmentTreeNode(start, end);
     if (start > end)
@@ -2320,7 +2320,7 @@ SegmentTreeNode * Build2Sub(vector<int> &A, int start, int end)
     return cur_node;
 }
 
-SegmentTreeNode * Build2(vector<int> &A) //LintCode 439. œﬂ∂Œ ˜µƒππ‘Ï II
+SegmentTreeNode * Build2(vector<int> &A) //LintCode 439
 {
     if (A.empty())
     {
@@ -2338,7 +2338,7 @@ struct UndirectedGraphNode {
     UndirectedGraphNode(int x) : label(x) {};
 };
 
-UndirectedGraphNode* CloneGraph(UndirectedGraphNode* node) // LintCode 137. øÀ¬°Õº
+UndirectedGraphNode* CloneGraph(UndirectedGraphNode* node) // LintCode 137
 {
     /*
      if (!node) return NULL;
@@ -2368,7 +2368,7 @@ UndirectedGraphNode* CloneGraph(UndirectedGraphNode* node) // LintCode 137. øÀ
      }
      }
      return graphCopy;
-     ø…“‘”√µƒ∫Ø ˝£¨≤ª÷™µ¿Œ™√´£¨¿œ±®”Ô∑®¥ÌŒÛ£¨‘Ù”∞œÏ¿œ÷Ω–ƒ«È£¨∆¡±ŒµÙ*/
+     */
     return NULL;
 }
 
@@ -2425,7 +2425,7 @@ void PermuteSub(vector<int> nums, int * is_insert, vector<int> cur_vec, vector<v
     }
 }
 
-vector<vector<int>> Permute(vector<int> &nums) // LintCode 15. »´≈≈¡–
+vector<vector<int>> Permute(vector<int> &nums) // LintCode 15
 {
     vector<vector<int>> Result;
     int len = nums.size();
@@ -2446,7 +2446,7 @@ vector<vector<int>> Permute(vector<int> &nums) // LintCode 15. »´≈≈¡–
     return Result;
 }
 
-int PartitionArray(vector<int> &nums, int k) //LintCode 31.  ˝◊ÈªÆ∑÷
+int PartitionArray(vector<int> &nums, int k) //LintCode 31
 {
     if (nums.empty())
     {
@@ -2527,7 +2527,7 @@ vector<int> FindOrder(int numCourses, vector<pair<int, int>> &prerequisites) // 
     return Result.size() == numCourses ? Result : vector<int>({});
 }
 
-class Tweet { // LintCode 501. √‘ƒ„Õ∆Ãÿ
+class Tweet { // LintCode 501
 public:
     int id;
     int user_id;
@@ -2535,7 +2535,7 @@ public:
     static Tweet create(int user_id, string tweet_text);
 };
 
-Tweet Tweet::create(int user_id, string tweet_text) // LintCode 501. √‘ƒ„Õ∆Ãÿ
+Tweet Tweet::create(int user_id, string tweet_text) // LintCode 501
 {
     Tweet * t = new Tweet;
     t->user_id = user_id;
@@ -2543,7 +2543,7 @@ Tweet Tweet::create(int user_id, string tweet_text) // LintCode 501. √‘ƒ„
     return *t;
 }
 
-class MiniTwitter { // LintCode 501. √‘ƒ„Õ∆Ãÿ
+class MiniTwitter { // LintCode 501
 public:
     vector<Tweet> Tweet_map;
     map<int, map<int, bool>> friend_groups;
@@ -2617,7 +2617,7 @@ static bool MinNumberSort(string a, string b)
     return a + b < b + a;
 }
 
-string MinNumber(vector<int> &nums) //LintCode 379. Ω´ ˝◊È÷ÿ–¬≈≈–Ú“‘ππ‘Ï◊Ó–°÷µ
+string MinNumber(vector<int> &nums) //LintCode 379
 {
     string result;
     vector<string> str_nums;
@@ -2647,7 +2647,7 @@ string MinNumber(vector<int> &nums) //LintCode 379. Ω´ ˝◊È÷ÿ–¬≈≈
     return result.substr(zero_count, result.length() - zero_count);
 }
 
-int CanCompleteCircuit(vector<int> &gas, vector<int> &cost) // LintCode 187. º””Õ’æ
+int CanCompleteCircuit(vector<int> &gas, vector<int> &cost) // LintCode 187
 {
     int result = -1;
     int max_abs = 0;
@@ -2675,7 +2675,7 @@ int CanCompleteCircuit(vector<int> &gas, vector<int> &cost) // LintCode 187. º�
     return max_abs >= 0 ? result : -1;
 }
 
-vector<vector<int>> LevelOrderBottom(TreeNode<int> * root) // LintCode 70. ∂˛≤Ê ˜µƒ≤„¥Œ±È¿˙ II
+vector<vector<int>> LevelOrderBottom(TreeNode<int> * root) // LintCode 70
 {
     vector<vector<int>> Result;
     if (root == NULL)
@@ -2746,7 +2746,7 @@ bool LowestCommonAncestorFindNode(TreeNode<int> * root, TreeNode<int> * node, ve
     return false;
 }
 
-TreeNode<int> * LowestCommonAncestor(TreeNode<int> * root, TreeNode<int> * A, TreeNode<int> * B) // LintCode 88. ◊ÓΩ¸π´π≤◊Êœ»
+TreeNode<int> * LowestCommonAncestor(TreeNode<int> * root, TreeNode<int> * A, TreeNode<int> * B) // LintCode 88
 {
     if (A == B)
     {
@@ -2835,7 +2835,7 @@ string IsBuild(int x) // LintCode 749. John's backyard garden
     return result;
 }
 
-bool CanJump(vector<int> &A) // LintCode 116. Ã¯‘æ”Œœ∑
+bool CanJump(vector<int> &A) // LintCode 116
 {
     int lenth = A.size() - 1;
     if (lenth == 0 || (lenth == 1 && A[0] > 0))
@@ -2866,14 +2866,14 @@ bool CanJump(vector<int> &A) // LintCode 116. Ã¯‘æ”Œœ∑
     return zero_map.size() == 0;
 }
 
-int MinCost(vector<vector<int>> &costs) // LintCode 515. ∑øŒ›»æ…´
+int MinCost(vector<vector<int>> &costs) // LintCode 515
 {
     if (costs.size() == 0 || costs[0].size() != 3)
     {
         return 0;
     }
     
-    // 0 ∫Ï…´ 1 ¿∂…´ 2 ¬Ã…´
+    // 0
     int tmp[3] = { 0 };
     int dp[3] = { 0 };
     for (uint i = 0; i < costs.size(); i++)
@@ -2975,13 +2975,13 @@ int Portal(vector<vector<char>> &Maze) // LintCode 750. Portal
     return -1;
 }
 
-struct DirectedGraphNode { // ”–œÚÕºΩ⁄µ„
+struct DirectedGraphNode { // 
     int label;
     vector<DirectedGraphNode *> neighbors;
     DirectedGraphNode(int x) : label(x) {};
 };
 
-vector<DirectedGraphNode*> TopSort(vector<DirectedGraphNode*>& graph) // LintCode 127. Õÿ∆À≈≈–Ú
+vector<DirectedGraphNode*> TopSort(vector<DirectedGraphNode*>& graph) // LintCode 127
 {
     vector<DirectedGraphNode*> Result;
     map<DirectedGraphNode*, int> Gramap;
@@ -3023,7 +3023,7 @@ vector<DirectedGraphNode*> TopSort(vector<DirectedGraphNode*>& graph) // LintCod
     return Result;
 }
 
-string DeleteDigits(string &A, int l) // LintCode 182. …æ≥˝ ˝◊÷
+string DeleteDigits(string &A, int l) // LintCode 182
 {
     uint dex = 0;
     int i = 0;
@@ -3170,7 +3170,7 @@ vector<int> SearchRange(TreeNode<int> * root, int k1, int k2)
     return result;
 }
 
-vector<int> Business(vector<int> &A, uint k) // LintCode 751. ‘º∫≤µƒ…˙“‚
+vector<int> Business(vector<int> &A, uint k) // LintCode 751
 {
     map<int, int> busmap;
     vector<int> result;
@@ -3214,7 +3214,7 @@ vector<int> Business(vector<int> &A, uint k) // LintCode 751. ‘º∫≤µƒ…
     return result;
 }
 
-vector<vector<int>> ThreeSum(vector<int> &numbers) // LintCode 57. »˝ ˝÷Æ∫Õ
+vector<vector<int>> ThreeSum(vector<int> &numbers) // LintCode 57
 {
     vector<vector<int>> result;
     sort(numbers.begin(), numbers.end());
@@ -3247,7 +3247,7 @@ vector<vector<int>> ThreeSum(vector<int> &numbers) // LintCode 57. »˝ ˝÷Æ�
     return result;
 }
 
-int MonotoneDigits(int num) // LintCode 743. µ•µ˜µ›‘ˆµƒ ˝◊÷
+int MonotoneDigits(int num) // LintCode 743
 {
     string num_str = to_string(num);
     for (uint i = 0; i < num_str.length() - 1; i++)
@@ -3269,7 +3269,7 @@ int MonotoneDigits(int num) // LintCode 743. µ•µ˜µ›‘ˆµƒ ˝◊÷
     return num;
 }
 
-void SortColors(vector<int> &nums) // LintCode 148. —’…´∑÷¿‡
+void SortColors(vector<int> &nums) // LintCode 148
 {
     int zero_dex = 0;
     int two_dex = nums.size() - 1;
@@ -3309,21 +3309,21 @@ void SortColors(vector<int> &nums) // LintCode 148. —’…´∑÷¿‡
     }
 }
 
-/*  »•ƒ„¬ËµƒSBÕÊ“‚£¨Ã‚ƒøø¥≤ª∂Æ£¨Ã‚“‚≤ª√˜»∑£¨≤ª∏¯÷¥––√¸¡Ó£¨Õ¯…œªπ√ª”–œ‡”¶Ω‚ Õ£¨ÕÊƒ„√√∞°£¨–“∫√¿œ◊””–“„¡¶£¨—–æø¡À“ªœ¬map reduce‘¥¬Î
- template<class T> class Input { // LintCode 549. ◊Ó≥£ π”√µƒk∏ˆµ•¥ (Map Reduce)
+/*
+ template<class T> class Input { // LintCode 549 (Map Reduce)
  public:
  bool done(); // Returns true if the iteration has elements or false.
  void next(); // Move to the next element in the iteration ,Runtime error if the iteration has no more elements
  T value(); // Get the current element, Runtime error if the iteration has no more elements
  };
  
- class Document { // LintCode 549. ◊Ó≥£ π”√µƒk∏ˆµ•¥ (Map Reduce)
+ class Document { // LintCode 549 (Map Reduce)
  public:
  int id; // document id
  string content; // document content
  };
  
- class TopKFrequentWordsMapper { // LintCode 549. ◊Ó≥£ π”√µƒk∏ˆµ•¥ (Map Reduce)
+ class TopKFrequentWordsMapper { // LintCode 549 (Map Reduce)
  public:
  void Map(Input<Document>* input) {
  while (!input->done())
@@ -3347,7 +3347,7 @@ void SortColors(vector<int> &nums) // LintCode 148. —’…´∑÷¿‡
  }
  };
  
- class TopKFrequentWordsReducer{ // LintCode 549. ◊Ó≥£ π”√µƒk∏ˆµ•¥ (Map Reduce)
+ class TopKFrequentWordsReducer{ // LintCode 549(Map Reduce)
  public:
  map<string, int> str_map;
  int num = 0;
@@ -3388,7 +3388,7 @@ void SortColors(vector<int> &nums) // LintCode 148. —’…´∑÷¿‡
  };
  */
 
-long long GetSum(int n, vector<int> &nums) //LintCode 782. ”ÎªÚ∫Õ
+long long GetSum(int n, vector<int> &nums) //LintCode 782
 {
     sort(nums.begin(), nums.end());
     long long min_or = nums[0];
@@ -3403,7 +3403,7 @@ long long GetSum(int n, vector<int> &nums) //LintCode 782. ”ÎªÚ∫Õ
     return min_or + max_and + max_or + min_and;
 }
 
-int HouseRobber2(vector<int> nums) // LintCode 534. ¥ÚΩŸ∑øŒ› II
+int HouseRobber2(vector<int> nums) // LintCode 534
 {
     if (nums.empty())
     {
@@ -3450,7 +3450,7 @@ int ValidTreeSub(vector<int> &existed, int e)
     return e;
 }
 
-bool ValidTree(int n, vector<vector<int>> &edges) // LintCode 178. Õº «∑Ò « ˜
+bool ValidTree(int n, vector<vector<int>> &edges) // LintCode 178
 {
     if (n - edges.size() != 1)
     {
@@ -3472,7 +3472,7 @@ bool ValidTree(int n, vector<vector<int>> &edges) // LintCode 178. Õº «∑Ò
     return true;
 }
 
-int TheLongestCommonPrefix(vector<string> &dic, string &target) // LintCode 784. ◊Ó≥§π´π≤«∞◊∫ II
+int TheLongestCommonPrefix(vector<string> &dic, string &target) // LintCode 784
 {
     int num = 0;
     for (uint i = 0; i < dic.size(); i++)
@@ -3490,7 +3490,7 @@ int TheLongestCommonPrefix(vector<string> &dic, string &target) // LintCode 784.
     return num;
 }
 
-int KthPrime(int n) // LintCode 792. µ⁄K∏ˆ÷  ˝
+int KthPrime(int n) // LintCode 792
 {
     int num = 1;
     for (int i = 2; i < n; i++)
@@ -3514,7 +3514,7 @@ int KthPrime(int n) // LintCode 792. µ⁄K∏ˆ÷  ˝
     return num;
 }
 
-int MaxTwoSubArrays(vector<int> &nums) // LintCode 42. ◊Ó¥Û◊” ˝◊È II
+int MaxTwoSubArrays(vector<int> &nums) // LintCode 42
 {
     if (nums.empty())
     {
@@ -3560,7 +3560,7 @@ int MaxTwoSubArrays(vector<int> &nums) // LintCode 42. ◊Ó¥Û◊” ˝◊È 
     return result;
 }
 
-int MergeNumber(vector<int> &numbers) // LintCode 791. ∫œ≤¢ ˝◊÷
+int MergeNumber(vector<int> &numbers) // LintCode 791
 {
     int Mernum = 0;
     map<int, int> num_map;
@@ -3606,7 +3606,7 @@ int MergeNumber(vector<int> &numbers) // LintCode 791. ∫œ≤¢ ˝◊÷
     return Mernum;
 }
 
-int IntersectionOfArrays(vector<vector<int>> &arrs) // LintCode 793.  ˝◊ÈµƒΩªºØ
+int IntersectionOfArrays(vector<vector<int>> &arrs) // LintCode 793
 {
     if (arrs.empty())
     {
@@ -3636,7 +3636,7 @@ int IntersectionOfArrays(vector<vector<int>> &arrs) // LintCode 793.  ˝◊Èµ
     return Ar_map.size();
 }
 
-bool CanBeGeneratedSub(vector<string> char_arrs[], string str1, string str2, int dex) // LintCode 790.∑˚∫≈¥Æ…˙≥…∆˜
+bool CanBeGeneratedSub(vector<string> char_arrs[], string str1, string str2, int dex) // LintCode 790
 {
     for (uint i = dex; i < str2.size() && i < str1.size();)
     {
@@ -3664,7 +3664,7 @@ bool CanBeGeneratedSub(vector<string> char_arrs[], string str1, string str2, int
     return str1.length() == str2.length();
 }
 
-bool CanBeGenerated(vector<string> &generator, char startSymbol, string symbolString) // LintCode 790.∑˚∫≈¥Æ…˙≥…∆˜
+bool CanBeGenerated(vector<string> &generator, char startSymbol, string symbolString) // LintCode 790
 {
     vector<string> char_arrs[BIG_ENGLISH_CHAR_NUM];
     for (uint i = 0; i < generator.size(); i++)
@@ -3678,7 +3678,7 @@ bool CanBeGenerated(vector<string> &generator, char startSymbol, string symbolSt
     return CanBeGeneratedSub(char_arrs, init_str, symbolString, 0);
 }
 
-bool ExistSub(vector<vector<char>> &board, vector<vector<bool>> &sign_load, string &word, int str_dex, uint i, uint j) //LintCode 123. µ•¥ À—À˜
+bool ExistSub(vector<vector<char>> &board, vector<vector<bool>> &sign_load, string &word, int str_dex, uint i, uint j) //LintCode 123
 {
     if (board[i][j] == word[str_dex])
     {
@@ -3713,7 +3713,7 @@ bool ExistSub(vector<vector<char>> &board, vector<vector<bool>> &sign_load, stri
     }
 }
 
-bool Exist(vector<vector<char>> &board, string &word) //LintCode 123. µ•¥ À—À˜
+bool Exist(vector<vector<char>> &board, string &word) //LintCode 123
 {
     if (word.length() == 0)
     {
@@ -3749,8 +3749,8 @@ bool Exist(vector<vector<char>> &board, string &word) //LintCode 123. µ•¥ �
     return false;
 }
 
-/* ”÷“ª∏ˆÃ‚“‚Œ“œÎ≤‹ƒ·¬Íœµ¡–
- class Comparator // LintCode 399. Nuts ∫Õ Bolts µƒŒ Ã‚
+/*
+ class Comparator // LintCode 399
  {
  public:
  int cmp(string a, string b)
@@ -3759,7 +3759,7 @@ bool Exist(vector<vector<char>> &board, string &word) //LintCode 123. µ•¥ �
  }
  };
  
- void SortNutsAndBolts(vector<string> &nuts, vector<string> &bolts, Comparator compare) // LintCode 399. Nuts ∫Õ Bolts µƒŒ Ã‚
+ void SortNutsAndBolts(vector<string> &nuts, vector<string> &bolts, Comparator compare) // LintCode 399
  {
  for (int i = 0; i<nuts.size(); i++){
  for (int j = i; j<bolts.size(); j++){
@@ -3774,7 +3774,7 @@ bool Exist(vector<vector<char>> &board, string &word) //LintCode 123. µ•¥ �
  }
  }*/
 
-vector<vector<string>> GroupAnagrams(vector<string> &strs) //LintCode 772. ¥ÌŒª¥ ∑÷◊È -- ”÷ «“ªµ¿ø”µ˘Ã‚£¨–¬Ã‚∂º «ø”µ˘µƒ
+vector<vector<string>> GroupAnagrams(vector<string> &strs) //LintCode 772
 {
     struct str_node
     {
@@ -3900,7 +3900,7 @@ bool PacificAtlanticSub(vector<vector<int>> &matrix, vector<vector<int>> &sign_c
     return false;
 }
 
-vector<vector<int>> PacificAtlantic(vector<vector<int>> &matrix) // LintCode 778. Pacific Atlantic Water Flow –°«≈¡˜ÀÆ»Àº“-°∑¬Ì…œ∑≈ºŸ£¨æÕø™–ƒ
+vector<vector<int>> PacificAtlantic(vector<vector<int>> &matrix) // LintCode 778. Pacific Atlantic Water Flow
 {
     vector<vector<int>> sign_can_move;
     bool** sign_moved;
@@ -3933,7 +3933,7 @@ vector<vector<int>> PacificAtlantic(vector<vector<int>> &matrix) // LintCode 778
     return result;
 }
 
-bool IsPalindrome2(int n) //LintCode 807. ªÿŒƒ ˝ II
+bool IsPalindrome2(int n) //LintCode 807
 {
     int dex_lenth = 0;
     for (int i = 31; i >= 0; i--)
@@ -3954,7 +3954,7 @@ bool IsPalindrome2(int n) //LintCode 807. ªÿŒƒ ˝ II
     return true;
 }
 
-vector<int> WinSum(vector<int> &nums, uint k) // LintCode 604. ª¨∂Ø¥∞ø⁄ƒ⁄ ˝µƒ∫Õ
+vector<int> WinSum(vector<int> &nums, uint k) // LintCode 604
 {
     vector<int> Result;
     if (k == 0)
@@ -3990,7 +3990,7 @@ void TopKMovieSub(bool * relation_arr, vector<vector<int>> &G, int i, int S)
     }
 }
 
-vector<int> TopKMovie(vector<int> &rating, vector<vector<int>> &G, int S, uint K) // LintCode 808. ”∞º Õ¯¬Á
+vector<int> TopKMovie(vector<int> &rating, vector<vector<int>> &G, int S, uint K) // LintCode 808
 {
     struct CmpByValue {
         bool operator()(const pair<int, int>& k1, const pair<int, int>& k2) {
@@ -4042,7 +4042,7 @@ vector<int> TopKMovie(vector<int> &rating, vector<vector<int>> &G, int S, uint K
     return result;
 }
 
-int BuyFruits(vector<vector<string>> &codeList, vector<string> &shoppingCart) // LintCode 806. ¬ÚÀÆπ˚
+int BuyFruits(vector<vector<string>> &codeList, vector<string> &shoppingCart) // LintCode 806
 {
     if (codeList.size() == 0)
     {
@@ -4097,7 +4097,7 @@ void MaximumAssociationSetSub(vector<string> &cur_relation, map<string, vector<s
     }
 }
 
-vector<string> MaximumAssociationSet(vector<string> &ListA, vector<string> &ListB) //LintCode 805. ◊Ó¥Ûπÿ¡™ºØ∫œ
+vector<string> MaximumAssociationSet(vector<string> &ListA, vector<string> &ListB) //LintCode 805
 {
     map<string, vector<string>> relation_map;
     map<string, bool> relation_visit;
@@ -4126,7 +4126,7 @@ vector<string> MaximumAssociationSet(vector<string> &ListA, vector<string> &List
     return result;
 }
 
-string InputStream(string &inputA, string &inputB) //LintCode 823.  ‰»Î¡˜  ’ºŸµ⁄“ªÃ‚£¨…Ò∑≥£¨ºŸ∆⁄∂º√ª”–º˚µΩœÎº˚µƒ»À£¨√˜√˜‘º∫√¡À
+string InputStream(string &inputA, string &inputB) //LintCode 823
 {
     stack<char> A_stack;
     stack<char> B_stack;
@@ -4176,7 +4176,7 @@ string InputStream(string &inputA, string &inputB) //LintCode 823.  ‰»Î¡˜
     return "YES";
 }
 
-int MaxDiff(vector<vector<int>> &arrs) //LintCode 698.  ˝◊È÷–◊Ó¥Ûµƒ≤Ó÷µ
+int MaxDiff(vector<vector<int>> &arrs) //LintCode 698
 {
     if (arrs.empty())
     {
@@ -4218,7 +4218,7 @@ int MaxDiff(vector<vector<int>> &arrs) //LintCode 698.  ˝◊È÷–◊Ó¥Ûµ
     return abs((*map_it_end).first - (*map_it_begin).first);
 }
 
-int GetSingleNumber(vector<int> &nums) // LintCode 824. ¬‰µ•µƒ ˝ IV
+int GetSingleNumber(vector<int> &nums) // LintCode 824
 {
     int min = 0;
     int max = nums.size() - 1;
@@ -4250,11 +4250,10 @@ int GetSingleNumber(vector<int> &nums) // LintCode 824. ¬‰µ•µƒ ˝ IV
     }
 }
 
-void BinaryTimeSub(vector<string> &result, int *arr, int num, int dex) // LintCode 706. ∂˛Ω¯÷∆ ±º‰ ”√∫Í∫Õπ´ ΩÃ´¬È∑≥¡À£¨÷±Ω”–¥≥… ˝◊÷£¨≤ª“™‘⁄“‚ƒ«√¥∂‡
+void BinaryTimeSub(vector<string> &result, int *arr, int num, int dex) // LintCode 706
 {
     if (num == 0)
     {
-        // ≈–∂œ–° ± «∑Ò≥¨π˝œﬁ÷∆
         int hour = 8 * arr[0] + 4 * arr[1] + 2 * arr[2] + arr[3];
         if (hour >= 12)
         {
@@ -4279,7 +4278,7 @@ void BinaryTimeSub(vector<string> &result, int *arr, int num, int dex) // LintCo
     }
 }
 
-vector<string> BinaryTime(int num) // LintCode 706. ∂˛Ω¯÷∆ ±º‰ ”√∫Í∫Õπ´ ΩÃ´¬È∑≥¡À£¨÷±Ω”–¥≥… ˝◊÷£¨≤ª“™‘⁄“‚ƒ«√¥∂‡
+vector<string> BinaryTime(int num) // LintCode 706
 {
     int arr[10] = { 0 };
     vector<string> result;
@@ -4312,12 +4311,12 @@ string HexConversion(int n, int k) // LintCode 763. Hex Conversion
     return result;
 }
 
-char LowercaseToUppercase(char character) // LintCode 145. ¥Û–°–¥◊™ªª
+char LowercaseToUppercase(char character) // LintCode 145
 {
     return character <= 'Z' ? character - 'A' + 'a' : character - 'a' + 'A';
 }
 
-int reverseInteger(int number) // LintCode 37. ∑¥◊™“ª∏ˆ3Œª’˚ ˝
+int reverseInteger(int number) // LintCode 37
 {
     int hundred = number / 100;
     int teen = (number - hundred * 100) / 10;
@@ -4325,7 +4324,7 @@ int reverseInteger(int number) // LintCode 37. ∑¥◊™“ª∏ˆ3Œª’˚ 
     return hundred + teen * 10 + bit * 100;
 }
 
-vector<vector<int>> SpiralArray(int n) // LintCode 769. ¬›–˝æÿ’Û
+vector<vector<int>> SpiralArray(int n) // LintCode 769
 {
     vector<vector<int>> result;
     for (int i = 0; i < n; i++)
@@ -4377,7 +4376,7 @@ vector<vector<int>> SpiralArray(int n) // LintCode 769. ¬›–˝æÿ’Û
     return result;
 }
 
-bool IsLeapYear(int n) // LintCode 766. »ÚƒÍ
+bool IsLeapYear(int n) // LintCode 766
 {
     return ((n % 4 == 0) && (n % 100 != 0)) || (n % 400 == 0);
 }
@@ -4438,7 +4437,7 @@ vector<double> Calculate(int r) // LintCode 764. Calculate Circumference And Are
     return result;
 }
 
-vector<vector<int>> CalcYangHuisTriangle(int n) // LintCode 768. —Óª‘»˝Ω«
+vector<vector<int>> CalcYangHuisTriangle(int n) // LintCode 768
 {
     vector<vector<int>> result;
     if (n == 0)
@@ -4459,7 +4458,7 @@ vector<vector<int>> CalcYangHuisTriangle(int n) // LintCode 768. —Óª‘»˝�
     return result;
 }
 
-void ReverseArray(vector<int> &nums) // LintCode 767. ∑≠◊™ ˝◊È
+void ReverseArray(vector<int> &nums) // LintCode 767
 {
     int n = nums.size();
     for (int i = 0; i < n / 2; i++)
@@ -4503,7 +4502,7 @@ bool WordSortCmp(string a, string b)
     return a < b;
 }
 
-vector<string> WordSort(string &alphabet, vector<string> &words) // LintCode 819. µ•¥ ≈≈–Ú
+vector<string> WordSort(string &alphabet, vector<string> &words) // LintCode 819
 {
     vector<string> result = words;
     char char_hash[SMALL_ENGLISH_CHAR_NUM];
@@ -4540,7 +4539,7 @@ public:
     }
 };
 
-string Rectangle(vector<Point> &pointSet) // LintCode 820. æÿ–Œ
+string Rectangle(vector<Point> &pointSet) // LintCode 820
 {
     unordered_set<string> PointSet;
     for (uint i = 0; i < pointSet.size(); i++)
@@ -4568,7 +4567,7 @@ string Rectangle(vector<Point> &pointSet) // LintCode 820. æÿ–Œ
     return "NO";
 }
 
-int FriendRequest(vector<int> &ages) // LintCode 895. ∫√”—«Î«Û
+int FriendRequest(vector<int> &ages) // LintCode 895
 {
     int result = 0;
     for (uint i = 0; i < ages.size(); i++)
@@ -4590,7 +4589,7 @@ int FriendRequest(vector<int> &ages) // LintCode 895. ∫√”—«Î«Û
     return result;
 }
 
-int PairNumbers(vector<Point> &p) // LintCode 844.  ˝∂‘Õ≥º∆
+int PairNumbers(vector<Point> &p) // LintCode 844
 {
     int result = 0;
     for (uint i = 0; i < p.size() - 1; i++)
@@ -4663,7 +4662,7 @@ bool ValidWordSquare(vector<string> &words) // LintCode 888. Valid Word Square
     return true;
 }
 
-string SameNumber(vector<int> &nums, int k) // LintCode 1368. œ‡Õ¨ ˝◊÷
+string SameNumber(vector<int> &nums, int k) // LintCode 1368
 {
     map<int, int> num_map;
     for (uint i = 0; i < nums.size(); i++)
@@ -4681,7 +4680,7 @@ string SameNumber(vector<int> &nums, int k) // LintCode 1368. œ‡Õ¨ ˝◊÷
     return "NO";
 }
 
-int DigitConvert(int n) // LintCode 952.  ˝◊÷Œ Ã‚
+int DigitConvert(int n) // LintCode 952.
 {
     int num = 0;
     while (n != 1)
@@ -4763,7 +4762,7 @@ int ReachNumber(int target)
     return num;
 }
 
-vector<int> AnagramMappings(vector<int> &A, vector<int> &B) // LintCode 813. ’“µΩ”≥…‰–Ú¡–
+vector<int> AnagramMappings(vector<int> &A, vector<int> &B) // LintCode 813
 {
     map<int, int> B_map;
     vector<int> result;
@@ -4778,7 +4777,7 @@ vector<int> AnagramMappings(vector<int> &A, vector<int> &B) // LintCode 813. ’
     return result;
 }
 
-vector<string> logSort(vector<string> &logs) // LintCode 1380. »’÷æ≈≈–Ú -- ’‚À˚¬Ë «ºÚµ•?
+vector<string> logSort(vector<string> &logs) // LintCode 1380
 {
     vector<string> Result;
     vector<string> Num_Vec;
@@ -4788,7 +4787,7 @@ vector<string> logSort(vector<string> &logs) // LintCode 1380. »’÷æ≈≈�
         int space_dex = cur_str.find(' ');
         string key = cur_str.substr(0, space_dex);
         string value = cur_str.substr(space_dex + 1, cur_str.length());
-        if (value[0] <= '9' && value[0] >= '0') // ˝◊÷£¨≤ª”√≈≈–Ú
+        if (value[0] <= '9' && value[0] >= '0') 
         {
             Num_Vec.push_back(cur_str);
         }
@@ -4867,7 +4866,7 @@ bool NumIslandCitiesSub(vector<vector<int>> &grid, uint i, uint j, vector<vector
     return Resut | SubResult;
 }
 
-int NumIslandCities(vector<vector<int>> &grid) // LintCode 897. ∫£µ∫≥« –
+int NumIslandCities(vector<vector<int>> &grid) // LintCode 897
 {
     int Result = 0;
     uint x = grid.size();
@@ -4930,7 +4929,7 @@ int SubarraySumEqualsK(vector<int> &nums, int k) // LintCode 838. Subarray Sum E
     unordered_map<int, int> hash;
     int cur_sum = 0;
     int res = 0;
-    hash[0] = 1; // ”√¿¥¥¶¿Ì“ª∏ˆsumæÕµ»”⁄kµƒ«Èøˆ
+    hash[0] = 1; 
     
     for (uint i = 0; i < nums.size(); i++)
     {
@@ -4949,7 +4948,7 @@ int SubarraySumEqualsK(vector<int> &nums, int k) // LintCode 838. Subarray Sum E
     return res;
 }
 
-vector<vector<int>> TwitchWords(string &str) // LintCode 1401. ≥È¥§¥
+vector<vector<int>> TwitchWords(string &str) // LintCode 1401
 {
     vector<vector<int>> res;
     uint start_index = 0;
@@ -5054,7 +5053,7 @@ bool RadarDetection2Sub(int a[2], int b[2])
     return a[1] <= b[1];
 }
 
-string RadarDetection2(vector<Point> &coordinates, vector<int> &radius) //LintCode ≤ª∫√“‚Àº£¨Œ“œÎ∂‡¡À
+string RadarDetection2(vector<Point> &coordinates, vector<int> &radius) //LintCode
 {
     /*vector<int[2]> radius_vec;
      for (uint i = 0; i < coordinates.size(); i++)
@@ -5081,12 +5080,11 @@ string RadarDetection2(vector<Point> &coordinates, vector<int> &radius) //LintCo
      
      for (uint i = 0; radius_vec.size(); i++)
      {
-     //◊ˆ“ª∏ˆ≈≈¡–
      }*/
     return "YES";
 }
 
-string RadarDetection(vector<Point> &coordinates, vector<int> &radius) //LintCode ¿◊¥ÔºÏ≤‚
+string RadarDetection(vector<Point> &coordinates, vector<int> &radius) //LintCode
 {
     for (uint i = 0; i < coordinates.size(); i++)
     {
@@ -5103,7 +5101,7 @@ string RadarDetection(vector<Point> &coordinates, vector<int> &radius) //LintCod
     return "NO";
 }
 
-bool WordPattern(string &pattern, string &str) // LintCode 828. ◊÷ƒ£ Ω
+bool WordPattern(string &pattern, string &str) // LintCode 828
 {
     unordered_map<string, char> value_to_key;
     bool key[SMALL_ENGLISH_CHAR_NUM] = { false };
@@ -5153,7 +5151,7 @@ int HammingDistance(int x, int y) // LintCode 835. Hamming Distance
          {
          res++;
          }
-         tmp = tmp >> 1; ∏–æıÕÍ»´Œª‘ÀÀ„∑¥∂¯∏¸øÏ */
+         tmp = tmp >> 1; */
         res++;
         tmp &= tmp - 1;
     }
@@ -5192,7 +5190,7 @@ bool BigBusinessSub(BigBusinessKeyValue a, BigBusinessKeyValue b)
     return a.key <= b.key;
 }
 
-int BigBusiness(vector<int> &a, vector<int> &b, int k) // LintCode 970. ¥Û…˙“‚
+int BigBusiness(vector<int> &a, vector<int> &b, int k) // LintCode 970
 {
     vector<BigBusinessKeyValue> vec_data;
     
@@ -5355,7 +5353,7 @@ int MinDiffInBSTSub(TreeNode<int> * root, int &min_num, int &max_num)
     return cur_root_min;
 }
 
-int MinDiffInBST(TreeNode<int> * root) // LintCode 1033. Minimum Distance Between BST Nodes   ;;;   1188. Minimum Absolute Difference in BST  LintCode’Êµƒ‘Ω¿¥‘Ω¿√µƒ£¨Õ¨∏ˆÀ„∑®¡Ω∏ˆÃ‚
+int MinDiffInBST(TreeNode<int> * root) // LintCode 1033. Minimum Distance Between BST Nodes   ;;;   1188. Minimum Absolute Difference in BST  LintCode
 {
     int min_num = MAXINTNUM;
     int max_num = MININTNUM;
@@ -5367,7 +5365,7 @@ int MinDiffInBST(TreeNode<int> * root) // LintCode 1033. Minimum Distance Betwee
     return MinDiffInBSTSub(root, min_num, max_num);
 }
 
-string Compress(string &str) // LintCode 213. ◊÷∑˚¥Æ—πÀı
+string Compress(string &str) // LintCode 213
 {
     string result;
     char last_char = str[0];
@@ -5391,7 +5389,7 @@ string Compress(string &str) // LintCode 213. ◊÷∑˚¥Æ—πÀı
     return result.length() < str.length() ? result : str;
 }
 
-vector<int> ReverseStore(ListNode<int> * head) // LintCode 822. œ‡∑¥µƒÀ≥–Ú¥Ê¥¢
+vector<int> ReverseStore(ListNode<int> * head) // LintCode 822
 {
     vector<int> result;
     while (head != NULL)
@@ -5473,7 +5471,7 @@ bool IsToeplitzMatrix(vector<vector<int>> &matrix) // 1042. Toeplitz Matrix
     return true;
 }
 
-string LastFourDigitsOfFn2(int n) // 949. Fibonacci II // «Û«∞º∏Œªµƒ£¨µıµıµı Fibonacciπ´ Ω Fn = £®°Ã5 / 5£© * pow(£®£®1 + °Ã5£©/ 2£© , n) - £®°Ã5 / 5£© * pow(£®£®1 - °Ã5£©/ 2£© , n)
+string LastFourDigitsOfFn2(int n) // 949. Fibonacci II 
 {
     if (n == 0)
     {
@@ -5503,7 +5501,7 @@ string LastFourDigitsOfFn2(int n) // 949. Fibonacci II // «Û«∞º∏Œªµƒ
     return to_string(cur_num);
 }
 
-bool LastFourDigitsOfFnSub(vector<int>& matrix, int & start, int n) // µ›πÈ∫√◊ˆ“ª–©
+bool LastFourDigitsOfFnSub(vector<int>& matrix, int & start, int n)
 {
     int i = 2;
     vector<int> base_matrix = { 1, 1, 0 };
@@ -5533,7 +5531,7 @@ bool LastFourDigitsOfFnSub(vector<int>& matrix, int & start, int n) // µ›πÈ
     return false;
 }
 
-string LastFourDigitsOfFn(int n) // 949. Fibonacci II // «Û∫Ûº∏Œªµƒ£¨æÿ’Ûœ‡≥À∑®£¨ø…“‘Ω´ ±º‰∏¥‘”∂»ŒﬁœﬁΩ”Ω¸”Îlog(n)£¨–÷µ‹£¨≈£±∆∞°£¨“ª∏ˆºÚµ•Ã‚∏„’‚√¥ƒ—£¨≈™µƒ¿œ◊”≤Óµ„Õ∂Àﬂ
+string LastFourDigitsOfFn(int n) // 949. Fibonacci II
 {
     if (n == 0)
     {
@@ -5568,7 +5566,7 @@ int UniqueMorseRepresentations(vector<string> &words) // LintCode 1013. Unique M
     return trans_string.size();
 }
 
-int Fibonacci(int n) // LintCode 366. Ï≥≤®ƒ…∆ı ˝¡– ƒ„‘⁄∂∫Œ“£ø
+int Fibonacci(int n) // LintCode 366
 {
     if (n == 1)
     {
@@ -5578,7 +5576,7 @@ int Fibonacci(int n) // LintCode 366. Ï≥≤®ƒ…∆ı ˝¡– ƒ„‘⁄�
     return result;
 }
 
-double FindMaxAverage(vector<int> &nums, int k) // LintCode 868. ◊” ˝◊Èµƒ◊Ó¥Û∆Ωæ˘÷µ
+double FindMaxAverage(vector<int> &nums, int k) // LintCode 868
 {
     double cur_sum = 0;
     double move_sum = 0;
@@ -5604,7 +5602,6 @@ int CountPalindromicSubstrings(string &str) // LintCode 837. Palindromic Substri
     for (uint i = 0; i < str.length(); i++)
     {
         result++;
-        // ÷––ƒµ„
         for (int j = i, distance = 1; j - distance >= 0 && distance + (uint)j < str.length(); distance++)
         {
             if (str[j - distance] == str[distance + j])
@@ -5617,7 +5614,6 @@ int CountPalindromicSubstrings(string &str) // LintCode 837. Palindromic Substri
             }
         }
         
-        // ÷––ƒ◊Ûµ„
         for (int j = i, distance = 1; j + 1 - distance >= 0 && distance + (uint)j < str.length(); distance++)
         {
             if (str[j + 1 - distance] == str[distance + j])
@@ -5633,7 +5629,6 @@ int CountPalindromicSubstrings(string &str) // LintCode 837. Palindromic Substri
     return result;
 }
 
-/*------------------------------------------------------------ ª™¿ˆ¿ˆXXX£¨œÓƒø–Ë“™£¨∫Û–¯∑Á∏Ò±‰¡À --------------------------------------------------------------*/
 TreeNode<int> * mergeTrees(TreeNode<int> * t1, TreeNode<int> * t2) // LintCode 1126. Merge Two Binary Trees
 {
     if (!t1)
@@ -5775,7 +5770,7 @@ vector<vector<int>> floodFill(vector<vector<int>> &image, int sr, int sc, int ne
     return image;
 }
 
-int findRadius(vector<int> &houses, vector<int> &heaters) // LintCode 1219. Heaters Fuck Fuck ‘⁄’‚µ¿Ã‚…œ¿œ◊”∂º–¥‘Œ¡À
+int findRadius(vector<int> &houses, vector<int> &heaters) // LintCode 1219. Heaters Fuck Fuck
 {
     sort(houses.begin(), houses.end());
     sort(heaters.begin(), heaters.end());
@@ -6048,7 +6043,7 @@ vector<string> subdomainVisits(vector<string> &cpdomains) // LintCode 1006. Subd
     char numStr[10];
     for (auto strIt : strMap)
     {
-        //sprintf(numStr, "%d", strIt.second); vs中sprintf会报错
+        //sprintf(numStr, "%d", strIt.second);
         result.push_back(numStr + string(" ") + strIt.first);
     }
     
@@ -6068,7 +6063,7 @@ int findNthDigit(int n) // LintCode 1256. Nth Digit
     }
     
     char curVal[15];
-    //sprintf(curVal, "%d", (int)(pow(10, curDex - 1) + (n - 1) / curDex)); vs中报错
+    //sprintf(curVal, "%d", (int)(pow(10, curDex - 1) + (n - 1) / curDex));
     return curVal[(n - 1) % curDex] - '0';
 }
 
@@ -6274,7 +6269,7 @@ ParentTreeNode<int> * lowestCommonAncestorII(ParentTreeNode<int> * root, ParentT
     return root;
 }
 
-string licenseKeyFormatting(string &S, int K) //LintCode 1214. License Key Formatting(这有些翻译真难)
+string licenseKeyFormatting(string &S, int K) //LintCode 1214. License Key Formatting
 {
     string result;
     int curDashNum = 0;
@@ -6349,7 +6344,7 @@ int hammingWeight(unsigned int n) // LintCode 1332. Number of 1 Bits
     return count;
 }
 
-char findTheDifferenceError(string &s, string &t) // LintCode 1266. Find the Difference LintCode 真的是越来越烂了，题目翻译有问题，各种解释不明确
+char findTheDifferenceError(string &s, string &t) // LintCode 1266. Find the Difference LintCode
 {
     int start = 0;
     int end = t.length() - 1;

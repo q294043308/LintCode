@@ -1,8 +1,8 @@
 //  func2.h
 //  LintCode
 //
-//  Created by 董旭轩 on 2018/8/21.
-//  Copyright © 2018年 董旭轩. All rights reserved.
+//  Created by DongXuxuan on 2018/8/21.
+//  Copyright © 2018 DongXuxuan. All rights reserved.
 
 #ifndef func2
 #define func2
@@ -11,7 +11,7 @@
 
 int countPrimeSetBits(int L, int R) // LintCode 1046. Prime Number of Set Bits in Binary Representation
 {
-    //init prime number arr  -- 备注：理论上这里不应该用这个宏，可题目说了是10^6，30位够了
+    //init prime number arr
     int res = 0;
     bool promeArr[THIRTY] = {false};
     promeArr[2] = true;
@@ -25,7 +25,7 @@ int countPrimeSetBits(int L, int R) // LintCode 1046. Prime Number of Set Bits i
 
     for (int i = L; i <= R; ++i)
     {
-        //int cnt = __builtin_popcount(i); -- 此处是Gcc编译器特有函数，计算二进制非零个数
+      //int cnt = __builtin_popcount(i)
       int cnt = 1;
       res += promeArr[cnt] ? 1 : 0;
     }
@@ -380,7 +380,7 @@ int judgeTheLastNumber(string &str) // 1459. Judge the last number
   return str.length() <= i ? 2 : 1;
 }
 
-int minCostClimbingStairs(vector<int> &cost) // 1054. Min Cost Climbing Stairs 动态规划
+int minCostClimbingStairs(vector<int> &cost) // 1054. Min Cost Climbing Stairs
 {
   int minOneStep = 0;
   int minTwoStep = MAXINTNUM;
@@ -581,7 +581,7 @@ vector<string> findWords(vector<string> &words) // 1204. Keyboard Row
   return res;
 }
 
-int maxAreaOfIslandSub(vector<vector<int>> &grid, int i, int j) // 这种递归减少了内存的申请，但破坏其原本数据，如果不想可以申请块内存记录是否访问
+int maxAreaOfIslandSub(vector<vector<int>> &grid, int i, int j) //
 {
   grid[i][j] = 0;
   int curArea = 1;
@@ -621,8 +621,32 @@ int maxAreaOfIsland(vector<vector<int>> &grid) // 1080. Max Area of Island
   return res;
 }
 
+int diameterOfBinaryTreeSub(TreeNode<int> * root, map<TreeNode<int>*, int> &nodeMap, int &res)
+{
+  if (!root)
+  {
+    return 0;
+  }
+
+  if (nodeMap.count(root))
+  {
+    return nodeMap[root];
+  }
+
+  int left = diameterOfBinaryTreeSub(root->left, nodeMap, res);
+  int right = diameterOfBinaryTreeSub(root->right, nodeMap, res);
+  res = max(res, left + right);
+  nodeMap[root] = max(left, right) + 1;
+  return nodeMap[root];
+}
+
 int diameterOfBinaryTree(TreeNode<int> * root) // 1181. Diameter of Binary Tree
 {
+  map<TreeNode<int> *, int> nodeMap;
+  int res = 0;
+
+  diameterOfBinaryTreeSub(root, nodeMap, res);
+  return res;
 }
 
 #endif

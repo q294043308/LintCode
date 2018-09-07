@@ -1,8 +1,8 @@
 //  define.h
 //  LintCode
 //
-//  Created by 董旭轩 on 2018/8/21.
-//  Copyright © 2018年 董旭轩. All rights reserved.
+//  Created by DongXuxuan on 2018/8/21.
+//  Copyright © 2018 DongXuxuan. All rights reserved.
 
 #ifndef define
 #define define
@@ -95,7 +95,7 @@ template<class val_type> bool IsEqual(TreeNode<val_type> * T1, TreeNode<val_type
     return false;
 }
 
-class Solution { // LintCode 204. µ•¿˝
+class Solution { // LintCode 204
 public:
     static Solution* getInstance()
     {
@@ -108,7 +108,7 @@ public:
     }
 };
 
-class Toy { // LintCode 496. ÕÊæﬂπ§≥ß
+class Toy { // LintCode 496
 public:
     virtual void talk() const = 0;
 };
@@ -148,7 +148,7 @@ template<class val_type> struct coordinate
     val_type j = 0;
 };
 
-template<class val_type> int CountNodes(ListNode<val_type> * head) //  LintCode 466 ¡¥±Ì≥§∂»
+template<class val_type> int CountNodes(ListNode<val_type> * head) //  LintCode 466
 {
     int count = 0;
     ListNode<val_type>* tmp = head;

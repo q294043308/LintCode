@@ -1,8 +1,8 @@
 //  main.cpp
 //  LintCode
 //
-//  Created by 董旭轩 on 2018/7/25.
-//  Copyright © 2018年 董旭轩. All rights reserved.
+//  Created by DongXuxuan on 2018/7/25.
+//  Copyright © 2018 DongXuxuan. All rights reserved.
 
 #include "define.h"
 #include "func1.h"
