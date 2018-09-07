@@ -649,4 +649,60 @@ int diameterOfBinaryTree(TreeNode<int> * root) // 1181. Diameter of Binary Tree
   return res;
 }
 
+int arrangeCoins(int n) // 988. Arranging Coins
+{
+  // D = b^2 - 4ac; x = (-b ± √D) / 2a
+  return (int)(sqrt(8 * (double)n + 1) - 1) / 2;
+}
+
+string reverseWords(string &s) // 1173. Reverse Words in a String III
+{
+  if (s.empty())
+  {
+    return s;
+  }
+
+  uint start = 0;
+  for (uint i = 0;; ++i)
+  {
+    if (i == s.size() ||  s[i] == ' ')
+    {
+      // reverse
+      for (uint end = i - 1; start < end; ++start, --end)
+      {
+        char tmp = s[start];
+        s[start] = s[end];
+        s[end] = tmp;
+      }
+      start = i + 1;
+    }
+
+    if (i == s.size())
+    {
+      return s;
+    }
+  }
+  return s;
+}
+
+vector<int> nextGreaterElement(vector<int> &nums1, vector<int> &nums2) // 1206. Next Greater Element I
+{
+  vector<int> res;
+  stack<int> st;
+  unordered_map<int, int> m;
+  for (int num : nums2)
+  {
+    while (!st.empty() && st.top() < num)
+    {
+      m[st.top()] = num; st.pop();
+    }
+    st.push(num);
+  }
+  for (int num : nums1)
+  {
+    res.push_back(m.count(num) ? m[num] : -1);
+  }
+  return res;
+}
+
 #endif
