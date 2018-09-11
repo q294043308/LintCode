@@ -10,7 +10,8 @@
 
 int main(int argc, char* argv[])
 {
-  vector<int> num1 = { 4, 1, 2 };
-  vector<int> num2 = { 1, 3, 4, 2 };
-  nextGreaterElement(num1, num2);
+  TreeNode<int> * tmp = new TreeNode<int>(1);
+  tmp->right = new TreeNode<int>(2);
+  tmp->right->left = new TreeNode<int>(2);
+  findMode(tmp);
 };

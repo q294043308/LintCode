@@ -705,4 +705,172 @@ vector<int> nextGreaterElement(vector<int> &nums1, vector<int> &nums2) // 1206. 
   return res;
 }
 
+bool rotatedDigitsSub(int n)
+{
+  bool flag = false;
+  while (n > 0)
+  {
+    switch (n % 10)
+    {
+    case 3: case 4: case 7: return false;
+    case 1: case 0: case 8: break;
+    default: flag = true;
+    }
+    n = n / 10;
+  }
+  return flag;
+}
+
+int rotatedDigits(int N) // 1028. Rotated Digits  --> I have a best answer, but I can't do it because of I don'tt have good state
+{
+  int num = 0;
+  for (int i = 0; i <= N; i++)
+  {
+    num += rotatedDigitsSub(i) ? 1 : 0;
+  }
+  return num;
+}
+
+int trailingZeroes(int n) // 1347. Factorial Trailing Zero
+{
+  int res = 0;
+  while (n >= 5)
+  {
+    n /= 5;
+    res += n;
+  }
+
+  return res;
+}
+
+void tree2strSub(TreeNode<int> * t, string &res) // reduce the consume of return
+{
+  if (!t)
+  {
+    return;
+  }
+
+  res += to_string(t->val);
+  if (t->left || t->right)
+  {
+    res.push_back('(');
+    if (t->left)
+    {
+      tree2strSub(t->left, res);
+    }
+    res.push_back(')');
+    if (t->right)
+    {
+      res.push_back('(');
+      tree2strSub(t->right, res);
+      res.push_back(')');
+    }
+  }
+}
+
+string tree2str(TreeNode<int> * t) // 1137. Construct String from Binary Tree
+{
+  string res;
+  tree2strSub(t, res);
+  return res;
+}
+
+vector<vector<int>> matrixReshape(vector<vector<int>> &nums, int r, int c) // 1170. Reshape the Matrix
+{
+  if ((r * c < (int)nums.size() * (int)nums[0].size()) || (r == nums.size() || c == nums[0].size()) || (r > (int)nums.size() && c > (int)nums[0].size()))
+  {
+    return nums;
+  }
+
+  vector<vector<int>> res;
+  vector<int> curLine;
+  for (auto lineNum : nums)
+  {
+    for (auto num : lineNum)
+    {
+      curLine.push_back(num);
+      if (curLine.size() == c)
+      {
+        res.push_back(curLine);
+        curLine.clear();
+      }
+    }
+  }
+  if (!curLine.empty())
+  {
+    res.push_back(curLine);
+  }
+
+  return res;
+}
+
+void findModeSub(TreeNode<int> * root, int &curVal, int &curNum, int &maxNum, vector<int> &res)
+{
+  if (!root)
+  {
+    return;
+  }
+
+  if (root->left)
+  {
+    findModeSub(root->left, curVal, curNum, maxNum, res);
+  }
+
+  if (maxNum == -1)
+  {
+    maxNum = 0;
+    curNum = 1;
+    curVal = root->val;
+  }
+  else
+  {
+    if (curVal == root->val)
+    {
+      curNum++;
+    }
+    else
+    {
+      if (curNum > maxNum)
+      {
+        maxNum = curNum;
+        res.clear();
+        res.push_back(curVal);
+      }
+      else if (curNum == maxNum)
+      {
+        res.push_back(curVal);
+      }
+      curNum = 1;
+      curVal = root->val;
+    }
+  }
+
+  if (root->right)
+  {
+    findModeSub(root->right, curVal, curNum, maxNum, res);
+  }
+}
+
+vector<int> findMode(TreeNode<int> * root) // 1203. Find Mode in Binary Search Tree
+{
+  vector<int> res;
+  int curVal = 0;
+  int curNum = -1;
+  int maxNum = -1;
+  findModeSub(root, curVal, curNum, maxNum, res);
+  if (maxNum != -1)
+  {
+    if (curNum == maxNum)
+    {
+      res.push_back(curVal);
+    }
+    else if (curNum > maxNum)
+    {
+      res.clear();
+      res.push_back(curVal);
+    }
+  }
+  return res;
+}
+
 #endif
