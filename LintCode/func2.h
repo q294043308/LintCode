@@ -873,4 +873,36 @@ vector<int> findMode(TreeNode<int> * root) // 1203. Find Mode in Binary Search T
   return res;
 }
 
+vector<string> findRelativeRanks(vector<int> &nums) // 1200. Relative Ranks
+{
+  int n = nums.size(), cnt = 1;
+  vector<string> res(n, "");
+  map<int, int> m;
+  for (int i = 0; i < n; ++i)
+  {
+    m[nums[i]] = i;
+  }
+  for (auto it = m.rbegin(); it != m.rend(); ++it)
+  {
+    if (cnt == 1)
+    {
+      res[it->second] = "Gold Medal";
+    }
+    else if (cnt == 2)
+    {
+       res[it->second] = "Silver Medal";
+    }
+    else if (cnt == 3)
+    {
+       res[it->second] = "Bronze Medal";
+    }
+    else
+    {
+      res[it->second] = to_string(cnt);
+    }
+    ++cnt;
+  }
+  return res;
+}
+
 #endif

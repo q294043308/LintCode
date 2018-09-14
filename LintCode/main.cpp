@@ -10,8 +10,6 @@
 
 int main(int argc, char* argv[])
 {
-  TreeNode<int> * tmp = new TreeNode<int>(1);
-  tmp->right = new TreeNode<int>(2);
-  tmp->right->left = new TreeNode<int>(2);
-  findMode(tmp);
+  vector<int> tmp = { 5, 4, 3, 2, 1 };
+  findRelativeRanks(tmp);
 };
