@@ -924,4 +924,60 @@ int numJewelsInStones(string &J, string &S) // 1038. Jewels And Stones
     return res;
 }
 
+int maximumProduct(vector<int> &nums) // 1119. Maximum Product of Three Numbers
+{
+    int firstNum = MININTNUM;
+    int secondNum = MININTNUM;
+    int threadNum = MININTNUM;
+    int oneNum = MININTNUM;
+    int twoNum = MININTNUM;
+
+    for (auto num : nums)
+    {
+        if (num > firstNum)
+        {
+            threadNum = secondNum;
+            secondNum = firstNum;
+            firstNum = num;
+        }
+        else if (num > secondNum)
+        {
+            threadNum = secondNum;
+            secondNum = num;
+        }
+        else if (num > threadNum)
+        {
+            threadNum = num;
+        }
+    }
+    oneNum = firstNum * secondNum * threadNum;
+    firstNum = MAXINTNUM;
+    secondNum = MAXINTNUM;
+    threadNum = MININTNUM;
+
+    for (auto num : nums)
+    {
+        if (num < firstNum && num < 0)
+        {
+            secondNum = firstNum;
+            firstNum = num;
+        }
+        else if (num < secondNum &&num < 0)
+        {
+            secondNum = num;
+        }
+        else if (num >threadNum && num > 0)
+        {
+            threadNum = num;
+        }
+    }
+    if (firstNum < 0 && secondNum < 0 && threadNum > 0)
+    {
+        twoNum = firstNum * secondNum * threadNum;
+    }
+
+    return max(oneNum, twoNum);
+}
+
+
 #endif
