@@ -905,4 +905,23 @@ vector<string> findRelativeRanks(vector<int> &nums) // 1200. Relative Ranks
   return res;
 }
 
+int numJewelsInStones(string &J, string &S) // 1038. Jewels And Stones
+{
+    int res = 0;
+    set<char> charSet;
+    for (auto cha : J)
+    {
+        charSet.insert(cha);
+    }
+
+    for (auto cha : S)
+    {
+        if (charSet.count(cha) > 0)
+        {
+            res += 1;
+        }
+    }
+    return res;
+}
+
 #endif

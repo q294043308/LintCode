@@ -10,6 +10,4 @@
 
 int main(int argc, char* argv[])
 {
-  vector<int> tmp = { 5, 4, 3, 2, 1 };
-  findRelativeRanks(tmp);
 };
