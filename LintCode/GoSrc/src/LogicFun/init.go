@@ -1,0 +1,5 @@
+package LogicFun
+
+func init() {
+
+}
