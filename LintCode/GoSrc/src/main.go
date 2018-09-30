@@ -6,5 +6,5 @@ import (
 )
 
 func main() {
-	fmt.Println(LogicFun.ReverseVowels("lintcode"))
+	fmt.Println(LogicFun.GeneratePossibleNextMoves(""))
 }
