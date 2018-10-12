@@ -113,3 +113,46 @@ func PoorPigs(buckets int, minutesToDie int, minutesToTest int) int {
 
 	return res
 }
+
+// 1086. Repeated String Match
+func RepeatedStringMatch(A string, B string) int {
+	firstIndex := strings.Index(B, A)
+	if firstIndex > len(A) {
+		return -1
+	}
+
+	for i := firstIndex - 1; i >= 0; i-- {
+		if B[i] != A[len(A)-firstIndex+i] {
+			return -1
+		}
+	}
+
+	indexA := 0
+	for i := firstIndex + len(A); i < len(B); i++ {
+		if B[i] != A[indexA] {
+			return -1
+		}
+		indexA = indexA + 1
+		if indexA == len(A) {
+			indexA = 0
+		}
+	}
+
+	if firstIndex == -1 {
+		if strings.Contains(A, B) {
+			return 1
+		}
+		if strings.Contains(A+A, B) {
+			return 2
+		}
+		return -1
+	} else if firstIndex == 0 {
+		if len(B)%len(A) == 0 {
+			return len(B) / len(A)
+		} else {
+			return len(B)/len(A) + 1
+		}
+	} else {
+		return 2 + (len(B)-firstIndex)/len(A)
+	}
+}
