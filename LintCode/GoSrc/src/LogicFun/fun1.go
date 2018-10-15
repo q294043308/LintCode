@@ -1,3 +1,6 @@
+// the first letter of function must be bigger, beacause of the special of go-language, I want debug the function in main.go
+// so ..  I lose my love .. fighting ~  ^v^
+
 package LogicFun
 
 import (
@@ -155,4 +158,69 @@ func RepeatedStringMatch(A string, B string) int {
 	} else {
 		return 2 + (len(B)-firstIndex)/len(A)
 	}
+}
+
+// 1270. Ransom Note
+func CanConstruct(ransomNote string, magazine string) bool {
+	var charNumArr [CommonFun.SMALL_ENGLISH_CHAR_NUM]int
+	for i := 0; i < len(magazine); i++ {
+		charNumArr[magazine[i]-'a'] = charNumArr[magazine[i]-'a'] + 1
+	}
+	for i := 0; i < len(ransomNote); i++ {
+		if charNumArr[ransomNote[i]-'a'] > 0 {
+			charNumArr[ransomNote[i]-'a'] = charNumArr[ransomNote[i]-'a'] - 1
+		} else {
+			return false
+		}
+	}
+	return true
+}
+
+// 1068. Find Pivot Index
+func PivotIndex(nums []int) int {
+	if len(nums) == 0 {
+		return -1
+	}
+
+	leftNum := 0
+	rightNum := 0
+	for i := 1; i < len(nums); i++ {
+		rightNum = rightNum + nums[i]
+	}
+
+	if leftNum == rightNum {
+		return 0
+	}
+
+	for i := 1; i < len(nums); i++ {
+		leftNum = leftNum + nums[i-1]
+		rightNum = rightNum - nums[i]
+		if leftNum == rightNum {
+			return i + 1
+		}
+	}
+	return -1
+}
+
+// 1056. Find Smallest Letter Greater Than Target
+func NextGreatestLetter(letters string, target byte) byte {
+	for i := 0; i < len(letters); i++ {
+		if target < letters[i] {
+			return letters[i]
+		}
+	}
+	return letters[0]
+}
+
+// 973. 1-bit and 2-bit Characters
+func IsOneBitCharacter(bits []int) bool {
+	i := 0
+	for i < len(bits)-1 {
+		if bits[i] == 1 {
+			i = i + 2
+		} else {
+			i = i + 1
+		}
+	}
+	return i == len(bits)-1
 }

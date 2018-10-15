@@ -6,5 +6,5 @@ import (
 )
 
 func main() {
-	fmt.Println(LogicFun.RepeatedStringMatch("abaababa", "abaabaa"))
+	fmt.Println(LogicFun.PivotIndex([]int{}))
 }
