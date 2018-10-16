@@ -6,5 +6,5 @@ import (
 )
 
 func main() {
-	fmt.Println(LogicFun.PivotIndex([]int{}))
+	fmt.Println(LogicFun.FindUnsortedSubarray([]int{2, 1}))
 }

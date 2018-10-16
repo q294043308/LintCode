@@ -224,3 +224,89 @@ func IsOneBitCharacter(bits []int) bool {
 	}
 	return i == len(bits)-1
 }
+
+// 1231. Minimum Moves to Equal Array Elements
+func MinMoves(nums []int) int {
+	numSum := 0
+	minNum := CommonFun.MAXINTNUM
+	for i := 0; i < len(nums); i++ {
+		numSum = numSum + nums[i]
+		minNum = math.Min(float64(minNum), float64(nums[i]))
+	}
+
+	return numSum - int(minNum)*len(nums)
+}
+
+// 1157. Shortest Unsorted Continuous Subarray
+func FindUnsortedSubarray(nums []int) int {
+	haveFind := false
+	minIndex := 0
+	minNum := int(CommonFun.MAXINTNUM)
+	startIndex := 0
+	maxIndex := len(nums) - 1
+	maxNum := int(-CommonFun.MININTNUM)
+	endIndex := len(nums) - 1
+
+	for i := 1; i < len(nums); i++ {
+		if nums[i] < nums[i-1] {
+			if nums[i] < minNum {
+				minNum = nums[i]
+				minIndex = i
+				haveFind = true
+			}
+		}
+	}
+
+	if minIndex != 0 {
+		for j := minIndex - 1; j >= 0; j-- {
+			if nums[minIndex] >= nums[j] {
+				startIndex = j + 1
+				break
+			}
+		}
+	}
+
+	for i := len(nums) - 2; i >= 0; i-- {
+		if nums[i] > nums[i+1] {
+			if nums[i] > maxNum {
+				maxNum = nums[i]
+				maxIndex = i
+				haveFind = true
+			}
+		}
+	}
+
+	if maxIndex != len(nums)-1 {
+		for j := maxIndex + 1; j < len(nums); j++ {
+			if nums[maxIndex] <= nums[j] {
+				endIndex = j - 1
+				break
+			}
+		}
+	}
+
+	if !haveFind {
+		return 0
+	}
+	if endIndex > startIndex {
+		return endIndex - startIndex + 1
+	}
+	return 0
+}
+
+// 1237. Number of Boomerangs ---- oh no it's error. i need go home so push it in advance
+func numberOfBoomerangs(points [][]int) int {
+	numMap := make(map[int]int)
+	result := 0
+
+	for i := 1; i < len(points); i++ {
+		for j := i - 1; j >= 0; j-- {
+			distanceDob := (points[j][0]-points[i][0])*(points[j][0]-points[i][0]) + (points[j][1]-points[i][1])*(points[j][1]-points[i][1])
+			numMap[distanceDob]++
+			if numMap[distanceDob] > result {
+				result = numMap[distanceDob]
+			}
+		}
+	}
+	return result
+}

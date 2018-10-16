@@ -1,6 +1,8 @@
 package CommonFun
 
-import "math"
+import (
+	"math"
+)
 
 var MAXWINTNUM = math.Pow(2, 61) - 1
 var MAXINTNUM = math.Pow(2, 31) - 1
@@ -13,7 +15,3 @@ const SMALL_ENGLISH_CHAR_NUM = 26
 const MIN_LEN = 0x7fffffff
 const CIRCLE_PI = 3.14
 const THIRTY = 30
-
-func init() {
-
-}
