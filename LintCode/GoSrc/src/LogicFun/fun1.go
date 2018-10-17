@@ -294,19 +294,21 @@ func FindUnsortedSubarray(nums []int) int {
 	return 0
 }
 
-// 1237. Number of Boomerangs ---- oh no it's error. i need go home so push it in advance
-func numberOfBoomerangs(points [][]int) int {
-	numMap := make(map[int]int)
+// 1237. Number of Boomerangs ---- oh no it's error. i need go home so push it in advance -- i'm coming
+func NumberOfBoomerangs(points [][]int) int {
 	result := 0
 
-	for i := 1; i < len(points); i++ {
-		for j := i - 1; j >= 0; j-- {
+	for i := 0; i < len(points); i++ {
+		numMap := make(map[int]int)
+		for j := 0; j < len(points); j++ {
 			distanceDob := (points[j][0]-points[i][0])*(points[j][0]-points[i][0]) + (points[j][1]-points[i][1])*(points[j][1]-points[i][1])
 			numMap[distanceDob]++
-			if numMap[distanceDob] > result {
-				result = numMap[distanceDob]
-			}
+		}
+
+		for distance := range numMap {
+			result += numMap[distance] * (numMap[distance] - 1)
 		}
 	}
+
 	return result
 }

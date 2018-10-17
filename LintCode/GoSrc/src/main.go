@@ -6,5 +6,5 @@ import (
 )
 
 func main() {
-	fmt.Println(LogicFun.FindUnsortedSubarray([]int{2, 1}))
+	fmt.Println(LogicFun.NumberOfBoomerangs([][]int{{0, 0}, {1, 0}, {2, 0}}))
 }
