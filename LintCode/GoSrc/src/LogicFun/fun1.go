@@ -6,6 +6,7 @@ package LogicFun
 import (
 	"CommonFun"
 	"math"
+	"sort"
 	"strconv"
 	"strings"
 )
@@ -311,4 +312,100 @@ func NumberOfBoomerangs(points [][]int) int {
 	}
 
 	return result
+}
+
+// 1163. Distribute Candies
+func DistributeCandies(candies []int) int {
+	sort.Ints(candies)
+	numMap := make(map[int][]int)
+	temp := candies[0]
+	num := 1
+	typeNum := 1
+	for i := 1; i < len(candies); i++ {
+		if temp != candies[i] {
+			numMap[num] = append(numMap[num], temp)
+			temp = candies[i]
+			num = 1
+			typeNum++
+		} else {
+			num++
+		}
+	}
+	numMap[num] = append(numMap[num], temp)
+
+	if len(numMap[1]) >= len(candies)/2 || typeNum >= len(candies)/2 {
+		if len(candies)%2 == 0 {
+			return len(candies) / 2
+		} else {
+			return len(candies)/2 + 1
+		}
+	}
+	return typeNum
+}
+
+// 1193. Detect Capital
+func DetectCapitalUse(word string) bool {
+	if len(word) == 1 {
+		return true
+	}
+
+	if word[0] <= 'Z' && word[0] >= 'A' {
+		var isCapitals bool
+		if word[1] <= 'Z' && word[1] >= 'A' {
+			isCapitals = true
+		} else {
+			isCapitals = false
+		}
+		for i := 2; i < len(word); i++ {
+			if isCapitals && word[i] <= 'z' && word[i] >= 'a' {
+				return false
+			}
+			if !isCapitals && word[i] <= 'Z' && word[i] >= 'A' {
+				return false
+			}
+		}
+		return true
+	} else {
+		for i := 1; i < len(word); i++ {
+			if word[i] <= 'Z' && word[i] >= 'A' {
+				return false
+			}
+		}
+		return true
+	}
+}
+
+type findShortestSubArraytype struct {
+	num        int
+	startIndex int
+	endIndex   int
+}
+
+// 1078. Degree of an Array
+func FindShortestSubArray(nums []int) int {
+	numIndexMap := make(map[int]*findShortestSubArraytype)
+
+	for i := 0; i < len(nums); i++ {
+		if val, ok := numIndexMap[nums[i]]; ok {
+			val.num++
+			val.endIndex = i
+		} else {
+			numIndexMap[nums[i]] = &findShortestSubArraytype{
+				num:        1,
+				startIndex: i,
+				endIndex:   i,
+			}
+		}
+	}
+
+	maxNum := int(CommonFun.MININTNUM)
+	res := int(CommonFun.MAXINTNUM)
+	for _, value := range numIndexMap {
+		if maxNum <= value.num {
+			maxNum = value.num
+			res = int(math.Min(float64(res), float64(value.endIndex-value.startIndex+1)))
+		}
+	}
+
+	return res
 }
