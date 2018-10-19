@@ -409,3 +409,54 @@ func FindShortestSubArray(nums []int) int {
 
 	return res
 }
+
+// 1319. Contains Duplicate II
+func ContainsNearbyDuplicate(nums []int, k int) bool {
+	numMap := make(map[int]int)
+	if k == 0 {
+		return false
+	}
+
+	for i := 0; i < len(nums); i++ {
+		if index, ok := numMap[nums[i]]; ok {
+			if i-index <= k {
+				return true
+			}
+		}
+		numMap[nums[i]] = i
+	}
+	return false
+}
+
+// 1085. Longest Univalue Path ---- LintCode Server is down.. tomorrow is weekend  老子先走为敬，不难为你服务器了
+func LongestUnivaluePath(root *CommonFun.TreeNode) int {
+	if root == nil {
+		return 0
+	}
+
+	res := 0
+	longestUnivaluePathSub(root, &res)
+	return res
+}
+
+func longestUnivaluePathSub(root *CommonFun.TreeNode, res *int) int {
+	if root == nil {
+		return 0
+	}
+	left := longestUnivaluePathSub(root.Left, res)
+	right := longestUnivaluePathSub(root.Right, res)
+
+	if root.Right.Val == root.Val {
+		left++
+	} else {
+		left = 0
+	}
+	if root.Right.Val == root.Val {
+		right++
+	} else {
+		right = 0
+	}
+
+	*res = int(math.Max(float64(*res), float64(left+right)))
+	return int(math.Max(float64(left), float64(right)))
+}
