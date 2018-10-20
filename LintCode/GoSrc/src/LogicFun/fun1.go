@@ -446,12 +446,12 @@ func longestUnivaluePathSub(root *CommonFun.TreeNode, res *int) int {
 	left := longestUnivaluePathSub(root.Left, res)
 	right := longestUnivaluePathSub(root.Right, res)
 
-	if root.Right.Val == root.Val {
+	if root.Left != nil && root.Left.Val == root.Val {
 		left++
 	} else {
 		left = 0
 	}
-	if root.Right.Val == root.Val {
+	if root.Right != nil && root.Right.Val == root.Val {
 		right++
 	} else {
 		right = 0
@@ -459,4 +459,15 @@ func longestUnivaluePathSub(root *CommonFun.TreeNode, res *int) int {
 
 	*res = int(math.Max(float64(*res), float64(left+right)))
 	return int(math.Max(float64(left), float64(right)))
+}
+
+// 993. Array Partition I -- i so sorry that i play game in total morning，But i found the bug of Go IDE in LintCode then i request it;
+func ArrayPairSum(nums []int) int {
+	res := 0
+
+	sort.Ints(nums)
+	for i := 0; i < len(nums); i = i + 2 {
+		res = res + nums[i]
+	}
+	return res
 }
