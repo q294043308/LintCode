@@ -6,5 +6,5 @@ import (
 )
 
 func main() {
-	fmt.Println(LogicFun.ArrayPairSum([]int{-470, 66, -4835, -5623}))
+	fmt.Println(LogicFun.ToHex(-100000))
 }

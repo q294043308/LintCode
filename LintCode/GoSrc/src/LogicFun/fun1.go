@@ -471,3 +471,152 @@ func ArrayPairSum(nums []int) int {
 	}
 	return res
 }
+
+// 1285. Power of Four
+func IsPowerOfFour(num int) bool {
+	if num <= 0 {
+		return false
+	}
+	for num != 1 {
+		if num%4 != 0 {
+			return false
+		}
+		num = num / 4
+	}
+	return true
+}
+
+// 1112. Set Mismatch
+func FindErrorNums(nums []int) []int {
+	res := make([]int, 2)
+	sort.Ints(nums)
+	lastNum := nums[0]
+	isFindDouble := false
+	isFindMiss := false
+
+	for i := 1; i < len(nums); i++ {
+		if nums[i]-lastNum == 2 {
+			res[1] = nums[i] - 1
+			isFindMiss = true
+		}
+		if !isFindDouble && nums[i] == lastNum {
+			isFindDouble = true
+			res[0] = lastNum
+		} else {
+			lastNum = nums[i]
+		}
+	}
+
+	if !isFindMiss {
+		res[1] = len(nums)
+	}
+	if nums[0] != 1 {
+		res[1] = 1
+	}
+	return res
+}
+
+// 1253. Convert a Number to Hexadecimal
+func ToHex(num int) string {
+	var res string
+	var isPositive bool
+	if num >= 0 {
+		isPositive = true
+	} else {
+		isPositive = false
+		num = -num
+	}
+
+	for num != 0 {
+		Remainder := num % 16
+		num = num / 16
+		if Remainder >= 10 {
+			res = string(Remainder-10+'a') + res
+		} else {
+			res = string(Remainder-0+'0') + res
+		}
+	}
+	if !isPositive {
+		binary := make([]int, 32)
+		binary[0] = 1
+
+		for i := len(res) - 1; i >= 0; i-- {
+			curChar := res[i]
+			var curInt int
+			curIndex := 31 - 4*(len(res)-1-i)
+			if curChar <= '9' && curChar >= '0' {
+				curInt = int(curChar - '0')
+			} else {
+				curInt = int(curChar-'a') + 10
+			}
+
+			for curInt != 0 {
+				if curInt%2 == 0 {
+					binary[curIndex] = 0
+				} else {
+					binary[curIndex] = 1
+				}
+				curIndex--
+				curInt = curInt / 2
+			}
+		}
+
+		for i := 31; i >= 0; i-- {
+			if binary[i] == 1 {
+				binary[i] = 0
+				break
+			} else {
+				binary[i] = 1
+			}
+		}
+		res = ""
+		for i := 1; i < 32; i++ {
+			if binary[i] == 1 {
+				binary[i] = 0
+			} else {
+				binary[i] = 1
+			}
+		}
+		for i := 0; i < 32; i = i + 4 {
+			val := 8*binary[i] + 4*binary[i+1] + 2*binary[i+2] + binary[i+3]
+			if val >= 10 {
+				res = res + string(val-10+'a')
+			} else {
+				res = res + string(val-0+'0')
+			}
+		}
+	}
+
+	if len(res) == 0 {
+		res = "0"
+	}
+	return res
+}
+
+// 1199. Perfect Number
+func CheckPerfectNumber(num int) bool {
+	if num <= 1 {
+		return false
+	}
+	res := 1
+	for i := 2; i <= int(math.Sqrt(float64(num))); i++ {
+		if num%i == 0 {
+			if num/i == i {
+				res += i
+			} else {
+				res += i + num/i
+			}
+		}
+
+		if res > num {
+			return false
+		}
+		if res == num {
+			return true
+		}
+	}
+	if res == num {
+		return true
+	}
+	return false
+}
