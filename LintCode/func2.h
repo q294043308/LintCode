@@ -979,5 +979,91 @@ int maximumProduct(vector<int> &nums) // 1119. Maximum Product of Three Numbers
     return max(oneNum, twoNum);
 }
 
+bool partitiontoEqualSumSubsetsSub(vector<int>& nums, int k, int target, int start, int curSum, vector<bool>& visited) {
+    if (k == 1)
+    {
+        return true;
+    }
+    
+    if (curSum == target)
+    {
+        return partitiontoEqualSumSubsetsSub(nums, k - 1, target, 0, 0, visited);
+    }
+    
+    for (uint i = start; i < nums.size(); ++i)
+    {
+        if (visited[i])
+        {
+            continue;
+        }
+        visited[i] = true;
+        
+        if (partitiontoEqualSumSubsetsSub(nums, k, target, i + 1, curSum + nums[i], visited))
+        {
+            return true;
+        }
+        visited[i] = false;
+    }
+    return false;
+}
+
+bool partitiontoEqualSumSubsets(vector<int> &nums, int k) // 836. Partition to K Equal Sum Subsets
+{
+    int sum = 0;
+    for (auto num : nums)
+    {
+        sum += num;
+    }
+    if (sum % k != 0)
+    {
+        return false;
+    }
+    
+    vector<bool> visited(nums.size(), false);
+    return partitiontoEqualSumSubsetsSub(nums, k, sum / k, 0, 0, visited);
+}
+
+string reverseString(string &s) // 1283. Reverse String
+{
+    bool isContinue = true;
+    for (uint i = 0; i < s.length() / 2; i++)
+    {
+        char tmp = s[i];
+        s[i] = s[s.length() - 1 - i];
+        s[s.length() - 1 - i] = tmp;
+        if (i > 0)
+        {
+            if (s[i] == '\\')
+            {
+                s[i] = s[i - 1];
+                s[i - 1] = '\\';
+            }
+            if (isContinue && s[s.length() - i] == '\\')
+            {
+                isContinue = false;
+                s[s.length() - i] = s[s.length() - 1 - i];
+                s[s.length() - 1 - i] = '\\';
+                continue;
+            }
+            if (!isContinue)
+            {
+                isContinue = true;
+            }
+        }
+    }
+    return s;
+}
+
+int titleToNumber(string &s) // 1348. Excel Sheet Column Number
+{
+    int curDou = 1;
+    int res = 0;
+    for (uint i = s.length() - 1; (int)i >= 0; i--)
+    {
+        res += (s[i] - 'A' + 1) * curDou;
+        curDou *= 26;
+    }
+    return res;
+}
 
 #endif
