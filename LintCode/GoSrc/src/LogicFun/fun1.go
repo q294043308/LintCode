@@ -620,3 +620,109 @@ func CheckPerfectNumber(num int) bool {
 	}
 	return false
 }
+
+// 1104. Judge Route Circle
+func JudgeCircle(moves string) bool {
+	point := &CommonFun.Point{
+		X: 0,
+		Y: 0,
+	}
+
+	for i := 0; i < len(moves); i++ {
+		switch moves[i] {
+		case 'R':
+			point.X++
+		case 'L':
+			point.X--
+		case 'U':
+			point.Y++
+		case 'D':
+			point.Y--
+		}
+	}
+
+	if point.X == 0 && point.Y == 0 {
+		return true
+	}
+	return false
+}
+
+// 1320. Contains Duplicate
+func ContainsDuplicate(nums []int) bool {
+	numMap := make(map[int]bool)
+
+	for i := 0; i < len(nums); i++ {
+		if _, ok := numMap[nums[i]]; ok {
+			return true
+		} else {
+			numMap[nums[i]] = true
+		}
+	}
+	return false
+}
+
+// 1294. Power of Three
+func IsPowerOfThree(n int) bool {
+	/* this solution is from math, but the result of Log10 func isn't precisely, so it's error
+		if n > 0 && (float64(int(math.Log10(float64(n))/math.Log10(3)))-(math.Log10(float64(n))/math.Log10(3)) == 0) {
+			return true
+		}
+	    return false
+	*/
+
+	// here is a foolish func, because of the limit of 'int' type, so n is litter by 3 ^ 19 -->>
+	maxIntForPowerOfThree := int(math.Pow(3, 19))
+	if maxIntForPowerOfThree%n == 0 {
+		return true
+	}
+	return false
+}
+
+// 1218. Number Complement
+func FindComplement(num int) int {
+	var bitStr string
+	var res int
+	curBase := 1
+
+	for num > 0 {
+		if num%2 == 0 {
+			bitStr = "1" + bitStr
+		} else {
+			bitStr = "0" + bitStr
+		}
+		num /= 2
+	}
+
+	for i := len(bitStr) - 1; i >= 0; i-- {
+		if bitStr[i] == '1' {
+			res += curBase
+		}
+		curBase *= 2
+	}
+
+	return res
+}
+
+// 977. Base 7
+func ConvertToBase7(num int) string {
+	var res string
+	isPossive := true
+	if num < 0 {
+		isPossive = false
+		num = -num
+	}
+
+	for num > 0 {
+		res = string('0'+num%7) + res
+		num /= 7
+	}
+
+	if len(res) == 0 {
+		res = "0"
+	}
+	if !isPossive {
+		res = "-" + res
+	}
+
+	return res
+}

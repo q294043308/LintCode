@@ -1,5 +1,1 @@
 package LogicFun
-
-func init() {
-
-}

@@ -6,5 +6,5 @@ import (
 )
 
 func main() {
-	fmt.Println(LogicFun.ToHex(-100000))
+	fmt.Println(LogicFun.ConvertToBase7(0))
 }

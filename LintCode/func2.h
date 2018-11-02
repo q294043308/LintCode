@@ -1066,4 +1066,61 @@ int titleToNumber(string &s) // 1348. Excel Sheet Column Number
     return res;
 }
 
+double largestTriangleArea(vector<vector<int>> &points) // 1005. Largest Triangle Area
+{
+    double res = 0;
+    for (uint i = 0; i < points.size() - 2; i++)
+    {
+        for (uint j = i + 1; j < points.size() - 1; j++)
+        {
+            for (uint z = j + 1; z < points.size(); z++)
+            {
+                double curArea = 0.5 * abs(points[i][0] * points[j][1] - points[i][1] * points[j][0] + points[j][0] * points[z][1] - points[j][1] * points[z][0] + points[z][0] * points[i][1] - points[z][1] * points[i][0]);
+                res = max(res, curArea);
+            }
+        }
+    }
+    return res;
+}
+
+bool multiSortCompare(vector<int> a, vector<int> b)
+{
+    if (a[1] == b[1])
+    {
+        return a[0] < b[0];
+    }
+    return a[1] < b[1];
+}
+
+vector<vector<int>> multiSort(vector<vector<int>> &array) // 846. Multi-keyword Sort
+{
+    //sort(array.begin(), array.end(), multiSortCompare);
+    //return array;
+
+    //the sort funcion is Limited by LintCode -- so using bubble sort instead of quick sort
+    vector<int> tmpmax;
+    for (int j = 0; j < array.size() - 1; j++)
+    {
+        for (int i = array.size() - 1; i != j; i--)
+        {
+            if (array[i][1]>array[i - 1][1])
+            {
+                tmpmax = array[i];
+                array[i] = array[i - 1];
+                array[i - 1] = tmpmax;
+            }
+            else if (array[i][1] == array[i - 1][1])
+            {
+                if (array[i][0]<array[i - 1][0])
+                {
+                    tmpmax = array[i];
+                    array[i] = array[i - 1];
+                    array[i - 1] = tmpmax;
+                }
+            }
+        }
+    }
+    return array;
+}
+
 #endif

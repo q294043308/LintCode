@@ -21,3 +21,8 @@ type TreeNode struct {
 	Left  *TreeNode
 	Right *TreeNode
 }
+
+type Point struct {
+	X int
+	Y int
+}
