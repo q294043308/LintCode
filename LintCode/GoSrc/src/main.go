@@ -6,5 +6,5 @@ import (
 )
 
 func main() {
-	fmt.Println(LogicFun.ConvertToBase7(0))
+	fmt.Println(LogicFun.CheckPossibility([]int{3, 4, 2, 3}))
 }

@@ -10,5 +10,5 @@
 
 int main(int argc, char* argv[])
 {
-    titleToNumber(string("AB"));
+    findLHS(vector<int>{ -3, -1, -2 });
 };

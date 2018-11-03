@@ -726,3 +726,103 @@ func ConvertToBase7(num int) string {
 
 	return res
 }
+
+// 1243. Number of Segments in a String
+func CountSegments(s string) int {
+	res := 0
+	lastSpace := true
+
+	for _, val := range s {
+		if val != ' ' {
+			if lastSpace {
+				res++
+			}
+			lastSpace = false
+		} else {
+			lastSpace = true
+		}
+	}
+
+	return res
+}
+
+// 916. Palindrome Permutation
+func CanPermutePalindrome(s string) bool {
+	var charNum [CommonFun.CHARNUM]int
+	count := 0
+
+	for _, val := range s {
+		if charNum[val] == 1 {
+			charNum[val] = 0
+		} else {
+			charNum[val] = 1
+		}
+	}
+
+	for _, val := range charNum {
+		if val == 1 {
+			count++
+			if count > 1 {
+				return false
+			}
+		}
+	}
+	return true
+}
+
+// 1178. Student Attendance Record I
+func CheckRecord(s string) bool {
+	Acount := 0
+	Lcount := 0
+
+	for _, val := range s {
+		if val == 'L' {
+			if Lcount >= 2 {
+				return false
+			}
+			Lcount++
+		} else {
+			Lcount = 0
+			if val == 'A' {
+				if Acount >= 1 {
+					return false
+				}
+				Acount = 1
+			}
+		}
+	}
+	return true
+}
+
+// 1099. Non-decreasing Array
+func CheckPossibility(nums []int) bool {
+	if len(nums) < 2 {
+		return true
+	}
+
+	isModify := false
+	for i := 0; i < len(nums)-1; i++ {
+		if nums[i] > nums[i+1] {
+			if isModify {
+				return false
+			} else {
+				if i+2 < len(nums) && nums[i+2] < nums[i] {
+					if i != 0 {
+						return false
+					}
+				}
+				isModify = true
+			}
+		}
+	}
+	return true
+}
+
+// 1300. Nim Game -- i'm a man of genius
+func CanWinNim(n int) bool {
+	if n%4 == 0 {
+		return false
+	}
+
+	return true
+}

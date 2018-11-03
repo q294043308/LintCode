@@ -1099,9 +1099,9 @@ vector<vector<int>> multiSort(vector<vector<int>> &array) // 846. Multi-keyword 
 
     //the sort funcion is Limited by LintCode -- so using bubble sort instead of quick sort
     vector<int> tmpmax;
-    for (int j = 0; j < array.size() - 1; j++)
+    for (uint j = 0; j < array.size() - 1; j++)
     {
-        for (int i = array.size() - 1; i != j; i--)
+        for (uint i = array.size() - 1; i != j; i--)
         {
             if (array[i][1]>array[i - 1][1])
             {
@@ -1121,6 +1121,63 @@ vector<vector<int>> multiSort(vector<vector<int>> &array) // 846. Multi-keyword 
         }
     }
     return array;
+}
+
+long long largestPalindromeSub(int n) {
+    string lastHalf = to_string(n);
+    reverse(lastHalf.begin(), lastHalf.end());
+    return stoll(to_string(n) + lastHalf);
+}
+
+int largestPalindrome(int n) { // 1216. Largest Palindrome Product
+    if (n == 1)
+    {
+        return 9;
+    }
+
+    int upper = (int)pow(10, n) - 1;
+    int lower = (int)pow(10, n - 1);
+    for (int i = upper; i > lower; --i) 
+    {
+        long long cand = largestPalindromeSub(i);
+        for (int j = upper; cand / j < j; --j) 
+        {
+            if (cand % j == 0)
+            {
+                return cand % 1337;
+            }
+        }
+    }
+    return -1;
+}
+
+int findLHS(vector<int> &nums){ // 1148. Longest Harmonious Subsequence
+    map<int, int> numMap;
+    int res = 0;
+
+    for (auto num : nums)
+    {
+        numMap[num]++;
+    }
+
+    if (numMap.size() < 2)
+    {
+        return 0;
+    }
+
+    for (auto it : numMap)
+    {
+        if (numMap.count(it.first - 1) > 0)
+        {
+            res = max(res, numMap[it.first - 1] + it.second);
+        }
+        if (numMap.count(it.first + 1) > 0)
+        {
+            res = max(res, numMap[it.first + 1] + it.second);
+        }
+    }
+
+    return res;
 }
 
 #endif
