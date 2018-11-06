@@ -826,3 +826,121 @@ func CanWinNim(n int) bool {
 
 	return true
 }
+
+// 644. Strobogrammatic Number
+func IsStrobogrammatic(num string) bool {
+	middle := 0
+	if len(num)%2 == 0 {
+		middle = len(num) / 2
+	} else {
+		middle = (len(num) + 1) / 2
+	}
+	for i := 0; i < middle; i++ {
+		if (num[i] == '1' && num[len(num)-1-i] == '1') ||
+			(num[i] == '8' && num[len(num)-1-i] == '8') ||
+			(num[i] == '0' && num[len(num)-1-i] == '0') {
+			continue
+		} else if num[i] == '6' && num[len(num)-1-i] == '9' {
+			continue
+		} else if num[i] == '9' && num[len(num)-1-i] == '6' {
+			continue
+		}
+		return false
+	}
+
+	return true
+}
+
+// 647. Find All Anagrams in a String
+func FindAnagrams(s string, p string) []int {
+	res := make([]int, 0, 10)
+	i := 0
+	targetMap := make(map[int]int)
+	curMap := make(map[int]int)
+
+	for _, val := range p {
+		targetMap[int(val)]++
+	}
+	for ; i < len(s) && i < len(p); i++ {
+		curMap[int(s[i])]++
+	}
+
+	for ; i <= len(s); i++ {
+		isEqual := true
+		for key, val := range targetMap {
+			if _, ok := curMap[key]; !ok {
+				isEqual = false
+				break
+			}
+			if val != curMap[key] {
+				isEqual = false
+				break
+			}
+		}
+		if isEqual {
+			res = append(res, i-len(p))
+		}
+
+		if i < len(s) {
+			curMap[int(s[i-len(p)])]--
+			curMap[int(s[i])]++
+		}
+	}
+
+	return res
+}
+
+var TwoSumMap = make(map[int]int)
+
+// 607. Two Sum III - Data structure design
+func TwoSumAdd(number int) {
+	TwoSumMap[number]++
+}
+
+func TwoSumFind(value int) bool {
+	for num, _ := range TwoSumMap {
+		if value-num == num {
+			if TwoSumMap[num] >= 2 {
+				return true
+			}
+		} else if TwoSumMap[value-num] >= 1 {
+			return true
+		}
+
+	}
+	return false
+}
+
+// 637. Valid Word Abbreviation
+func ValidWordAbbreviation(word string, abbr string) bool {
+	i := 0
+	j := 0
+
+	for i < len(word) {
+		curIndex := 0
+		for ; j < len(abbr); j++ {
+			if abbr[j] <= '9' && abbr[j] >= '0' {
+				curIndex = curIndex*10 + int(abbr[j]-'0')
+				if curIndex == 0 {
+					break
+				}
+			} else {
+				break
+			}
+		}
+		if curIndex == 0 {
+			if word[i] != abbr[j] {
+				return false
+			}
+			i++
+			j++
+		} else {
+			i = i + curIndex
+		}
+	}
+
+	if i == len(word) && j == len(abbr) {
+		return true
+	}
+	return false
+}

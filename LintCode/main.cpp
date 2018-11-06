@@ -10,5 +10,7 @@
 
 int main(int argc, char* argv[])
 {
-    findLHS(vector<int>{ -3, -1, -2 });
+    add(0);
+    add(0);
+    find(0);
 };

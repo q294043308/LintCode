@@ -1180,4 +1180,26 @@ int findLHS(vector<int> &nums){ // 1148. Longest Harmonious Subsequence
     return res;
 }
 
+map<int, int> numMap;
+
+void add(int number) {
+    numMap[number]++;
+    // write your code here
+}
+
+bool find(int value) {
+    for (auto it : numMap){
+        if (value - it.first == it.first){
+            if (it.second >= 2){
+                return true;
+            }
+        }
+        else if (numMap.count(value - it.first) >= 1){
+            return true;
+        }
+    }
+    return false;
+    // write your code here
+}
+
 #endif
