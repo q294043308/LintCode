@@ -944,3 +944,44 @@ func ValidWordAbbreviation(word string, abbr string) bool {
 	}
 	return false
 }
+
+// 626. Rectangle Overlap
+func DoOverlap(l1 *CommonFun.Point, r1 *CommonFun.Point, l2 *CommonFun.Point, r2 *CommonFun.Point) bool {
+	if math.Max(float64(l1.X), float64(l2.X)) <= math.Min(float64(r1.X), float64(r2.X)) && math.Min(float64(l1.Y), float64(l2.Y)) >= math.Max(float64(r1.Y), float64(r2.Y)) {
+		return true
+	}
+	return false
+}
+
+func longestConsecutiveSub(root *CommonFun.TreeNode, res *int, curLen int) {
+	if root.Left != nil {
+		if root.Left.Val == root.Val+1 {
+			longestConsecutiveSub(root.Left, res, curLen+1)
+		} else {
+			longestConsecutiveSub(root.Left, res, 1)
+		}
+	}
+	if root.Right != nil {
+		if root.Right.Val == root.Val+1 {
+			longestConsecutiveSub(root.Right, res, curLen+1)
+		} else {
+			longestConsecutiveSub(root.Right, res, 1)
+		}
+	}
+
+	if curLen > *res {
+		*res = curLen
+	}
+}
+
+// 595. Binary Tree Longest Consecutive Sequence
+func LongestConsecutive(root *CommonFun.TreeNode) int {
+	res := 0
+
+	if root == nil {
+		return res
+	}
+
+	longestConsecutiveSub(root, &res, 1)
+	return res
+}

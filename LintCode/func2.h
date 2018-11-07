@@ -1182,24 +1182,57 @@ int findLHS(vector<int> &nums){ // 1148. Longest Harmonious Subsequence
 
 map<int, int> numMap;
 
-void add(int number) {
+void add(int number)
+{
     numMap[number]++;
-    // write your code here
 }
 
-bool find(int value) {
-    for (auto it : numMap){
-        if (value - it.first == it.first){
-            if (it.second >= 2){
+bool find(int value)
+{
+    for (auto it : numMap)
+    {
+        if (value - it.first == it.first)
+        {
+            if (it.second >= 2)
+            {
                 return true;
             }
         }
-        else if (numMap.count(value - it.first) >= 1){
+        else if (numMap.count(value - it.first) >= 1)
+        {
             return true;
         }
     }
     return false;
-    // write your code here
+}
+
+class NestedInteger
+{
+public:
+    bool isInteger() const;
+    int getInteger() const;
+    const vector<NestedInteger> &getList() const;
+};
+
+int depthSum(const vector<NestedInteger>& nestedList) // 551. Nested List Weight Sum
+{
+    static int dep = 1;
+    int sum = 0;
+
+    for (auto it : nestedList)
+    {
+        if (it.isInteger())
+        {
+            sum += dep * it.getInteger();
+        }
+        else
+        {
+            dep++;
+            sum += depthSum(it.getList());
+            dep--;
+        }
+    }
+    return sum;
 }
 
 #endif
