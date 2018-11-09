@@ -985,3 +985,68 @@ func LongestConsecutive(root *CommonFun.TreeNode) int {
 	longestConsecutiveSub(root, &res, 1)
 	return res
 }
+
+// 643. Longest Absolute File Path
+func LengthLongestPath(input string) int {
+	var maxLen int
+	var pathArr []string
+	startIndex := 0
+	curPath := ""
+	curIndex := 0
+
+	if len(input) > 0 {
+		baseIndex := strings.Index(input[startIndex:], "\\n")
+		if baseIndex == -1 {
+			return 0
+		}
+		pathArr = append(pathArr, input[0:baseIndex])
+		startIndex = baseIndex + 2
+	} else {
+		return 0
+	}
+
+	for startIndex < len(input) {
+		endIndex := strings.Index(input[startIndex:], "\\n") + startIndex
+		if endIndex < startIndex {
+			endIndex = len(input)
+		}
+
+		tCount := 0
+		for i := startIndex; i+1 < len(input); i += 2 {
+			if input[i] == '\\' && input[i+1] == 't' {
+				tCount++
+			} else {
+				break
+			}
+		}
+		if tCount == curIndex+1 {
+			pathArr = append(pathArr, input[startIndex+tCount*2:endIndex])
+			curIndex++
+		} else {
+			if strings.Count(pathArr[len(pathArr)-1], ".") > 0 {
+				curPath = ""
+				for i := 0; i < len(pathArr); i++ {
+					curPath += pathArr[i]
+					curPath += "/"
+				}
+				if len(curPath)-1 > maxLen {
+					maxLen = len(curPath) - 1
+				}
+			}
+			pathArr = append(pathArr[0:tCount], input[startIndex+tCount*2:endIndex])
+		}
+		startIndex = endIndex + 2
+	}
+
+	if strings.Count(pathArr[len(pathArr)-1], ".") > 0 {
+		curPath = ""
+		for i := 0; i < len(pathArr); i++ {
+			curPath += pathArr[i]
+			curPath += "/"
+		}
+		if len(curPath)-1 > maxLen {
+			maxLen = len(curPath) - 1
+		}
+	}
+	return maxLen
+}

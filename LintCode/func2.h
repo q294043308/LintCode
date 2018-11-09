@@ -1214,6 +1214,7 @@ public:
     const vector<NestedInteger> &getList() const;
 };
 
+/* The function using interfacce of type NestedInteger
 int depthSum(const vector<NestedInteger>& nestedList) // 551. Nested List Weight Sum
 {
     static int dep = 1;
@@ -1233,6 +1234,51 @@ int depthSum(const vector<NestedInteger>& nestedList) // 551. Nested List Weight
         }
     }
     return sum;
+}
+*/
+
+vector<int> findRedundantConnection(vector<vector<int>> &edges) // 1088. Redundant Connection
+{
+    vector<map<int, bool>> relationMapVec;
+
+    for (auto edge : edges)
+    {
+        bool isFind = false;
+        for (uint i = 0; i < relationMapVec.size(); i++)
+        {
+            if (relationMapVec[i].count(edge[0]) && relationMapVec[i].count(edge[1]))
+            {
+                return edge;
+            }
+            if (relationMapVec[i].count(edge[0]) || relationMapVec[i].count(edge[1]))
+            {
+                relationMapVec[i][edge[0]] = true;
+                relationMapVec[i][edge[1]] = true;
+                isFind = true;
+                for (uint j = i + 1; j < relationMapVec.size(); j++)
+                {
+                    if (relationMapVec[j].count(edge[0]) || relationMapVec[j].count(edge[1]))
+                    {
+                        for (auto it : relationMapVec[j])
+                        {
+                            relationMapVec[i][it.first] = true;
+                        }
+                        relationMapVec.erase(relationMapVec.begin() + j);
+                        break;
+                    }
+                }
+                break;
+            }
+        }
+        if (!isFind)
+        {
+            map<int, bool> newMap;
+            newMap[edge[0]] = true;
+            newMap[edge[1]] = true;
+            relationMapVec.push_back(newMap);
+        }
+    }
+    return vector<int>();
 }
 
 #endif

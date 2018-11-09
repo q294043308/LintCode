@@ -10,7 +10,9 @@
 
 int main(int argc, char* argv[])
 {
-    add(0);
-    add(0);
-    find(0);
+    vector<vector<int>> s;
+    s.push_back(vector<int>{1, 2});
+    s.push_back(vector<int>{1, 3});
+    s.push_back(vector<int>{3, 2});
+    findRedundantConnection(s);
 };
