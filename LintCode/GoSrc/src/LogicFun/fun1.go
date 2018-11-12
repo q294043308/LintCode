@@ -1093,3 +1093,69 @@ func ExpressionExpand(s string) string {
 	res += s[start:]
 	return res
 }
+
+func FindNumberOfLISError(nums []int) int {
+	if len(nums) == 0 {
+		return 0
+	}
+
+	resLen := 0
+	resNum := 0
+	curLen := 1
+
+	for i := 1; i <= len(nums); i++ {
+		if i != len(nums) && nums[i] > nums[i-1] {
+			curLen++
+			continue
+		} else if curLen == resLen {
+			resNum++
+			continue
+		} else if curLen > resLen {
+			resLen = curLen
+			resNum = 1
+			continue
+		}
+	}
+	return resNum
+}
+
+// 1093. Number of Longest Increasing Subsequence (Dynamic Program)
+func FindNumberOfLIS(nums []int) int {
+	if len(nums) == 0 {
+		return 0
+	}
+
+	type LISNode struct {
+		len int
+		num int
+	}
+
+	// 1, 3, 5, 4, 7
+	resLen := -1
+	onceNum := 0
+	maxNumArr := make([]LISNode, len(nums))
+	for i := len(nums) - 1; i >= 0; i-- {
+		for j := i + 1; j < len(nums); j++ {
+			if nums[i] < nums[j] {
+				if maxNumArr[i].len < maxNumArr[j].len+1 {
+					maxNumArr[i].len = maxNumArr[j].len + 1
+					maxNumArr[i].num = maxNumArr[j].num
+					resLen = i
+				} else if maxNumArr[i].len == maxNumArr[j].len+1 {
+					maxNumArr[i].num += maxNumArr[j].num
+				}
+			}
+		}
+		if maxNumArr[i].len == 0 {
+			maxNumArr[i].len = 1
+			maxNumArr[i].num = 1
+			onceNum++
+		}
+
+	}
+
+	if resLen == -1 {
+		return onceNum
+	}
+	return maxNumArr[resLen].num
+}
