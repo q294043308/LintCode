@@ -6,5 +6,5 @@ import (
 )
 
 func main() {
-	fmt.Println(LogicFun.LengthLongestPath(""))
+	fmt.Println(LogicFun.ExpressionExpand("3[abc]"))
 }

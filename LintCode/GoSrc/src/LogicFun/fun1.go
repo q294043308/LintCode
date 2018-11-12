@@ -1050,3 +1050,46 @@ func LengthLongestPath(input string) int {
 	}
 	return maxLen
 }
+
+// 575. Decode String
+func ExpressionExpand(s string) string {
+	start := 0
+	res := ""
+
+	for strings.Index(s[start:], "[") >= 0 {
+		leftCount := 1
+		curStart := strings.Index(s[start:], "[") + start
+		curNum := ""
+		j := curStart - 1
+		for ; j >= 0; j-- {
+			if s[j] > '9' || s[j] < '0' {
+				break
+			}
+			curNum = string(s[j]) + curNum
+		}
+
+		res += s[start : j+1]
+		curEnd := curStart + 1
+		for ; curEnd < len(s); curEnd++ {
+			if s[curEnd] == '[' {
+				leftCount++
+			}
+			if s[curEnd] == ']' {
+				leftCount--
+				if leftCount == 0 {
+					break
+				}
+			}
+		}
+		tmpStr := ExpressionExpand(s[curStart+1 : curEnd])
+		num, _ := strconv.Atoi(curNum)
+		for j = 0; j < num; j++ {
+			res += tmpStr
+		}
+
+		start = curEnd + 1
+	}
+
+	res += s[start:]
+	return res
+}
