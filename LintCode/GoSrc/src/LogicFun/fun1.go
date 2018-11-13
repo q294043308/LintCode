@@ -1159,3 +1159,9 @@ func FindNumberOfLIS(nums []int) int {
 	}
 	return maxNumArr[resLen].num
 }
+
+// 5. Kth Largest Element
+func KthLargestElement(n int, nums []int) int {
+	sort.Ints(nums)
+	return nums[len(nums)-n]
+}

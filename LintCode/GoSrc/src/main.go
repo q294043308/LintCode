@@ -6,5 +6,5 @@ import (
 )
 
 func main() {
-	fmt.Println(LogicFun.ExpressionExpand("3[abc]"))
+	fmt.Println(LogicFun.KthLargestElement(3, []int{9, 3, 2, 4, 8}))
 }
