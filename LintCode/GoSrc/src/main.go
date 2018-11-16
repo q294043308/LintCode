@@ -6,5 +6,5 @@ import (
 )
 
 func main() {
-	fmt.Println(LogicFun.KthLargestElement(3, []int{9, 3, 2, 4, 8}))
+	fmt.Println(LogicFun.FindPoisonedDuration([]int{1, 2}, 2))
 }
