@@ -6,5 +6,8 @@ import (
 )
 
 func main() {
-	fmt.Println(LogicFun.FindPoisonedDuration([]int{1, 2}, 2))
+	var banned []string
+	banned = append(banned, "bob")
+	banned = append(banned, "hit")
+	fmt.Println(LogicFun.MostCommonWord("Bob. hIt, baLl", banned))
 }
