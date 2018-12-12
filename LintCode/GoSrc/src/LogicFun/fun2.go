@@ -1,6 +1,7 @@
 package LogicFun
 
 import (
+	"Common"
 	"math"
 	"sort"
 	"strings"
@@ -156,6 +157,24 @@ func MostCommonWord(paragraph string, banned []string) string {
 		}
 		if startIndex == -1 {
 			break
+		}
+	}
+	return res
+}
+
+// 1201. Next Greater Element II
+func NextGreaterElements(nums []int) []int {
+	res := make([]int, len(nums))
+	numStack := new(Common.Stack)
+
+	for i := 0; i < 2*len(nums); i++ {
+		index := i % len(nums)
+		for !numStack.Empty() && nums[numStack.Top()] < nums[index] {
+			res[numStack.Pop()] = nums[index]
+		}
+		if i < len(nums) {
+			res[index] = -1
+			numStack.Push(index)
 		}
 	}
 	return res

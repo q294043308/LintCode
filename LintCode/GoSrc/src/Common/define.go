@@ -1,4 +1,4 @@
-package CommonFun
+package Common
 
 import (
 	"math"

@@ -6,8 +6,5 @@ import (
 )
 
 func main() {
-	var banned []string
-	banned = append(banned, "bob")
-	banned = append(banned, "hit")
-	fmt.Println(LogicFun.MostCommonWord("Bob. hIt, baLl", banned))
+	fmt.Println(LogicFun.NextGreaterElements([]int{1, 2, 1}))
 }

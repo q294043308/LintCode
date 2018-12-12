@@ -4,7 +4,7 @@
 package LogicFun
 
 import (
-	"CommonFun"
+	"Common"
 	"math"
 	"sort"
 	"strconv"
@@ -14,17 +14,17 @@ import (
 // 1282. Reverse Vowels of a String
 func ReverseVowels(s string) string {
 	resBytes := []byte(s)
-	var charArr [CommonFun.ENGLISH_CHAR_NUM]bool
+	var charArr [Common.ENGLISH_CHAR_NUM]bool
 	charArr['a'-'a'] = true
-	charArr['A'-'A'+CommonFun.SMALL_ENGLISH_CHAR_NUM] = true
+	charArr['A'-'A'+Common.SMALL_ENGLISH_CHAR_NUM] = true
 	charArr['e'-'a'] = true
-	charArr['E'-'A'+CommonFun.SMALL_ENGLISH_CHAR_NUM] = true
+	charArr['E'-'A'+Common.SMALL_ENGLISH_CHAR_NUM] = true
 	charArr['i'-'a'] = true
-	charArr['I'-'A'+CommonFun.SMALL_ENGLISH_CHAR_NUM] = true
+	charArr['I'-'A'+Common.SMALL_ENGLISH_CHAR_NUM] = true
 	charArr['o'-'a'] = true
-	charArr['O'-'A'+CommonFun.SMALL_ENGLISH_CHAR_NUM] = true
+	charArr['O'-'A'+Common.SMALL_ENGLISH_CHAR_NUM] = true
 	charArr['u'-'a'] = true
-	charArr['U'-'A'+CommonFun.SMALL_ENGLISH_CHAR_NUM] = true
+	charArr['U'-'A'+Common.SMALL_ENGLISH_CHAR_NUM] = true
 
 	startDex := 0
 	front := false
@@ -163,7 +163,7 @@ func RepeatedStringMatch(A string, B string) int {
 
 // 1270. Ransom Note
 func CanConstruct(ransomNote string, magazine string) bool {
-	var charNumArr [CommonFun.SMALL_ENGLISH_CHAR_NUM]int
+	var charNumArr [Common.SMALL_ENGLISH_CHAR_NUM]int
 	for i := 0; i < len(magazine); i++ {
 		charNumArr[magazine[i]-'a'] = charNumArr[magazine[i]-'a'] + 1
 	}
@@ -229,7 +229,7 @@ func IsOneBitCharacter(bits []int) bool {
 // 1231. Minimum Moves to Equal Array Elements
 func MinMoves(nums []int) int {
 	numSum := 0
-	minNum := CommonFun.MAXINTNUM
+	minNum := Common.MAXINTNUM
 	for i := 0; i < len(nums); i++ {
 		numSum = numSum + nums[i]
 		minNum = math.Min(float64(minNum), float64(nums[i]))
@@ -242,10 +242,10 @@ func MinMoves(nums []int) int {
 func FindUnsortedSubarray(nums []int) int {
 	haveFind := false
 	minIndex := 0
-	minNum := int(CommonFun.MAXINTNUM)
+	minNum := int(Common.MAXINTNUM)
 	startIndex := 0
 	maxIndex := len(nums) - 1
-	maxNum := int(-CommonFun.MININTNUM)
+	maxNum := int(-Common.MININTNUM)
 	endIndex := len(nums) - 1
 
 	for i := 1; i < len(nums); i++ {
@@ -398,8 +398,8 @@ func FindShortestSubArray(nums []int) int {
 		}
 	}
 
-	maxNum := int(CommonFun.MININTNUM)
-	res := int(CommonFun.MAXINTNUM)
+	maxNum := int(Common.MININTNUM)
+	res := int(Common.MAXINTNUM)
 	for _, value := range numIndexMap {
 		if maxNum <= value.num {
 			maxNum = value.num
@@ -429,7 +429,7 @@ func ContainsNearbyDuplicate(nums []int, k int) bool {
 }
 
 // 1085. Longest Univalue Path ---- LintCode Server is down.. tomorrow is weekend  老子先走为敬，不难为你服务器了
-func LongestUnivaluePath(root *CommonFun.TreeNode) int {
+func LongestUnivaluePath(root *Common.TreeNode) int {
 	if root == nil {
 		return 0
 	}
@@ -439,7 +439,7 @@ func LongestUnivaluePath(root *CommonFun.TreeNode) int {
 	return res
 }
 
-func longestUnivaluePathSub(root *CommonFun.TreeNode, res *int) int {
+func longestUnivaluePathSub(root *Common.TreeNode, res *int) int {
 	if root == nil {
 		return 0
 	}
@@ -623,7 +623,7 @@ func CheckPerfectNumber(num int) bool {
 
 // 1104. Judge Route Circle
 func JudgeCircle(moves string) bool {
-	point := &CommonFun.Point{
+	point := &Common.Point{
 		X: 0,
 		Y: 0,
 	}
@@ -748,7 +748,7 @@ func CountSegments(s string) int {
 
 // 916. Palindrome Permutation
 func CanPermutePalindrome(s string) bool {
-	var charNum [CommonFun.CHARNUM]int
+	var charNum [Common.CHARNUM]int
 	count := 0
 
 	for _, val := range s {
@@ -946,14 +946,14 @@ func ValidWordAbbreviation(word string, abbr string) bool {
 }
 
 // 626. Rectangle Overlap
-func DoOverlap(l1 *CommonFun.Point, r1 *CommonFun.Point, l2 *CommonFun.Point, r2 *CommonFun.Point) bool {
+func DoOverlap(l1 *Common.Point, r1 *Common.Point, l2 *Common.Point, r2 *Common.Point) bool {
 	if math.Max(float64(l1.X), float64(l2.X)) <= math.Min(float64(r1.X), float64(r2.X)) && math.Min(float64(l1.Y), float64(l2.Y)) >= math.Max(float64(r1.Y), float64(r2.Y)) {
 		return true
 	}
 	return false
 }
 
-func longestConsecutiveSub(root *CommonFun.TreeNode, res *int, curLen int) {
+func longestConsecutiveSub(root *Common.TreeNode, res *int, curLen int) {
 	if root.Left != nil {
 		if root.Left.Val == root.Val+1 {
 			longestConsecutiveSub(root.Left, res, curLen+1)
@@ -975,7 +975,7 @@ func longestConsecutiveSub(root *CommonFun.TreeNode, res *int, curLen int) {
 }
 
 // 595. Binary Tree Longest Consecutive Sequence
-func LongestConsecutive(root *CommonFun.TreeNode) int {
+func LongestConsecutive(root *Common.TreeNode) int {
 	res := 0
 
 	if root == nil {
