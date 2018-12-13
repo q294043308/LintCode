@@ -1,7 +1,7 @@
 package Common
 
 type Stack struct {
-	data []int
+	data []interface{}
 }
 
 func (self *Stack) Empty() bool {
@@ -12,7 +12,7 @@ func (self *Stack) Size() int {
 	return len(self.data)
 }
 
-func (self *Stack) Top() int {
+func (self *Stack) Top() interface{} {
 	if self.Size() == 0 {
 		panic("Stack empty")
 	}
@@ -20,11 +20,11 @@ func (self *Stack) Top() int {
 	return self.data[len(self.data)-1]
 }
 
-func (self *Stack) Push(num int) {
+func (self *Stack) Push(num interface{}) {
 	self.data = append(self.data, num)
 }
 
-func (self *Stack) Pop() int {
+func (self *Stack) Pop() interface{} {
 	if self.Size() == 0 {
 		panic("Stack empty")
 	}

@@ -6,7 +6,5 @@ import (
 )
 
 func main() {
-	fmt.Println(fmt.Sprintf("'%%%s%%'", "55555"))
-
-	fmt.Println(LogicFun.NextGreaterElements([]int{1, 2, 1}))
+	fmt.Println(LogicFun.MinDistance(5, 7, []int{2, 2}, []int{4, 4}, [][]int{{3, 0}, {2, 5}}))
 }

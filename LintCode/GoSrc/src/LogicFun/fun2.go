@@ -169,13 +169,68 @@ func NextGreaterElements(nums []int) []int {
 
 	for i := 0; i < 2*len(nums); i++ {
 		index := i % len(nums)
-		for !numStack.Empty() && nums[numStack.Top()] < nums[index] {
-			res[numStack.Pop()] = nums[index]
+		topNum, _ := numStack.Top().(int)
+		for !numStack.Empty() && nums[topNum] < nums[index] {
+			popNum, _ := numStack.Pop().(int)
+			res[popNum] = nums[index]
+			topNum, _ = numStack.Top().(int)
 		}
 		if i < len(nums) {
 			res[index] = -1
 			numStack.Push(index)
 		}
+	}
+	return res
+}
+
+// 1089. Valid Parenthesis String
+func CheckValidString(s string) bool {
+	left := 0  // 将所有*当做左括号时左括号剩余的个数
+	right := 0 // 将所有*当做右括号或空时左括号剩余的个数
+
+	for i := 0; i < len(s); i++ {
+		if s[i] == '(' {
+			left++
+			right++
+		} else {
+			if right > 0 {
+				right--
+			}
+			if s[i] == ')' {
+				left--
+			} else {
+				left++
+			}
+		}
+		if left < 0 {
+			return false
+		}
+	}
+	return right == 0
+}
+
+// 873. Squirrel Simulation
+func MinDistance(height int, width int, tree []int, squirrel []int, nuts [][]int) int {
+	res := 0
+	firstSelect := -1
+	distanceSelect := float64(0)
+	distanceToTreeSelect := float64(0)
+	maxSelect := float64(Common.MININTNUM)
+
+	for i := 0; i < len(nuts); i++ {
+		toTree := math.Abs(float64(nuts[i][0]-tree[0])) + math.Abs(float64(nuts[i][1]-tree[1]))
+		toSquirrel := math.Abs(float64(nuts[i][0]-squirrel[0])) + math.Abs(float64(nuts[i][1]-squirrel[1]))
+		res += int(2 * toTree)
+		if toTree-toSquirrel > maxSelect {
+			firstSelect = i
+			maxSelect = toTree - toSquirrel
+			distanceSelect = toSquirrel
+			distanceToTreeSelect = toTree
+		}
+	}
+
+	if firstSelect >= 0 {
+		res = res - int(distanceToTreeSelect) + int(distanceSelect)
 	}
 	return res
 }
