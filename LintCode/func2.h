@@ -2,7 +2,7 @@
 //  LintCode
 //
 //  Created by DongXuxuan on 2018/8/21.
-//  Copyright © 2018 DongXuxuan. All rights reserved.
+//  Copyright 2018 DongXuxuan. All rights reserved.
 
 #ifndef func2
 #define func2
@@ -1279,6 +1279,46 @@ vector<int> findRedundantConnection(vector<vector<int>> &edges) // 1088. Redunda
         }
     }
     return vector<int>();
+}
+
+string removeKdigits(string &num, int k) // 1255. Remove K Digits
+{
+    if ((int)num.length() <= k)
+    {
+        return "0";
+    }
+
+    for (uint i = 1; i < num.length() && k > 0;)
+    {
+        if (num[i] < num[i - 1])
+        {
+            num.erase(i - 1, 1);
+            i--;
+            k--;
+            continue;
+        }
+
+        i++;
+    }
+
+    int zeroCount = 0;
+    for (uint i = 0; i < num.length(); i++)
+    {
+        if (num[i] != '0')
+        {
+            zeroCount = i;
+            break;
+        }
+    }
+    num.erase(0, zeroCount);
+
+    if ((int)num.length() <= k)
+    {
+        return "0";
+    }
+
+    num.erase(num.length() - k - 1, k);
+    return num;
 }
 
 #endif

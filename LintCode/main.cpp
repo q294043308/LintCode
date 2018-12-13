@@ -10,9 +10,6 @@
 
 int main(int argc, char* argv[])
 {
-    vector<vector<int>> s;
-    s.push_back(vector<int>{1, 2});
-    s.push_back(vector<int>{1, 3});
-    s.push_back(vector<int>{3, 2});
-    findRedundantConnection(s);
+    string num = "469009211437929393647";
+    removeKdigits(num, 3);
 };
