@@ -1,10 +1,7 @@
 package main
 
-import (
-	"LogicFun"
-	"fmt"
-)
+import "LogicFun"
 
 func main() {
-	fmt.Println(LogicFun.MinDistance(5, 7, []int{2, 2}, []int{4, 4}, [][]int{{3, 0}, {2, 5}}))
+	println(LogicFun.MinimalDistance([]int{5, 1, 2, 3}, []int{2, 3, 2}))
 }

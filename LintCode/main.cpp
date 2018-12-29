@@ -10,6 +10,6 @@
 
 int main(int argc, char* argv[])
 {
-    string num = "469009211437929393647";
-    removeKdigits(num, 3);
+    vector<string> str = { "ab.cd+cd@jiu.zhang.com", "ab.cd+cd@jiuzhang.com", "ab+cd.cd@jiuzhang.com" };
+    countGroups(str);
 };

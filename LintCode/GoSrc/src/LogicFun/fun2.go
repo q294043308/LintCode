@@ -234,3 +234,114 @@ func MinDistance(height int, width int, tree []int, squirrel []int, nuts [][]int
 	}
 	return res
 }
+
+// 1613. Highest frequency IP
+func HighestFrequency(ipLines []string) string {
+	res := ""
+	maxCount := 0
+	ipMap := make(map[string]int)
+
+	for _, val := range ipLines {
+		ipMap[val]++
+		if ipMap[val] > maxCount {
+			maxCount = ipMap[val]
+			res = val
+		}
+	}
+	return res
+}
+
+// 1632. Count email groups
+func CountGroups(emails []string) int {
+	groupMap := make(map[string]bool)
+	res := 0
+
+	for _, val := range emails {
+		curVal := ""
+		index := 0
+		for i, cha := range val {
+			if cha == '@' || cha == '+' {
+				index = i
+				if cha == '+' {
+					index = strings.Index(val[index:], "@") + index
+				}
+				break
+			} else if cha == '.' {
+				continue
+			}
+			curVal += string(cha)
+		}
+		curVal += val[index:]
+
+		_, ok := groupMap[curVal]
+		if !ok {
+			groupMap[curVal] = false
+		} else if !groupMap[curVal] {
+			groupMap[curVal] = true
+			res++
+		}
+	}
+
+	return res
+}
+
+// 1638. Least Substring
+func GetAns(s string, k int) int {
+	if len(s) == 0 {
+		return 0
+	}
+
+	curCha := s[0]
+	curNum := 1
+	res := 1
+
+	for i := 1; i < len(s); i++ {
+		if curCha != s[i] || curNum >= k {
+			curCha = s[i]
+			curNum = 1
+			res++
+		} else {
+			curNum++
+		}
+	}
+	return res
+}
+
+// 1623. Minimal Distance In The Array
+func MinimalDistance(a []int, b []int) []int {
+	trueMap := make(map[int]struct{})
+	hashMap := make(map[int]int)
+	res := make([]int, len(b))
+
+	for _, val := range a {
+		trueMap[val] = struct{}{}
+	}
+
+	for index, key := range b {
+		if hashVal, ok := hashMap[key]; ok {
+			res[index] = hashVal
+			continue
+		}
+		if _, ok := trueMap[key]; ok {
+			hashMap[key] = key
+			res[index] = key
+			continue
+		}
+		dis := 1
+		for true {
+			if _, ok := trueMap[key-dis]; ok {
+				hashMap[key] = key - dis
+				res[index] = key - dis
+				break
+			}
+			if _, ok := trueMap[key+dis]; ok {
+				hashMap[key] = key + dis
+				res[index] = key + dis
+				break
+			}
+			dis++
+		}
+	}
+
+	return res
+}

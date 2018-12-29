@@ -1321,4 +1321,110 @@ string removeKdigits(string &num, int k) // 1255. Remove K Digits
     return num;
 }
 
+// 1127. Add Bold Tag in String
+string addBoldTag(string &s, vector<string> &dict){
+    vector<vector<int>> tagVec;
+    string res;
+
+    for (uint i = 0; i < dict.size(); i++){
+        int findIndex = 0;
+        while (true){
+            int startIndex = s.find(dict[i], findIndex);
+            if (startIndex == s.npos){
+                break;
+            }
+            findIndex = startIndex + 1;
+            uint j = 0;
+            int endIndex = startIndex + dict[i].length() - 1;
+            vector<int> index = { startIndex , endIndex};
+            bool needInsert = true;
+            for (; j < tagVec.size(); j++){
+                if (startIndex <= tagVec[j][0]){
+                    uint z = j;
+                    for (; z < tagVec.size(); z++){
+                        if (endIndex < tagVec[z][0] - 1){
+                            break;
+                        }
+                    }
+                    if (z!=j){
+                        needInsert = false;
+                        tagVec[j][0] = startIndex;
+                        tagVec[j][1] = max(tagVec[z - 1][1], endIndex);
+                        tagVec.erase(tagVec.begin() + j + 1, tagVec.begin() + z);
+                    }
+                    break;
+                }
+                else if(startIndex <= tagVec[j][1] + 1){
+                    needInsert = false;
+                    uint z = j + 1;
+                    for (; z < tagVec.size(); z++){
+                        if (endIndex < tagVec[z][0] - 1){
+                            break;
+                        }
+                    }
+                    tagVec[j][1] = max(tagVec[z - 1][1], endIndex);
+                    tagVec.erase(tagVec.begin() + j + 1, tagVec.begin() + z);
+                    break;
+
+                }
+            }
+            if (needInsert){
+                tagVec.insert(tagVec.begin() + j, index);
+            }
+        }
+    }
+
+    int startIndex = 0;
+    for (uint i = 0; i < tagVec.size(); i++){
+        res += s.substr(startIndex, tagVec[i][0] - startIndex);
+        res += "<b>";
+        res += s.substr(tagVec[i][0], tagVec[i][1] - tagVec[i][0] + 1);
+        res += "</b>";
+        startIndex = tagVec[i][1] + 1;
+    }
+    res += s.substr(startIndex, s.length());
+    return res;
+}
+
+// 1632. Count email groups
+int countGroups(vector<string> &emails) {
+    int res = 0;
+    map<string, bool> groupMap;
+
+    for (int i = 0; i < emails.size(); i++){
+        int index = 0;
+        string val = "";
+        bool isober = false;
+
+        for (int j = 0; j < emails[i].length(); j++){
+            if (emails[i][j] == '@') {
+                index = j;
+                break;
+            }
+            else if (!isober){
+                if (emails[i][j] == '+'){
+                    isober = true;
+                    continue;
+                }
+                if (emails[i][j] == '.'){
+                    continue;
+                }
+                val += emails[i][j];
+            }
+        }
+        val += emails[i].substr(index, emails[i].length() - index);
+
+        if (groupMap.count(val)){
+            if (!groupMap[val]){
+                groupMap[val] = true;
+                res++;
+            }
+        }
+        else{
+            groupMap[val] = false;
+        }
+    }
+    return res;
+}
+
 #endif
