@@ -232,7 +232,7 @@ func MinMoves(nums []int) int {
 	minNum := Common.MAXINTNUM
 	for i := 0; i < len(nums); i++ {
 		numSum = numSum + nums[i]
-		minNum = math.Min(float64(minNum), float64(nums[i]))
+		minNum = int(math.Min(float64(minNum), float64(nums[i])))
 	}
 
 	return numSum - int(minNum)*len(nums)

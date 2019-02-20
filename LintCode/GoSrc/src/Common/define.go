@@ -5,8 +5,8 @@ import (
 )
 
 var MAXWINTNUM = math.Pow(2, 61) - 1
-var MAXINTNUM = math.Pow(2, 31) - 1
-var MININTNUM = -(math.Pow(2, 31)) + 1
+var MAXINTNUM int = int(math.Pow(2, 31) - 1)
+var MININTNUM int = int(-(math.Pow(2, 31)) + 1)
 
 const CHARNUM = 128
 const ENGLISH_CHAR_NUM = (26 * 2)

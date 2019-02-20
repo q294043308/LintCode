@@ -345,3 +345,62 @@ func MinimalDistance(a []int, b []int) []int {
 
 	return res
 }
+
+//1565. Modern Ludo I
+func ModernLudo(length int, connections [][]int) int {
+	connectMap := make(map[int]int)
+	stepArr := make([]int, length)
+	stepArr[0] = 0
+
+	for _, val := range connections {
+		connectMap[val[0]] = val[1]
+	}
+
+	for i := 1; i < length; i++ {
+		if stepArr[i] == 0 {
+			if i >= 6 {
+				stepArr[i] = stepArr[i-6] + 1
+				for j := i - 1; j > i-6; j-- {
+					stepArr[i] = int(math.Min(float64(stepArr[i]), float64(stepArr[j]+1)))
+				}
+			} else {
+				stepArr[i] = stepArr[0] + 1
+			}
+		}
+
+		curindex := i
+
+		for true {
+			val, ok := connectMap[curindex+1]
+			if !ok {
+				break
+			}
+
+			stepArr[val-1] = stepArr[curindex]
+			if val == length {
+				return stepArr[val-1]
+			}
+			curindex = val - 1
+		}
+	}
+
+	return stepArr[length-1]
+}
+
+//1478. Closest Target Value
+func ClosestTargetValue(target int, array []int) int {
+	res := array[0] + array[1]
+	for i := 0; i < len(array); i++ {
+		for j := i + 1; j < len(array); j++ {
+			sum := array[i] + array[j]
+			if (sum > res || res > target) && sum <= target {
+				res = sum
+			}
+		}
+	}
+
+	if res > target {
+		res = -1
+	}
+	return res
+}
