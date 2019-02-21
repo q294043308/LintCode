@@ -552,3 +552,78 @@ func RemoveOne(matrix [][]int, x int, y int) [][]int {
 
 	return matrix
 }
+
+// 1779. Shortest Duplicate Subarray
+func GetLength(arr []int) int {
+	res := -1
+	numMap := make(map[int]int)
+
+	for i := 0; i < len(arr); i++ {
+		val, ok := numMap[arr[i]]
+		if ok {
+			if res == -1 || res > i-val+1 {
+				res = i - val + 1
+			}
+		}
+		numMap[arr[i]] = i
+	}
+
+	return res
+}
+
+func ReachEndpointSub(dataMap [][]int, flag [][]bool, x, y int) bool {
+	if x < 0 || y < 0 || x >= len(dataMap) || y >= len(dataMap[0]) || flag[x][y] || dataMap[x][y] == 0 {
+		return false
+	}
+	if dataMap[x][y] == 9 {
+		return true
+	}
+
+	flag[x][y] = true
+	res := false
+	if res = ReachEndpointSub(dataMap, flag, x+1, y) || res; res {
+		return res
+	}
+	if res = ReachEndpointSub(dataMap, flag, x, y+1) || res; res {
+		return res
+	}
+	if res = ReachEndpointSub(dataMap, flag, x-1, y) || res; res {
+		return res
+	}
+	if res = ReachEndpointSub(dataMap, flag, x, y-1) || res; res {
+		return res
+	}
+
+	return res
+}
+
+// 1479. Can Reach The Endpoint
+func ReachEndpoint(dataMap [][]int) bool {
+	flag := make([][]bool, len(dataMap))
+	for i := 0; i < len(flag); i++ {
+		flag[i] = make([]bool, len(dataMap[0]))
+	}
+
+	return ReachEndpointSub(dataMap, flag, 0, 0)
+}
+
+// 1615. The result of investment
+func GetAns1(funds []int, a int, b int, c int) []int {
+	res := []int{a, b, c}
+
+	for _, val := range funds {
+		min := res[0]
+		minIndex := 0
+
+		for i := 1; i <= 2; i++ {
+			if min > res[i] {
+				minIndex = i
+				min = res[i]
+			}
+		}
+
+		res[minIndex] += val
+	}
+
+	return res
+}

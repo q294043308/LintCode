@@ -10,6 +10,6 @@
 
 int main(int argc, char* argv[])
 {
-    vector<string> str = { "ab.cd+cd@jiu.zhang.com", "ab.cd+cd@jiuzhang.com", "ab+cd.cd@jiuzhang.com" };
-    countGroups(str);
+    vector<vector<int>> lists = { { -203653, -202653 }, {-288256, -287256}, {19396, 20396}, {835984, 836984}, {-976643, -975643}, {368729, 369729}, {501747, 502747}, {847647, 848647} };
+    isInterval(lists, 368722);
 };

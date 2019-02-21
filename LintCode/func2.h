@@ -1391,12 +1391,12 @@ int countGroups(vector<string> &emails) {
     int res = 0;
     map<string, bool> groupMap;
 
-    for (int i = 0; i < emails.size(); i++){
+    for (uint i = 0; i < emails.size(); i++){
         int index = 0;
         string val = "";
         bool isober = false;
 
-        for (int j = 0; j < emails[i].length(); j++){
+        for (uint j = 0; j < emails[i].length(); j++){
             if (emails[i][j] == '@') {
                 index = j;
                 break;
@@ -1425,6 +1425,35 @@ int countGroups(vector<string> &emails) {
         }
     }
     return res;
+}
+
+// 1779. Shortest Duplicate Subarray
+int getLength(vector<int> &arr) {
+    int res = -1;
+    map<int, int> numMap;
+
+    for (uint i = 0; i < arr.size(); i++){
+        if (numMap.count(arr[i]) == 0){
+            numMap[arr[i]] = i;
+        }
+        else{
+            if (res == -1 || res > (int)i - numMap[arr[i]] + 1){
+                res = i - numMap[arr[i]] + 1;
+            }
+        }
+    }
+    return res;
+}
+
+// 1564. Interval Search
+string isInterval(vector<vector<int>> &intervalList, int number){
+    for (auto list : intervalList){
+        if (number >= list[0] && number <= list[1]){
+            return "True";
+        }
+    }
+    
+    return "False";
 }
 
 #endif
