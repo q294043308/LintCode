@@ -404,3 +404,151 @@ func ClosestTargetValue(target int, array []int) int {
 	}
 	return res
 }
+
+//1510. Buddy Strings
+func BuddyStrings(A string, B string) bool {
+	if len(A) != len(B) {
+		return false
+	}
+
+	isTrue := 0
+	isRepeat := false
+	letterArr := make([]bool, Common.SMALL_ENGLISH_CHAR_NUM)
+	var exchangeCh byte
+
+	for i := 0; i < len(A); i++ {
+		if letterArr[A[i]-'a'] {
+			isRepeat = true
+		}
+		letterArr[A[i]-'a'] = true
+
+		if A[i] != B[i] {
+			if isTrue == 0 {
+				isTrue = 1
+				exchangeCh = A[i]
+			} else if isTrue == 1 {
+				if exchangeCh == B[i] {
+					isTrue = 2
+				} else {
+					return false
+				}
+			} else {
+				return false
+			}
+		}
+	}
+
+	return isTrue == 2 || isRepeat
+}
+
+//1535. To Lower Case
+func ToLowerCase(str string) string {
+	res := make([]byte, len(str))
+	for i := 0; i < len(str); i++ {
+		if str[i] <= 'Z' && str[i] >= 'A' {
+			res[i] = str[i] - 'A' + 'a'
+		} else {
+			res[i] = str[i]
+		}
+	}
+
+	return string(res)
+}
+
+func removeOneSub1(matrix [][]int, x int, y int, falgMtx [][]int) bool {
+	if x >= len(matrix) || y < 0 || y >= len(matrix[0]) {
+		return false
+	}
+
+	if falgMtx[x][y] == 1 {
+		return true
+	}
+	if falgMtx[x][y] == 2 {
+		return false
+	}
+
+	if matrix[x][y] == 0 {
+		return false
+	}
+
+	if x == 0 {
+		return true
+	}
+
+	res := false
+	falgMtx[x][y] = 2
+	if res = removeOneSub1(matrix, x-1, y, falgMtx) || res; res {
+		falgMtx[x][y] = 1
+		return res
+	}
+	if res = removeOneSub1(matrix, x+1, y, falgMtx) || res; res {
+		falgMtx[x][y] = 1
+		return res
+	}
+	if res = removeOneSub1(matrix, x, y-1, falgMtx) || res; res {
+		falgMtx[x][y] = 1
+		return res
+	}
+	if res = removeOneSub1(matrix, x, y+1, falgMtx) || res; res {
+		falgMtx[x][y] = 1
+		return res
+	}
+
+	falgMtx[x][y] = 2
+	return res
+}
+
+func RemoveOneSub2(matrix [][]int, x int, y int) {
+	if x >= len(matrix) || y < 0 || y >= len(matrix[0]) {
+		return
+	}
+
+	if matrix[x][y] == 1 {
+		matrix[x][y] = 0
+	} else {
+		return
+	}
+
+	RemoveOneSub2(matrix, x-1, y)
+	RemoveOneSub2(matrix, x+1, y)
+	RemoveOneSub2(matrix, x, y-1)
+	RemoveOneSub2(matrix, x, y+1)
+}
+
+// 1621. Cut Connection   想多了----
+func RemoveOneOver(matrix [][]int, x int, y int) [][]int {
+	if matrix[x][y] == 0 {
+		return matrix
+	}
+
+	falgMtx := make([][]int, len(matrix))
+	for i := 0; i < len(falgMtx); i++ {
+		falgMtx[i] = make([]int, len(matrix[0]))
+	}
+
+	matrix[x][y] = 0
+	falgMtx[x][y] = 2
+
+	if !removeOneSub1(matrix, x-1, y, falgMtx) {
+		RemoveOneSub2(matrix, x-1, y)
+	}
+	if !removeOneSub1(matrix, x+1, y, falgMtx) {
+		RemoveOneSub2(matrix, x+1, y)
+	}
+	if !removeOneSub1(matrix, x, y-1, falgMtx) {
+		RemoveOneSub2(matrix, x, y-1)
+	}
+	if !removeOneSub1(matrix, x, y+1, falgMtx) {
+		RemoveOneSub2(matrix, x, y+1)
+	}
+	return matrix
+}
+
+// 1621. Cut Connection
+func RemoveOne(matrix [][]int, x int, y int) [][]int {
+	for i := x; i < len(matrix); i++ {
+		matrix[i][y] = 0
+	}
+
+	return matrix
+}
