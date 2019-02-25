@@ -1,7 +1,9 @@
 package main
 
-import "LogicFun"
+import (
+	"LogicFun"
+)
 
 func main() {
-	println(LogicFun.GetAns1([]int{1, 2, 1, 3, 1, 1}, 1, 2, 1))
+	println(LogicFun.GetAnswer([]int{6, 63, 27, 36, 77, 5, 36, 74, 74, 46}))
 }

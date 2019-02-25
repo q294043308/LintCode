@@ -1456,4 +1456,37 @@ string isInterval(vector<vector<int>> &intervalList, int number){
     return "False";
 }
 
+struct stringSortStruct{
+    char cha;
+    int num;
+};
+
+bool stringSortSub(stringSortStruct A, stringSortStruct B){
+    if (A.num > B.num){
+        return true;
+    }
+    else if (A.num == B.num){
+        return A.cha < B.cha;
+    }
+    return false;
+}
+
+// 830. String Sort
+string stringSort(string &str) {
+    vector<stringSortStruct> chaArr(SMALL_ENGLISH_CHAR_NUM);
+    for (auto cha : str){
+        chaArr[cha - 'a'].cha = cha;
+        chaArr[cha - 'a'].num++;
+    }
+
+    sort(chaArr.begin(), chaArr.end(), stringSortSub);
+
+    string res;
+    for (auto val : chaArr){
+        res += string(val.num, val.cha);
+    }
+
+    return res;
+}
+
 #endif

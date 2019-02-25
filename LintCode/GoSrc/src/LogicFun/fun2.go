@@ -4,6 +4,7 @@ import (
 	"Common"
 	"math"
 	"sort"
+	"strconv"
 	"strings"
 )
 
@@ -625,5 +626,237 @@ func GetAns1(funds []int, a int, b int, c int) []int {
 		res[minIndex] += val
 	}
 
+	return res
+}
+
+//1633. Strings That Satisfies The Condition
+func GetAns2(target string, s []string) []string {
+	res := make([]string, 0, 1)
+	for _, val := range s {
+		if len(target) > len(val) {
+			continue
+		}
+
+		index := 0
+		jumpNum := 0
+		for _, cha := range val {
+			if byte(cha) == target[index] {
+				index++
+			} else {
+				jumpNum++
+				if len(target) > len(val)-jumpNum {
+					break
+				}
+			}
+
+			if index == len(target) {
+				res = append(res, val)
+				break
+			}
+		}
+	}
+
+	return res
+}
+
+//1540. Can Convert
+func CanConvert(s string, t string) bool {
+	jumpNum := 0
+	index := 0
+	for _, cha := range s {
+		if byte(cha) == t[index] {
+			index++
+		} else {
+			jumpNum++
+			if len(t) > len(s)-jumpNum {
+				break
+			}
+		}
+
+		if index == len(t) {
+			return true
+		}
+	}
+
+	return false
+}
+
+//1645. Least Subsequences
+func LeastSubsequences(arrayIn []int) int {
+	var res float64 = 0
+	resArr := make([]float64, len(arrayIn))
+
+	resArr[0] = 1
+	for i := 1; i < len(arrayIn); i++ {
+		resArr[i] = 1
+		for j := 0; j < i; j++ {
+			if arrayIn[i] >= arrayIn[j] {
+				resArr[i] = math.Max(resArr[i], resArr[j]+1)
+			}
+		}
+		res = math.Max(resArr[i], res)
+	}
+
+	return int(res)
+}
+
+// 1480. Dot Product
+func DotProduct(A []int, B []int) int {
+	if len(A) == 0 || len(A) != len(B) {
+		return -1
+	}
+
+	res := 0
+	for i := 0; i < len(A); i++ {
+		res += A[i] * B[i]
+	}
+
+	return res
+}
+
+//1614. Highest growth stock
+func HighestGrowth(Stock [][]string) string {
+	var maxNum float64
+	res := ""
+
+	for _, val := range Stock {
+		v1, _ := strconv.ParseFloat(val[1], 64)
+		v2, _ := strconv.ParseFloat(val[2], 64)
+		if v2/v1 > maxNum {
+			maxNum = v2 / v1
+			res = val[0]
+		}
+	}
+
+	return res
+}
+
+func findSubtreeSub(root *Common.TreeNode, maxNum *int, maxNode **Common.TreeNode) int {
+	if root == nil {
+		return 0
+	}
+
+	val := root.Val
+	if root.Left != nil {
+		val += findSubtreeSub(root.Left, maxNum, maxNode)
+	}
+	if root.Right != nil {
+		val += findSubtreeSub(root.Right, maxNum, maxNode)
+	}
+
+	if val > *maxNum {
+		*maxNum = val
+		*maxNode = root
+	}
+	return val
+}
+
+//628. Maximum Subtree
+func FindSubtree(root *Common.TreeNode) *Common.TreeNode {
+	if root == nil {
+		return nil
+	}
+
+	res := new(Common.TreeNode)
+	maxNum := Common.MININTNUM
+
+	findSubtreeSub(root, &maxNum, &res)
+	return res
+}
+
+//956. Data Segmentation
+func DataSegmentation(str string) []string {
+	startIndex := -1
+	endIndex := -1
+	res := make([]string, 0, 1)
+
+	for i := 0; i < len(str); i++ {
+		if str[i] < 'a' || str[i] > 'z' {
+			if startIndex != -1 {
+				res = append(res, str[startIndex:endIndex])
+			}
+			if str[i] != ' ' {
+				res = append(res, string(str[i]))
+			}
+
+			startIndex = -1
+			endIndex = -1
+		} else {
+			if startIndex == -1 {
+				startIndex = i
+				endIndex = i + 1
+			} else {
+				endIndex++
+			}
+		}
+	}
+
+	if startIndex != -1 {
+		res = append(res, str[startIndex:endIndex])
+	}
+
+	return res
+}
+
+//1398. K Decimal Addition
+func Addition(k int, a string, b string) string {
+	res := ""
+	isAdd := false
+	i := 0
+
+	for i < len(a) && i < len(b) {
+		var curnum int
+		curnum = int(a[len(a)-i-1] - '0' + b[len(b)-i-1] - '0')
+		if isAdd {
+			curnum++
+		}
+
+		if curnum >= k {
+			curnum -= k
+			isAdd = true
+		} else {
+			isAdd = false
+		}
+
+		res = string(curnum+'0') + res
+		i++
+	}
+
+	remainStr := ""
+	if i < len(a) {
+		remainStr = a[:len(a)-i]
+	}
+	if i < len(b) {
+		remainStr = b[:len(b)-i]
+	}
+
+	if isAdd {
+		if remainStr == "" {
+			res = "1" + res
+		} else {
+			res = Addition(k, remainStr, "1") + res
+		}
+	} else {
+		res = remainStr + res
+	}
+
+	for res[0] == '0' {
+		res = res[1:]
+	}
+
+	return res
+}
+
+//1617. Array Maximum Difference
+func GetAnswer(a []int) int {
+	res := 0
+
+	for i := 1; i < len(a); i++ {
+		for j := 0; j < i; j++ {
+			if (a[j] < a[i]) && (a[i]%2 == 0) && (a[j]%2 == 1) && (a[i]-a[j] > res) {
+				res = a[i] - a[j]
+			}
+		}
+	}
 	return res
 }
