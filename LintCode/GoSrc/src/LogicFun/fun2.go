@@ -860,3 +860,74 @@ func GetAnswer(a []int) int {
 	}
 	return res
 }
+
+// 1781. Reverse ASCII Encoded Strings
+func ReverseAsciiEncodedString(encodeString string) string {
+	res := ""
+
+	for i := 0; i < len(encodeString); i += 2 {
+		curNum := (encodeString[i]-'0')*10 + encodeString[i+1] - '0'
+		res = string(curNum) + res
+	}
+
+	return res
+}
+
+// 1410. Matrix Water Injection
+func WaterInjection(matrix [][]int, R int, C int) string {
+	if R == 0 || R == len(matrix)-1 || C == 0 || C == len(matrix[0])-1 {
+		return "YES"
+	}
+
+	if R > 0 && matrix[R][C] > matrix[R-1][C] {
+		if res := WaterInjection(matrix, R-1, C); res == "YES" {
+			return res
+		}
+	}
+	if R < len(matrix)-1 && matrix[R][C] > matrix[R+1][C] {
+		if res := WaterInjection(matrix, R+1, C); res == "YES" {
+			return res
+		}
+	}
+	if C > 0 && matrix[R][C] > matrix[R][C-1] {
+		if res := WaterInjection(matrix, R, C-1); res == "YES" {
+			return res
+		}
+	}
+	if C < len(matrix[0])-1 && matrix[R][C] > matrix[R][C+1] {
+		if res := WaterInjection(matrix, R, C+1); res == "YES" {
+			return res
+		}
+	}
+
+	return "NO"
+}
+
+// 958. Palindrome Data Stream
+func GetStream(s string) []int {
+	steamMap := make(map[rune]int)
+	res := []int{}
+	oddCnt := 0
+
+	for _, char := range s {
+		_, ok := steamMap[char]
+		if !ok {
+			steamMap[char] = 0
+		}
+
+		steamMap[char]++
+		if steamMap[char]%2 == 0 {
+			oddCnt--
+		} else {
+			oddCnt++
+		}
+
+		if oddCnt <= 1 {
+			res = append(res, 1)
+		} else {
+			res = append(res, 0)
+		}
+	}
+
+	return res
+}
