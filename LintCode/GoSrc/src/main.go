@@ -1,7 +1,9 @@
 package main
 
-import "LogicFun"
+import (
+	"LogicFun"
+)
 
 func main() {
-	println(LogicFun.GetStream("aba"))
+	println(LogicFun.NameDeduplication([]string{}))
 }

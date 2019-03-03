@@ -931,3 +931,124 @@ func GetStream(s string) []int {
 
 	return res
 }
+
+// 1443. Longest AB Substring
+func GetAns3(S string) int {
+	decNumMap := make(map[int]int)
+	decNumMap[0] = 0
+	res := 0
+	count := 0
+
+	for i := 1; i <= len(S); i++ {
+		if S[i-1] == 'A' {
+			count++
+		} else {
+			count--
+		}
+
+		val, ok := decNumMap[count]
+		if ok {
+			if res < i-val {
+				res = i - val
+			}
+		} else {
+			decNumMap[count] = i
+		}
+	}
+
+	return res
+}
+
+func findSubtree1Sub(root *Common.TreeNode) (*Common.TreeNode, int, int) {
+	var leftNode, rightNode *Common.TreeNode
+	var leftVal, rightVal, leftMinVal, rightMinVal int
+	leftMinVal = Common.MAXINTNUM
+	rightMinVal = Common.MAXINTNUM
+	if root.Left != nil {
+		leftNode, leftVal, leftMinVal = findSubtree1Sub(root.Left)
+	}
+	if root.Right != nil {
+		rightNode, rightVal, rightMinVal = findSubtree1Sub(root.Right)
+	}
+
+	curVal := root.Val + leftVal + rightVal
+	if leftMinVal < rightMinVal {
+		if curVal < leftMinVal {
+			return root, curVal, curVal
+		} else {
+			return leftNode, curVal, leftMinVal
+		}
+	} else {
+		if curVal < rightMinVal {
+			return root, curVal, curVal
+		} else {
+			return rightNode, curVal, rightMinVal
+		}
+	}
+}
+
+// 596. Minimum Subtree
+func FindSubtree1(root *Common.TreeNode) *Common.TreeNode {
+	if root == nil {
+		return root
+	}
+
+	res, _, _ := findSubtree1Sub(root)
+	return res
+}
+
+func findSubtree2Sub(root *Common.TreeNode) (*Common.TreeNode, int, float64, int) {
+	var leftNode, rightNode *Common.TreeNode
+	var leftVal, rightVal, leftCnt, rightCnt int
+	leftMaxVal := float64(Common.MININTNUM)
+	rightMaxVal := float64(Common.MININTNUM)
+	if root.Left != nil {
+		leftNode, leftVal, leftMaxVal, leftCnt = findSubtree2Sub(root.Left)
+	}
+	if root.Right != nil {
+		rightNode, rightVal, rightMaxVal, rightCnt = findSubtree2Sub(root.Right)
+	}
+
+	curCnt := 1 + leftCnt + rightCnt
+	curVal := float64(root.Val+leftVal+rightVal) / float64(curCnt)
+	if leftMaxVal > rightMaxVal {
+		if curVal > leftMaxVal {
+			return root, root.Val + leftVal + rightVal, curVal, curCnt
+		} else {
+			return leftNode, root.Val + leftVal + rightVal, leftMaxVal, curCnt
+		}
+	} else {
+		if curVal > rightMaxVal {
+			return root, root.Val + leftVal + rightVal, curVal, curCnt
+		} else {
+			return rightNode, root.Val + leftVal + rightVal, rightMaxVal, curCnt
+		}
+	}
+}
+
+// 597. Maximum Subtree
+func FindSubtree2(root *Common.TreeNode) *Common.TreeNode {
+	if root == nil {
+		return root
+	}
+
+	res, _, _, _ := findSubtree2Sub(root)
+	return res
+}
+
+// 487. Name Deduplication
+func NameDeduplication(names []string) []string {
+	resMap := make(map[string]struct{}, 0)
+	res := make([]string, 0, 1)
+
+	for _, val := range names {
+		resMap[strings.ToLower(val)] = struct{}{}
+	}
+
+	for key, _ := range resMap {
+		res = append(res, key)
+	}
+
+	sort.Strings(res)
+	return res
+}
