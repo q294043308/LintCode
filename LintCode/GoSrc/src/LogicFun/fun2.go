@@ -1052,3 +1052,21 @@ func NameDeduplication(names []string) []string {
 	sort.Strings(res)
 	return res
 }
+
+// 975. 2 Keys Keyboard
+func MinSteps(n int) int {
+	minArr := make([]int, n+1)
+
+	for i := 2; i <= n; i++ {
+		minArr[i] = i
+		for j := i - 1; j > 1; j-- {
+			if i%j == 0 {
+				if i/j+minArr[j] < minArr[i] {
+					minArr[i] = i/j + minArr[j]
+				}
+			}
+		}
+	}
+
+	return minArr[n]
+}

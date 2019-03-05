@@ -5,5 +5,5 @@ import (
 )
 
 func main() {
-	println(LogicFun.NameDeduplication([]string{}))
+	println(LogicFun.MinSteps(15))
 }
