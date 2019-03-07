@@ -3,5 +3,5 @@ package main
 import "LogicFun"
 
 func main() {
-	println(LogicFun.FindMinHeightTrees(1, [][]int{}))
+	println(LogicFun.TwoSum([]int{2, 7, 9, 11}, 9))
 }
