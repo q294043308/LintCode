@@ -1070,3 +1070,75 @@ func MinSteps(n int) int {
 
 	return minArr[n]
 }
+
+// 1298. Minimum Height Trees
+func FindMinHeightTrees(n int, edges [][]int) []int {
+	res := make([]int, 0, 1)
+	edgMap := make(map[int]map[int]struct{})
+
+	if n <= 1 {
+		return []int{0}
+	}
+
+	for _, edge := range edges {
+		if _, ok := edgMap[edge[0]]; !ok {
+			edgMap[edge[0]] = make(map[int]struct{})
+		}
+
+		edgMap[edge[0]][edge[1]] = struct{}{}
+
+		if _, ok := edgMap[edge[1]]; !ok {
+			edgMap[edge[1]] = make(map[int]struct{})
+		}
+		edgMap[edge[1]][edge[0]] = struct{}{}
+	}
+
+	leafNode := make([][]int, 0)
+	for len(edgMap) > 2 {
+		newLeafNode := make([][]int, 0)
+		for _, leaf := range leafNode {
+			delete(edgMap[leaf[0]], leaf[1])
+			delete(edgMap[leaf[1]], leaf[0])
+
+			if len(edgMap[leaf[0]]) == 0 {
+				delete(edgMap, leaf[0])
+			} else if len(edgMap[leaf[0]]) == 1 {
+				for index, _ := range edgMap[leaf[0]] {
+					newLeafNode = append(newLeafNode, []int{leaf[0], index})
+				}
+			}
+
+			if len(edgMap[leaf[1]]) == 0 {
+				delete(edgMap, leaf[1])
+			} else if len(edgMap[leaf[1]]) == 1 {
+				for index, _ := range edgMap[leaf[1]] {
+					newLeafNode = append(newLeafNode, []int{leaf[1], index})
+				}
+			}
+		}
+
+		if len(newLeafNode) == 0 {
+			for index, _ := range edgMap {
+				if len(edgMap[index]) == 1 {
+					for in, _ := range edgMap[index] {
+						newLeafNode = append(newLeafNode, []int{index, in})
+					}
+				}
+
+			}
+		}
+
+		leafNode = newLeafNode
+	}
+
+	for index, _ := range edgMap {
+		res = append(res, index)
+	}
+	if len(res) == 0 {
+		for _, Node := range leafNode {
+			res = append(res, Node[0])
+		}
+	}
+
+	return res
+}
