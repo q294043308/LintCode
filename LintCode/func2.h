@@ -1489,4 +1489,65 @@ string stringSort(string &str) {
     return res;
 }
 
+// 1562. Number of restaurants
+vector<vector<int>> nearestRestaurant(vector<vector<int>> &restaurant, int n) {
+    map<double,vector<int>> disMap;
+    vector<int>resIndex;
+    vector<vector<int>> res;
+
+    if (restaurant.size() < n){
+        return res;
+    }
+
+    for (uint i = 0; i < restaurant.size(); i++){
+        double dis = sqrt(restaurant[i][0] * restaurant[i][0] + restaurant[i][1] * restaurant[i][1]);
+        disMap[dis].push_back(i);
+    }
+
+    for (auto it = disMap.begin(); it != disMap.end(); it++){
+        if (resIndex.size() < uint(n)){
+            for (auto index : (*it).second){
+                resIndex.push_back(index);
+            }
+        }
+        else{
+            break;
+        }
+    }
+
+    sort(resIndex.begin(), resIndex.end());
+    for (auto index : resIndex){
+        res.push_back(restaurant[index]);
+    }
+
+    return res;
+}
+
+// 853. Number Of Corner Rectangles
+int countCornerRectangles(vector<vector<int>> &grid) {
+    // 这里其实可以用一个map存下对应行列是否有多余的1，省去多重for，困了，暂不实现了~
+    if (grid.size() == 1 || grid[0].size() == 1){
+        return 0;
+    }
+
+    int res;
+
+    for (uint i = 0; i < grid.size(); i++){
+        for (uint j = 0; j < grid[0].size(); j++){
+            if (grid[i][j] == 1){
+                for (uint x = i + 1; x < grid.size(); x++){
+                    if (grid[x][j] == 1){
+                        for (uint y = j + 1; y < grid[0].size(); y++){
+                            if (grid[i][y] == 1 && grid[x][y] == 1){
+                                res++;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    return res;
+}
 #endif
