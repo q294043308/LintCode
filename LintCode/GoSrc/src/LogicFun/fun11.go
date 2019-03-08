@@ -70,3 +70,24 @@ func AddTwoNumbers(l1 *Common.ListNode, l2 *Common.ListNode) *Common.ListNode {
 	}
 	return res
 }
+
+// 3. Longest Substring Without Repeating Characters
+func LengthOfLongestSubstring(s string) int {
+	charMap := make([]int, Common.CHARNUM, Common.CHARNUM)
+	res := 0
+	lastIndex := 0
+
+	for i := 0; i < len(s); i++ {
+		if charMap[s[i]] > lastIndex {
+			lastIndex = charMap[s[i]]
+		}
+
+		if res < i-lastIndex+1 {
+			res = i - lastIndex + 1
+		}
+
+		charMap[s[i]] = i + 1
+	}
+
+	return res
+}
