@@ -3,5 +3,5 @@ package main
 import "LogicFun"
 
 func main() {
-	println(LogicFun.LengthOfLongestSubstring("bbbb"))
+	println(LogicFun.LongestPalindromeMaLaCher("ababababa"))
 }
