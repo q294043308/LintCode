@@ -3,5 +3,5 @@ package main
 import "LogicFun"
 
 func main() {
-	println(LogicFun.LongestPalindromeMaLaCher(""))
+	println(LogicFun.Reverse(-2147483648))
 }

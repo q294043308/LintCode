@@ -2,7 +2,10 @@
 // escape LintCode, Go LeetCode -- 2019.3.7
 package LogicFun
 
-import "Common"
+import (
+	"Common"
+	"math"
+)
 
 // 1. Two Sum
 func TwoSum(nums []int, target int) []int {
@@ -185,4 +188,18 @@ func LongestPalindromeMaLaCher(s string) string {
 		maxIndex = (maxIndex-2)/2 + 1
 		return s[maxIndex-maxLen/2 : maxIndex-maxLen/2+maxLen]
 	}
+}
+
+// 7. Reverse Integer
+func Reverse(x int) int {
+	var res int64
+	for x != 0 {
+		res = res*10 + int64(x%10)
+		x /= 10
+	}
+	if res > math.MaxInt32 || res < math.MinInt32 {
+		return 0
+	}
+
+	return int(res)
 }
