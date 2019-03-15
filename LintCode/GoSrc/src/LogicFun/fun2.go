@@ -2,7 +2,6 @@ package LogicFun
 
 import (
 	"Common"
-	"errors"
 	"math"
 	"sort"
 	"strconv"
@@ -1142,79 +1141,4 @@ func FindMinHeightTrees(n int, edges [][]int) []int {
 	}
 
 	return res
-}
-
-func FindMedianSortedArraysSub(nums []int) (float64, int, error) {
-	if len(nums) == 0 {
-		return 0, 0, errors.New("empty")
-	}
-
-	index := len(nums) / 2
-	if len(nums)%2 == 0 {
-		return float64(nums[index]+nums[index-1]) / 2, index - 1, nil
-	} else {
-		return float64(nums[index]), index, nil
-	}
-}
-
-func FindMedianSortedArrays(nums1 []int, nums2 []int) float64 {
-	nums1Len := len(nums1)
-	nums2Len := len(nums2)
-
-	if nums1Len > nums2Len {
-		// exchange
-		temp := nums1
-		nums1 = nums2
-		nums2 = temp
-
-		nums1Len = len(nums1)
-		nums2Len = len(nums2)
-	}
-
-	iMin := 0
-	iMax := nums1Len
-	halfLen := (nums1Len + nums2Len + 1) / 2
-
-	for iMin <= iMax {
-		i := (iMin + iMax) / 2
-		j := halfLen - i
-
-		if i < iMax && nums2[j-1] > nums1[i] {
-			iMin = i + 1
-		} else if i > iMin && nums1[i-1] > nums2[j] {
-			iMax = i - 1
-		} else {
-			maxLeft := 0
-			if i == 0 {
-				maxLeft = nums2[j-1]
-			} else if j == 0 {
-				maxLeft = nums1[i-1]
-			} else {
-				if nums1[i-1] > nums2[j-1] {
-					maxLeft = nums1[i-1]
-				} else {
-					maxLeft = nums2[j-1]
-				}
-			}
-			if (nums1Len+nums2Len)%2 == 1 {
-				return float64(maxLeft)
-			}
-
-			minRight := 0
-			if i == nums1Len {
-				minRight = nums2[j]
-			} else if j == nums2Len {
-				minRight = nums1[i]
-			} else {
-				if nums1[i] < nums2[j] {
-					minRight = nums1[i]
-				} else {
-					minRight = nums2[j]
-				}
-			}
-
-			return float64(maxLeft+minRight) / 2
-		}
-	}
-	return 0
 }
