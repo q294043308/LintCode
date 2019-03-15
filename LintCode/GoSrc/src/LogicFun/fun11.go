@@ -92,7 +92,7 @@ func LengthOfLongestSubstring(s string) int {
 	return res
 }
 
-// 4. Longest Palindromic Substring (it's haven a introduction of malacher, Limited to O(n) time.)
+// 4. Longest Palindromic Substring (it's haven a Algorithms of malacher, Limited to O(n) time.)
 func LongestPalindrome(s string) string {
 	start, end, le := 0, 0, len(s)
 	if le == 0 {
@@ -131,8 +131,13 @@ func expand(s string, left, right int) int {
 	return right - left - 1
 }
 
+// malacher
 func LongestPalindromeMaLaCher(s string) string {
 	len := len(s)
+	if len == 0 {
+		return ""
+	}
+
 	news := make([]byte, len*2+3)
 	p := make([]int, len*2+3)
 	news[0] = '~'
@@ -166,15 +171,18 @@ func LongestPalindromeMaLaCher(s string) string {
 			id = i
 		}
 
-		if p[i] > maxLen {
+		if p[i] >= maxLen {
 			maxLen = p[i]
 			maxIndex = i
 		}
 	}
 
+	maxLen -= 1
 	if maxIndex%2 == 0 {
-		maxLen -= 1
+		maxIndex = (maxIndex - 2) / 2
+		return s[maxIndex-maxLen/2 : maxIndex-maxLen/2+maxLen]
+	} else {
+		maxIndex = (maxIndex-2)/2 + 1
+		return s[maxIndex-maxLen/2 : maxIndex-maxLen/2+maxLen]
 	}
-	maxIndex /= 2
-	return s[maxIndex-maxLen/2 : maxIndex/2+maxLen/2+1]
 }
