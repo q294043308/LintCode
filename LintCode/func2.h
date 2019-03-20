@@ -1495,7 +1495,7 @@ vector<vector<int>> nearestRestaurant(vector<vector<int>> &restaurant, int n) {
     vector<int>resIndex;
     vector<vector<int>> res;
 
-    if (restaurant.size() < n){
+    if (restaurant.size() < uint(n)){
         return res;
     }
 
@@ -1530,7 +1530,7 @@ int countCornerRectangles(vector<vector<int>> &grid) {
         return 0;
     }
 
-    int res;
+    int res = 0;
 
     for (uint i = 0; i < grid.size(); i++){
         for (uint j = 0; j < grid[0].size(); j++){

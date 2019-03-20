@@ -7,9 +7,9 @@
 #include "define.h"
 #include "func1.h"
 #include "func2.h"
+#include "func11.h"
 
 int main(int argc, char* argv[])
 {
-    vector<vector<int>>date = { { 1, 0 }, { 1, 2 }, { 2, 1 }, { 0, 1 } };
-    nearestRestaurant(date, 3);
+    convert("A", 1);
 };
