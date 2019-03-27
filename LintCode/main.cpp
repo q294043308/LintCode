@@ -11,5 +11,6 @@
 
 int main(int argc, char* argv[])
 {
-    convert("A", 1);
+    cout << myAtoi("-2147483647") << endl;
+    getchar();
 };

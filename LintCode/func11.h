@@ -9,6 +9,7 @@
 
 #include "define.h"
 
+// 6. ZigZag Conversion
 string convert(string s, int numRows) {
     if (numRows == 1){
         return s;
@@ -38,6 +39,57 @@ string convert(string s, int numRows) {
     }
 
     return res;
+}
+
+// 8. String to Integer (atoi)
+int myAtoi(string str) {
+    long long res = 0;
+    uint index = 0;
+    bool isPositive = true;
+
+    for (; index < str.length(); index ++){
+        if (str[index] != ' '){
+            if (str[index] == '-'){
+                isPositive = false;
+                index++;
+                break;
+            }
+            else if (str[index] == '+'){
+                isPositive = true;
+                index++;
+                break;
+            }
+            else if (str[index] <= '9' && str[index] >= 0){
+                break;
+            }
+            else{
+                return int(res);
+            }
+        }
+    }
+    
+    for (; index < str.length(); index++){
+        if (str[index] > '9' || str[index] < '0'){
+            return int(res);
+        }
+        if (isPositive){
+            if (res * 10 + str[index] - '0' < MAXINTNUM){
+                res = res * 10 + str[index] - '0';
+            }
+            else{
+                return MAXINTNUM;
+            }
+        }
+        else{
+            if (res * 10 - str[index] + '0' > MININTNUM){
+                res = res * 10 - str[index] + '0';
+            }
+            else{
+                return MININTNUM;
+            }
+        }
+    }
+    return int(res);
 }
 
 #endif
