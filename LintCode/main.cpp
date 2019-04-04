@@ -11,6 +11,6 @@
 
 int main(int argc, char* argv[])
 {
-    cout << myAtoi("-2147483647") << endl;
+    cout << isPalindrome(2147483647) << endl;
     getchar();
 };

@@ -92,4 +92,40 @@ int myAtoi(string str) {
     return int(res);
 }
 
+// 9. Palindrome Number
+bool isPalindrome(int x) {
+    if (x < 0){
+        return false;
+    }
+
+    int tmp = x;
+    long long s = 0;
+    while (tmp > 0){
+        s = s * 10 + tmp % 10;
+        tmp /= 10;
+    }
+
+    return x == s;
+}
+
+// 10. Regular Expression Matching
+bool isMatch(string s, string p) {
+    int sIndex = 0;
+    int pIndex = 0;
+    char starC = -1;
+    while (sIndex < s.length() && pIndex < p.length()){
+        if (sIndex == s.length() || pIndex == s.length()){
+            return false;
+        }
+
+        if (starC >= 0){
+            
+        }
+        else{
+        }
+    }
+
+    return true;
+}
+
 #endif
