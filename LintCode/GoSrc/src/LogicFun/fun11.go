@@ -280,3 +280,126 @@ func Reverse(x int) int {
 
 	return int(res)
 }
+
+// 10. Regular Expression Matching
+func IsMatch(s string, p string) bool {
+	if len(s) == 0 {
+		if s == "" && p == "" {
+			return true
+		}
+
+		num := 0
+		for _, val := range p {
+			if val == '*' {
+				if num <= 0 {
+					return false
+				}
+				num--
+			} else {
+				num++
+			}
+		}
+		if num == 0 {
+			return true
+		}
+
+		return false
+	}
+	if len(p) == 0 || p[0] == '*' {
+		return false
+	}
+
+	matchMarix := make([][]bool, len(p))
+	for i := 0; i < len(p); i++ {
+		matchMarix[i] = make([]bool, len(s))
+	}
+
+	lastJStart := 0
+	jStart := 0
+	trueNumStart := 1
+
+	for i := 0; i < len(p); i++ {
+		isUpdate := false
+		j := 0
+
+		if i > 0 {
+			if p[i] != '*' {
+				if p[i-1] == '*' {
+					if trueNumStart > jStart {
+						j = trueNumStart
+					} else {
+						j = jStart
+					}
+				} else {
+					j = jStart + 1
+				}
+				trueNumStart++
+			} else {
+				j = jStart
+				trueNumStart--
+			}
+		}
+
+		if i > 1 && p[i] == '*' {
+			for z := lastJStart; z < len(s); z++ {
+				if matchMarix[i-2][z] {
+					matchMarix[i][z] = matchMarix[i-2][z]
+					if !isUpdate {
+						isUpdate = true
+						lastJStart = jStart
+						jStart = z
+					}
+				}
+			}
+		}
+
+		for ; j < len(s); j++ {
+			if s[j] == p[i] || p[i] == '.' {
+				if i == 0 || j == 0 || matchMarix[i-1][j-1] {
+					matchMarix[i][j] = true
+
+					if !isUpdate {
+						isUpdate = true
+						lastJStart = jStart
+						jStart = j
+						if trueNumStart < jStart {
+							trueNumStart = jStart
+						}
+					}
+				}
+
+				if i == 0 {
+					break
+				}
+			} else if p[i] == '*' {
+				if i == 0 {
+					return false
+				}
+
+				if (s[j] == p[i-1] || p[i-1] == '.') && (matchMarix[i-1][j] || j > 0 && matchMarix[i][j-1]) {
+					matchMarix[i][j] = true
+
+					if !isUpdate {
+						isUpdate = true
+						lastJStart = jStart
+						jStart = j
+					}
+				}
+			} else if i > 0 && !matchMarix[i-1][j] {
+				if !isUpdate {
+					isUpdate = true
+					lastJStart = jStart
+					jStart = j
+				}
+			} else if i == 0 {
+				break
+			}
+		}
+		if !isUpdate {
+			isUpdate = true
+			lastJStart = jStart
+		}
+	}
+
+	return matchMarix[len(p)-1][len(s)-1]
+}
