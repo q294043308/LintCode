@@ -403,3 +403,138 @@ func IsMatch(s string, p string) bool {
 
 	return matchMarix[len(p)-1][len(s)-1]
 }
+
+// 11. Container With Most Water
+func MaxArea(height []int) int {
+	res := 0
+	compIndexMap := make(map[int]struct{})
+	lastIndex := -1
+
+	for index, h := range height {
+		if index < len(height)-1 && height[index+1] >= height[index] {
+			compIndexMap[index] = struct{}{}
+			lastIndex = index
+			continue
+		}
+		for preIndex, _ := range compIndexMap {
+			preHei := height[preIndex]
+			hei := h
+			if preHei < h {
+				hei = preHei
+			}
+			curVal := (index - preIndex) * hei
+			if curVal > res {
+				res = curVal
+			}
+		}
+
+		if index > lastIndex {
+			compIndexMap[index] = struct{}{}
+			lastIndex = index
+		}
+	}
+
+	return res
+}
+
+// 11+. Container With Most Water
+func MaxAreaOpt(height []int) int {
+	res := 0
+	leftIndex := 0
+	rightIndex := len(height) - 1
+
+	for rightIndex > leftIndex {
+		het := height[leftIndex]
+		if height[leftIndex] > height[rightIndex] {
+			het = height[rightIndex]
+		}
+
+		curVal := (rightIndex - leftIndex) * het
+		if res < curVal {
+			res = curVal
+		}
+
+		if height[rightIndex] > height[leftIndex] {
+			leftIndex++
+		} else {
+			rightIndex--
+		}
+	}
+
+	return res
+}
+
+// 12. Integer to Roman
+func IntToRoman(num int) string {
+	res := ""
+	romanByte := []byte{'I', 'V', 'X', 'L', 'C', 'D', 'M'}
+	i := 6
+	dev := 1000
+
+	for i >= 0 {
+		mod := num / dev
+		if mod != 0 {
+			if mod == 9 {
+				res = res + string(romanByte[i]) + string(romanByte[i+2])
+			} else if mod == 4 {
+				res = res + string(romanByte[i]) + string(romanByte[i+1])
+			} else {
+				newMod := mod
+				if newMod >= 5 {
+					newMod -= 5
+					res = res + string(romanByte[i+1])
+				}
+				for num := 0; num < newMod; num++ {
+					res = res + string(romanByte[i])
+				}
+
+			}
+		}
+
+		num -= mod * dev
+		dev /= 10
+		i -= 2
+	}
+
+	return res
+}
+
+// 13. Roman to Integer
+func RomanToInt(s string) int {
+	res := 0
+	RomanMap := map[rune]int{'I': 1, 'V': 5, 'X': 10, 'L': 50, 'C': 100, 'D': 500, 'M': 1000}
+	lastNum := 10000
+
+	for _, char := range s {
+		curVal := RomanMap[char]
+
+		if curVal > lastNum {
+			res += curVal - 2*lastNum
+		} else {
+			res += curVal
+			lastNum = curVal
+		}
+	}
+
+	return res
+}
+
+// 13+. Roman to Integer
+func RomanToIntOpt(s string) int {
+	res := 0
+	RomanMap := map[rune]int{'I': 1, 'V': 5, 'X': 10, 'L': 50, 'C': 100, 'D': 500, 'M': 1000}
+	lastNum := 10000
+
+	for _, char := range s {
+		curVal := RomanMap[char]
+
+		if curVal > lastNum {
+			res += curVal - 2*lastNum
+		} else {
+			res += curVal
+			lastNum = curVal
+		}
+	}
+
+	return res
+}
