@@ -3,5 +3,5 @@ package main
 import "LogicFun"
 
 func main() {
-	println(LogicFun.RomanToIntOpt("LVIII"))
+	println(LogicFun.LongestCommonPrefix([]string{"ca", "a"}))
 }

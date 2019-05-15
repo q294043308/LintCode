@@ -6,6 +6,7 @@ import (
 	"Common"
 	"errors"
 	"math"
+	"strings"
 )
 
 // 1. Two Sum
@@ -502,11 +503,11 @@ func IntToRoman(num int) string {
 // 13. Roman to Integer
 func RomanToInt(s string) int {
 	res := 0
-	RomanMap := map[rune]int{'I': 1, 'V': 5, 'X': 10, 'L': 50, 'C': 100, 'D': 500, 'M': 1000}
+	romanMap := map[rune]int{'I': 1, 'V': 5, 'X': 10, 'L': 50, 'C': 100, 'D': 500, 'M': 1000}
 	lastNum := 10000
 
 	for _, char := range s {
-		curVal := RomanMap[char]
+		curVal := romanMap[char]
 
 		if curVal > lastNum {
 			res += curVal - 2*lastNum
@@ -521,12 +522,19 @@ func RomanToInt(s string) int {
 
 // 13+. Roman to Integer
 func RomanToIntOpt(s string) int {
-	res := 0
-	RomanMap := map[rune]int{'I': 1, 'V': 5, 'X': 10, 'L': 50, 'C': 100, 'D': 500, 'M': 1000}
-	lastNum := 10000
+	romanArr := make([]int16, 24)
+	romanArr['I'-'A'] = 1
+	romanArr['V'-'A'] = 5
+	romanArr['X'-'A'] = 10
+	romanArr['L'-'A'] = 50
+	romanArr['C'-'A'] = 100
+	romanArr['D'-'A'] = 500
+	romanArr['M'-'A'] = 1000
+	var lastNum int16 = 10000
+	var res int16
 
 	for _, char := range s {
-		curVal := RomanMap[char]
+		curVal := romanArr[char-'A']
 
 		if curVal > lastNum {
 			res += curVal - 2*lastNum
@@ -536,5 +544,66 @@ func RomanToIntOpt(s string) int {
 		}
 	}
 
-	return res
+	return int(res)
+}
+
+// 14. Longest Common Prefix
+func LongestCommonPrefix(strs []string) string {
+	shortestStr := ""
+	shortestIndex := -1
+	for index, str := range strs {
+		if len(shortestStr) == 0 {
+			shortestStr = str
+			shortestIndex = index
+		} else if len(shortestStr) > len(str) {
+			shortestStr = str
+			shortestIndex = index
+		}
+	}
+
+	for lenRange := len(shortestStr); lenRange > 0; lenRange-- {
+		strRange := shortestStr[0:lenRange]
+		ok := true
+
+		for index, str := range strs {
+			if shortestIndex == index {
+				continue
+			}
+
+			if strings.HasPrefix(str, strRange) {
+				continue
+			}
+
+			ok = false
+			break
+		}
+
+		if ok {
+			return strRange
+		}
+	}
+
+	return ""
+}
+
+/*
+Given an array nums of n integers, are there elements a, b, c in nums such that a + b + c = 0? Find all unique triplets in the array which gives the sum of zero.
+
+Note:
+
+The solution set must not contain duplicate triplets.
+
+Example:
+
+Given array nums = [-1, 0, 1, 2, -1, -4],
+
+A solution set is:
+[
+  [-1, 0, 1],
+  [-1, -1, 2]
+]
+*/
+// 14. 3Sum
+func ThreeSum(nums []int) [][]int {
+	return nil
 }
