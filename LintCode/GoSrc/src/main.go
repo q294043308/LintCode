@@ -3,5 +3,5 @@ package main
 import "LogicFun"
 
 func main() {
-	println(LogicFun.LongestCommonPrefix([]string{"ca", "a"}))
+	println(LogicFun.ThreeSumClosest([]int{-1, 2, 1, -4}, 1))
 }

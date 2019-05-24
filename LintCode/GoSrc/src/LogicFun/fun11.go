@@ -6,6 +6,7 @@ import (
 	"Common"
 	"errors"
 	"math"
+	"sort"
 	"strings"
 )
 
@@ -586,24 +587,81 @@ func LongestCommonPrefix(strs []string) string {
 	return ""
 }
 
-/*
-Given an array nums of n integers, are there elements a, b, c in nums such that a + b + c = 0? Find all unique triplets in the array which gives the sum of zero.
-
-Note:
-
-The solution set must not contain duplicate triplets.
-
-Example:
-
-Given array nums = [-1, 0, 1, 2, -1, -4],
-
-A solution set is:
-[
-  [-1, 0, 1],
-  [-1, -1, 2]
-]
-*/
-// 14. 3Sum
+// 15. 3Sum -> this question have a solution of less time, this solution will using at 16's question
 func ThreeSum(nums []int) [][]int {
-	return nil
+	type repeatStr struct {
+		repeatMap map[int]struct{}
+		cnt       int
+	}
+
+	res := make([][]int, 0)
+	numMap := make(map[int]*repeatStr, 0)
+	for _, num := range nums {
+		if val, ok := numMap[num]; ok {
+			val.cnt++
+		} else {
+			numMap[num] = new(repeatStr)
+			numMap[num].repeatMap = make(map[int]struct{})
+		}
+	}
+
+	for i, iV := range nums {
+		for j := i + 1; j < len(nums); j++ {
+			jV := nums[j]
+			needNum := 0 - iV - jV
+			if needNum == iV || needNum == jV {
+				if needNum == iV && needNum == jV && numMap[needNum].cnt < 2 {
+					continue
+				} else if numMap[needNum].cnt < 1 {
+					continue
+				}
+			}
+
+			repeatVal, ok := numMap[needNum]
+			if ok {
+				if _, repeat := repeatVal.repeatMap[iV]; !repeat {
+					res = append(res, []int{iV, jV, needNum})
+					repeatVal.repeatMap[iV] = struct{}{}
+					repeatVal.repeatMap[jV] = struct{}{}
+					numMap[iV].repeatMap[jV] = struct{}{}
+					numMap[iV].repeatMap[needNum] = struct{}{}
+					numMap[jV].repeatMap[iV] = struct{}{}
+					numMap[jV].repeatMap[needNum] = struct{}{}
+				}
+			}
+		}
+	}
+
+	return res
+}
+
+// 16. 3Sum Closest
+func ThreeSumClosest(nums []int, target int) int {
+	res := 0
+	resDis := Common.MAXINTNUM
+	sort.Ints(nums)
+	for i := 0; i < len(nums)-2; i++ {
+		start := i + 1
+		end := len(nums) - 1
+
+		for start != end {
+			sum := nums[i] + nums[start] + nums[end]
+			dis := 0
+			if sum < target {
+				dis = target - sum
+				start++
+			} else {
+				dis = sum - target
+				end--
+			}
+			if dis == 0 {
+				return target
+			}
+			if dis < resDis {
+				resDis = dis
+				res = sum
+			}
+		}
+	}
+	return res
 }
