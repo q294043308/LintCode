@@ -3,5 +3,5 @@ package main
 import "LogicFun"
 
 func main() {
-	println(LogicFun.ThreeSumClosest([]int{-1, 2, 1, -4}, 1))
+	println(LogicFun.LetterCombinations("234"))
 }

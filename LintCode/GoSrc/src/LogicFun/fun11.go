@@ -665,3 +665,34 @@ func ThreeSumClosest(nums []int, target int) int {
 	}
 	return res
 }
+
+/*Given a string containing digits from 2-9 inclusive, return all possible letter combinations that the number could represent.
+
+A mapping of digit to letters (just like on the telephone buttons) is given below. Note that 1 does not map to any letters.
+
+Example:
+
+Input: "23"
+Output: ["ad", "ae", "af", "bd", "be", "bf", "cd", "ce", "cf"].*/
+// 17. Letter Combinations of a Phone Number
+func LetterCombinations(digits string) []string {
+	letterArr := []string{"abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"}
+	size := 1
+	for _, digit := range digits {
+		size = size * len(letterArr[digit-'2'])
+	}
+
+	if size < 3 {
+		size = 0
+	}
+	res := make([]string, size)
+	for _, digit := range digits {
+		letter := letterArr[digit-'2']
+		size = size / len(letter)
+		for i := 0; i < len(res); i++ {
+			res[i] = res[i] + string(letter[(i/size)%len(letter)])
+		}
+	}
+
+	return res
+}
