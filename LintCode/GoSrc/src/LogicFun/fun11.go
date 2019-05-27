@@ -666,14 +666,6 @@ func ThreeSumClosest(nums []int, target int) int {
 	return res
 }
 
-/*Given a string containing digits from 2-9 inclusive, return all possible letter combinations that the number could represent.
-
-A mapping of digit to letters (just like on the telephone buttons) is given below. Note that 1 does not map to any letters.
-
-Example:
-
-Input: "23"
-Output: ["ad", "ae", "af", "bd", "be", "bf", "cd", "ce", "cf"].*/
 // 17. Letter Combinations of a Phone Number
 func LetterCombinations(digits string) []string {
 	letterArr := []string{"abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"}
@@ -692,6 +684,63 @@ func LetterCombinations(digits string) []string {
 		for i := 0; i < len(res); i++ {
 			res[i] = res[i] + string(letter[(i/size)%len(letter)])
 		}
+	}
+
+	return res
+}
+
+/*
+Given an array nums of n integers and an integer target, are there elements a, b, c, and d in nums such that a + b + c + d = target? Find all unique quadruplets in the array which gives the sum of target.
+
+Note:
+
+The solution set must not contain duplicate quadruplets.
+*/
+// 18. 4Sum
+func FourSum(nums []int, target int) [][]int {
+	sort.Ints(nums)
+	res := make([][]int, 0)
+
+	for i := 0; i < len(nums)-3; {
+		cur := nums[i]
+		for j := i + 1; j < len(nums)-2; {
+			cur += nums[j]
+			start := j + 1
+			end := len(nums) - 1
+
+			for start < end {
+				if cur+nums[start]+nums[end] == target {
+					res = append(res, []int{nums[i], nums[j], nums[start], nums[end]})
+				}
+
+				if cur+nums[start]+nums[end] < target {
+					newstart := start + 1
+					for newstart < end && nums[newstart] == nums[start] {
+						newstart++
+					}
+					start = newstart
+				} else {
+					newend := end - 1
+					for start < newend && nums[newend] == nums[end] {
+						newend--
+					}
+					end = newend
+				}
+			}
+
+			cur -= nums[j]
+			newj := j + 1
+			for newj < len(nums)-2 && nums[newj] == nums[j] {
+				newj++
+			}
+			j = newj
+		}
+
+		newi := i + 1
+		for newi < len(nums)-3 && nums[newi] == nums[i] {
+			newi++
+		}
+		i = newi
 	}
 
 	return res

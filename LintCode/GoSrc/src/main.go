@@ -3,5 +3,5 @@ package main
 import "LogicFun"
 
 func main() {
-	println(LogicFun.LetterCombinations("234"))
+	println(LogicFun.FourSum([]int{0}, 0))
 }
