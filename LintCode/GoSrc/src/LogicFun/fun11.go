@@ -805,5 +805,57 @@ func IsValid(s string) bool {
 
 // 21. Merge Two Sorted Lists
 func MergeTwoLists(l1 *Common.ListNode, l2 *Common.ListNode) *Common.ListNode {
+	if l1 == nil {
+		return l2
+	}
+	if l2 == nil {
+		return l1
+	}
+
+	res := l1
+	if l2.Val < l1.Val {
+		res = l2
+		l2 = l2.Next
+	} else {
+		l1 = l1.Next
+	}
+
+	tmp := res
+	for l1 != nil && l2 != nil {
+		if l1.Val < l2.Val {
+			tmp.Next = l1
+			tmp = l1
+			l1 = l1.Next
+		} else {
+			tmp.Next = l2
+			tmp = l2
+			l2 = l2.Next
+		}
+	}
+
+	if l1 != nil {
+		tmp.Next = l1
+	} else {
+		tmp.Next = l2
+	}
+
+	return res
+}
+
+/*
+Given n pairs of parentheses, write a function to generate all combinations of well-formed parentheses.
+
+For example, given n = 3, a solution set is:
+
+[
+  "((()))",
+  "(()())",
+  "(())()",
+  "()(())",
+  "()()()"
+]
+*/
+// 22. Generate Parentheses
+func GenerateParenthesis(n int) []string {
 	return nil
 }
