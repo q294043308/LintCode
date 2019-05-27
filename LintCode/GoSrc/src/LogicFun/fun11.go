@@ -689,13 +689,6 @@ func LetterCombinations(digits string) []string {
 	return res
 }
 
-/*
-Given an array nums of n integers and an integer target, are there elements a, b, c, and d in nums such that a + b + c + d = target? Find all unique quadruplets in the array which gives the sum of target.
-
-Note:
-
-The solution set must not contain duplicate quadruplets.
-*/
 // 18. 4Sum
 func FourSum(nums []int, target int) [][]int {
 	sort.Ints(nums)
@@ -744,4 +737,73 @@ func FourSum(nums []int, target int) [][]int {
 	}
 
 	return res
+}
+
+// 19. Remove Nth Node From End of List
+func RemoveNthFromEnd(head *Common.ListNode, n int) *Common.ListNode {
+	lenth := 0
+	for tmp := head; tmp != nil; tmp = tmp.Next {
+		lenth++
+	}
+
+	if lenth < n {
+		return head
+	}
+
+	if lenth == 1 {
+		return nil
+	}
+
+	index := lenth - n
+	if index == 0 {
+		return head.Next
+	}
+
+	tmp := head
+	for i := 1; i < index; i++ {
+		tmp = tmp.Next
+	}
+
+	tmp.Next = tmp.Next.Next
+	return head
+}
+
+// 20. Valid Parentheses
+func IsValid(s string) bool {
+	if len(s)%2 == 1 {
+		return false
+	}
+
+	stack := &Common.Stack{}
+	for _, cha := range s {
+		if cha == '(' || cha == '{' || cha == '[' {
+			stack.Push(cha)
+		} else {
+			if stack.Empty() {
+				return false
+			}
+
+			top := stack.Pop()
+			if cha == '}' {
+				if top.(rune) == '{' {
+					continue
+				}
+			} else if cha == ')' {
+				if top.(rune) == '(' {
+					continue
+				}
+			} else {
+				if top.(rune) == '[' {
+					continue
+				}
+			}
+			return false
+		}
+	}
+	return stack.Empty()
+}
+
+// 21. Merge Two Sorted Lists
+func MergeTwoLists(l1 *Common.ListNode, l2 *Common.ListNode) *Common.ListNode {
+	return nil
 }
