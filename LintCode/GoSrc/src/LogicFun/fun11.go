@@ -924,5 +924,48 @@ func MergeKLists(lists []*Common.ListNode) *Common.ListNode {
 
 // 23+. Merge k Sorted Lists
 func MergeKListsOpt(lists []*Common.ListNode) *Common.ListNode {
-	return nil
+	mergedList := make([]*Common.ListNode, (len(lists)+1)/2)
+	for i := 0; i < len(lists); i += 2 {
+		var curList *Common.ListNode
+		if i+1 == len(lists) {
+			curList = lists[i]
+		} else {
+			curList = MergeTwoLists(lists[i], lists[i+1])
+		}
+		mergedList[i/2] = curList
+	}
+
+	if len(mergedList) == 0 {
+		return nil
+	} else if len(mergedList) == 1 {
+		return mergedList[0]
+	} else {
+		return MergeKListsOpt(mergedList)
+	}
+}
+
+// 24. Swap Nodes in Pairs
+func SwapPairs(head *Common.ListNode) *Common.ListNode {
+	if head == nil || head.Next == nil {
+		return head
+	}
+
+	var lastNode, leftNode, rightNode *Common.ListNode
+	leftNode = head
+	rightNode = head.Next
+	head = rightNode
+
+	for leftNode != nil && rightNode != nil {
+		if lastNode != nil {
+			lastNode.Next = rightNode
+		}
+		leftNode.Next = rightNode.Next
+		rightNode.Next = leftNode
+		lastNode = leftNode
+		leftNode = leftNode.Next
+		if leftNode != nil {
+			rightNode = leftNode.Next
+		}
+	}
+	return head
 }
