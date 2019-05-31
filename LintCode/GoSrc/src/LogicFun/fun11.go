@@ -842,20 +842,87 @@ func MergeTwoLists(l1 *Common.ListNode, l2 *Common.ListNode) *Common.ListNode {
 	return res
 }
 
-/*
-Given n pairs of parentheses, write a function to generate all combinations of well-formed parentheses.
-
-For example, given n = 3, a solution set is:
-
-[
-  "((()))",
-  "(()())",
-  "(())()",
-  "()(())",
-  "()()()"
-]
-*/
 // 22. Generate Parentheses
 func GenerateParenthesis(n int) []string {
+	res := make([]string, 0)
+
+	if n == 0 {
+		res = append(res, "")
+	}
+
+	for i := 0; i < n; i++ {
+		for _, left := range GenerateParenthesis(i) {
+			for _, right := range GenerateParenthesis(n - 1 - i) {
+				res = append(res, "("+left+")"+right)
+			}
+		}
+	}
+
+	return res
+}
+
+// 23. Merge k Sorted Lists
+func MergeKLists(lists []*Common.ListNode) *Common.ListNode {
+	type qortNode struct {
+		listId int
+		val    int
+	}
+
+	var list, res *Common.ListNode
+	nodeArr := make([]*qortNode, 0)
+	insert := func(node *qortNode) {
+		index := 0
+		for ; index < len(nodeArr); index++ {
+			if node.val <= nodeArr[index].val {
+				break
+			}
+		}
+
+		tmp := []*qortNode{node}
+		nodeArr = append(nodeArr[:index], append(tmp, nodeArr[index:]...)...)
+	}
+
+	for index, list := range lists {
+		if list != nil {
+			insert(&qortNode{
+				listId: index,
+				val:    list.Val,
+			})
+		}
+	}
+
+	for len(nodeArr) > 1 {
+		newNode := nodeArr[0]
+		nodeArr = nodeArr[1:]
+		if list == nil {
+			list = lists[newNode.listId]
+			res = list
+		} else {
+			list.Next = lists[newNode.listId]
+			list = list.Next
+		}
+
+		lists[newNode.listId] = lists[newNode.listId].Next
+		if lists[newNode.listId] != nil {
+			insert(&qortNode{
+				listId: newNode.listId,
+				val:    lists[newNode.listId].Val,
+			})
+		}
+	}
+
+	if len(nodeArr) == 1 {
+		if list == nil {
+			list = lists[nodeArr[0].listId]
+			res = list
+		} else {
+			list.Next = lists[nodeArr[0].listId]
+		}
+	}
+	return res
+}
+
+// 23+. Merge k Sorted Lists
+func MergeKListsOpt(lists []*Common.ListNode) *Common.ListNode {
 	return nil
 }
