@@ -969,3 +969,51 @@ func SwapPairs(head *Common.ListNode) *Common.ListNode {
 	}
 	return head
 }
+
+// 25. Reverse Nodes in k-Group
+func ReverseKGroup(head *Common.ListNode, k int) *Common.ListNode {
+	stack := &Common.Stack{}
+	node := head
+
+	for node != nil {
+		start := node
+		i := 0
+		for ; i < k && node != nil; i++ {
+			stack.Push(node.Val)
+			node = node.Next
+		}
+
+		if i < k {
+			break
+		}
+
+		for !stack.Empty() {
+			v := stack.Pop()
+			start.Val = v.(int)
+			start = start.Next
+		}
+
+	}
+
+	return head
+}
+
+// 26. Remove Duplicates from Sorted Array
+func RemoveDuplicates(nums []int) int {
+	if len(nums) == 0 {
+		return 0
+	}
+
+	j := 1
+	lastNum := nums[0]
+	for i := 1; i < len(nums); i++ {
+		if lastNum != nums[i] {
+			nums[j] = nums[i]
+			j++
+			lastNum = nums[i]
+		}
+	}
+
+	nums = nums[:j]
+	return len(nums)
+}
