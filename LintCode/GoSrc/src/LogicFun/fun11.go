@@ -1017,3 +1017,58 @@ func RemoveDuplicates(nums []int) int {
 	nums = nums[:j]
 	return len(nums)
 }
+
+// 27. Remove Element
+func RemoveElement(nums []int, val int) int {
+	i := 0
+	for _, v := range nums {
+		if v != val {
+			nums[i] = v
+			i++
+		}
+	}
+	nums = nums[:i]
+
+	return i
+}
+
+// 28. Implement strStr() ^v^!
+func StrStr(haystack string, needle string) int {
+	return strings.Index(haystack, needle)
+}
+
+// 29. Divide Two Integers
+func Divide(dividend int, divisor int) int {
+	if dividend == 0 {
+		return 0
+	}
+
+	positive := true
+	if dividend < 0 && divisor < 0 {
+		dividend = -dividend
+		divisor = -divisor
+	} else if dividend < 0 {
+		positive = false
+		dividend = -dividend
+	} else if divisor < 0 {
+		positive = false
+		divisor = -divisor
+	}
+
+	seek := 0
+	for divisor != 0 {
+		divisor = divisor >> 1
+		dividend = dividend >> 1
+		seek++
+	}
+	for seek != 0 {
+		dividend = dividend << 1
+		seek--
+	}
+
+	if !positive {
+		dividend = -dividend
+	}
+
+	return dividend
+}

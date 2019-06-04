@@ -5,5 +5,5 @@ import (
 )
 
 func main() {
-	LogicFun.RemoveDuplicates([]int{0, 0, 1, 1, 1, 2, 2, 3, 3, 4})
+	LogicFun.Divide(7, 3)
 }
