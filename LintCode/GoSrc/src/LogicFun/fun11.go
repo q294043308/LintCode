@@ -1039,36 +1039,40 @@ func StrStr(haystack string, needle string) int {
 
 // 29. Divide Two Integers
 func Divide(dividend int, divisor int) int {
-	if dividend == 0 {
-		return 0
+	if dividend == math.MinInt32 && divisor == -1 {
+		return math.MaxInt32
 	}
 
 	positive := true
-	if dividend < 0 && divisor < 0 {
+	if dividend < 0 {
 		dividend = -dividend
-		divisor = -divisor
-	} else if dividend < 0 {
-		positive = false
-		dividend = -dividend
-	} else if divisor < 0 {
-		positive = false
-		divisor = -divisor
+		if divisor < 0 {
+			divisor = -divisor
+		} else {
+			positive = false
+		}
+	} else {
+		if divisor < 0 {
+			divisor = -divisor
+			positive = false
+		}
 	}
 
-	seek := 0
-	for divisor != 0 {
-		divisor = divisor >> 1
-		dividend = dividend >> 1
-		seek++
-	}
-	for seek != 0 {
-		dividend = dividend << 1
-		seek--
+	res := 0
+	for dividend >= divisor {
+		mul := 1
+		div := divisor
+		for dividend >= div {
+			res += mul
+			mul += mul
+			dividend -= div
+			div += div
+		}
+
 	}
 
 	if !positive {
-		dividend = -dividend
+		res = -res
 	}
-
-	return dividend
+	return res
 }
