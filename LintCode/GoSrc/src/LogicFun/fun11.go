@@ -1076,3 +1076,65 @@ func Divide(dividend int, divisor int) int {
 	}
 	return res
 }
+
+// 30. Substring with Concatenation of All Words
+func FindSubstring(s string, words []string) []int {
+	res := make([]int, 0)
+	wordNum := len(words)
+	if len(s) == 0 || wordNum == 0 {
+		return res
+	}
+
+	wordLenth := len(words[0])
+	sumLenth := wordNum * wordLenth
+	if len(s) < sumLenth {
+		return res
+	}
+
+	wordMap := make(map[string]int)
+	for _, word := range words {
+		wordMap[word]++
+	}
+
+	for i := 0; i < wordLenth; i++ {
+		needInit := true
+		z := 0
+		curMap := make(map[string]int, len(wordMap))
+		for j := i; j <= len(s)-sumLenth; {
+			if needInit {
+				z = 0
+				for key, val := range wordMap {
+					curMap[key] = val
+				}
+			}
+
+			firstStr := s[j : j+wordLenth]
+			for ; z < sumLenth; z += wordLenth {
+				curStr := s[j+z : j+z+wordLenth]
+				val, ok := curMap[curStr]
+				if ok && val > 0 {
+					curMap[curStr]--
+				} else {
+					if !ok {
+						j += z + wordLenth
+						needInit = true
+					} else {
+						curMap[firstStr]++
+						j += wordLenth
+						z -= wordLenth
+						needInit = false
+					}
+					break
+				}
+			}
+			if z == sumLenth {
+				res = append(res, j)
+				curMap[s[j:j+wordLenth]]++
+				j += wordLenth
+				z -= wordLenth
+				needInit = false
+			}
+		}
+	}
+	return res
+}
