@@ -1138,3 +1138,43 @@ func FindSubstring(s string, words []string) []int {
 	}
 	return res
 }
+
+// 31. Next Permutation
+func NextPermutation(nums []int) {
+	swapIndex := 0
+	swapIndexMove := len(nums) - 2
+	tmp := 0
+	for ; swapIndexMove >= 0; swapIndexMove-- {
+		if nums[swapIndexMove] < nums[swapIndexMove+1] {
+			break
+		}
+	}
+
+	if swapIndexMove >= 0 {
+		swapIndex = swapIndexMove + 1
+		dis := nums[swapIndexMove+1] - nums[swapIndexMove]
+		for i := swapIndexMove + 2; i < len(nums); i++ {
+			if nums[i]-nums[swapIndexMove] <= 0 {
+				break
+			}
+			if nums[i]-nums[swapIndexMove] <= dis {
+				dis = nums[i] - nums[swapIndexMove]
+				swapIndex = i
+			}
+		}
+
+		tmp = nums[swapIndex]
+		nums[swapIndex] = nums[swapIndexMove]
+		nums[swapIndexMove] = tmp
+		swapIndexMove++
+	}
+
+	if swapIndexMove < 0 {
+		swapIndexMove = 0
+	}
+	for i := 0; i < (len(nums)-swapIndexMove)/2; i++ {
+		tmp = nums[swapIndexMove+i]
+		nums[swapIndexMove+i] = nums[len(nums)-1-i]
+		nums[len(nums)-1-i] = tmp
+	}
+}

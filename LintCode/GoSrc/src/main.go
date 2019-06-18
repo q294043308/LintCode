@@ -5,5 +5,5 @@ import (
 )
 
 func main() {
-	println(LogicFun.FindSubstring("wordgoodgoodgoodbestword", []string{"word", "good", "best", "good"}))
+	LogicFun.NextPermutation([]int{1})
 }
