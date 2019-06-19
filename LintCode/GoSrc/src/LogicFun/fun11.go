@@ -1178,3 +1178,48 @@ func NextPermutation(nums []int) {
 		nums[len(nums)-1-i] = tmp
 	}
 }
+
+// 32. Longest Valid Parentheses
+// 个人还想出第二种方案 -》 使用栈保存 "(" 或 ")" 并且保存相应的下标，如果之前紧接着有对称消除，则下标记录之前消除的下标
+func LongestValidParentheses(s string) int {
+	res := 0
+	left := 0
+	right := 0
+
+	for _, c := range s {
+		if c == '(' {
+			left++
+		} else {
+			right++
+			if right >= left {
+				if res < left {
+					res = left
+				}
+				if right > left {
+					right = 0
+					left = 0
+				}
+			}
+		}
+	}
+
+	left = 0
+	right = 0
+	for i := len(s) - 1; i >= 0; i-- {
+		if s[i] == ')' {
+			right++
+		} else {
+			left++
+			if left >= right {
+				if res < right {
+					res = right
+				}
+				if left > right {
+					right = 0
+					left = 0
+				}
+			}
+		}
+	}
+	return res * 2
+}

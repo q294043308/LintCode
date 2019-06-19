@@ -5,5 +5,5 @@ import (
 )
 
 func main() {
-	LogicFun.NextPermutation([]int{1})
+	LogicFun.LongestValidParentheses(")()())")
 }
