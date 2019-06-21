@@ -1329,5 +1329,29 @@ func SearchInsert(nums []int, target int) int {
 
 // 36. Valid Sudoku
 func IsValidSudoku(board [][]byte) bool {
+	row := make([]int16, 9)
+	column := make([]int16, 9)
+	gong := make([]int16, 9) // 宫
 
+	for i := 0; i < len(board); i++ {
+		for j := 0; j < len(board[i]); j++ {
+			if board[i][j] == '.' {
+				continue
+			}
+
+			var curNum int16 = 1 << (board[i][j] - '1')
+			if row[i]&curNum != 0 || column[j]&curNum != 0 || gong[i/3+j/3*3]&curNum != 0 {
+				return false
+			}
+			row[i] |= curNum
+			column[j] |= curNum
+			gong[i/3+j/3*3] |= curNum
+		}
+	}
+
+	return true
+}
+
+// 37. Sudoku Solver
+func SolveSudoku(board [][]byte) {
 }
