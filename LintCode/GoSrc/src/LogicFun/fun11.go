@@ -1352,6 +1352,68 @@ func IsValidSudoku(board [][]byte) bool {
 	return true
 }
 
+func SolveSudokuSub(board [][]byte, boards [3][9]int16, i, j int) bool {
+	checkVal := func(val, block int) bool {
+		var v int16 = 1 << uint(val-1)
+		return (boards[0][i]|boards[1][j]|boards[2][block])&v == 0
+	}
+
+	for i < len(board) {
+		for j < len(board[i]) {
+			if board[i][j] == '.' {
+				for val := 1; val <= 9; val++ {
+					block := i/3*3 + j/3
+					ok := checkVal(val, block)
+					if ok {
+						var v int16 = 1 << uint(val-1)
+						board[i][j] = byte(val) + '1' - 1
+						boards[0][i] = boards[0][i] | v
+						boards[1][j] = boards[1][j] | v
+						boards[2][block] = boards[2][block] | v
+						finish := SolveSudokuSub(board, boards, i, j+1)
+						if finish {
+							return true
+						} else {
+							board[i][j] = '.'
+							boards[0][i] = boards[0][i] - v
+							boards[1][j] = boards[1][j] - v
+							boards[2][block] = boards[2][block] - v
+						}
+					}
+				}
+				return false
+			}
+			j++
+		}
+		i++
+		j = 0
+	}
+	return true
+}
+
+/*
+{'5', '3', '.', '.', '7', '.', '.', '.', '.'},
+{'6', '.', '.', '1', '9', '5', '.', '.', '.'},
+{'.', '9', '8', '.', '.', '.', '.', '6', '.'},
+{'8', '.', '.', '.', '6', '.', '.', '.', '3'},
+{'4', '.', '.', '8', '.', '3', '.', '.', '1'},
+{'7', '.', '.', '.', '2', '.', '.', '.', '6'},
+{'.', '6', '.', '.', '.', '.', '2', '8', '.'},
+{'.', '.', '.', '4', '1', '9', '.', '.', '5'},
+{'.', '.', '.', '.', '8', '.', '.', '7', '9'},*/
 // 37. Sudoku Solver
 func SolveSudoku(board [][]byte) {
+	var boards [3][9]int16
+	for i, boardVal := range board {
+		for j, val := range boardVal {
+			if val <= '9' && val >= '1' {
+				var v int16 = 1 << (val - '0' - 1)
+				block := i/3*3 + j/3
+				boards[0][i] = boards[0][i] | v
+				boards[1][j] = boards[1][j] | v
+				boards[2][block] = boards[2][block] | v
+			}
+		}
+	}
+	SolveSudokuSub(board, boards, 0, 0)
 }
