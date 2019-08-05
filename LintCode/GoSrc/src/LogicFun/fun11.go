@@ -1391,16 +1391,6 @@ func SolveSudokuSub(board [][]byte, boards [3][9]int16, i, j int) bool {
 	return true
 }
 
-/*
-{'5', '3', '.', '.', '7', '.', '.', '.', '.'},
-{'6', '.', '.', '1', '9', '5', '.', '.', '.'},
-{'.', '9', '8', '.', '.', '.', '.', '6', '.'},
-{'8', '.', '.', '.', '6', '.', '.', '.', '3'},
-{'4', '.', '.', '8', '.', '3', '.', '.', '1'},
-{'7', '.', '.', '.', '2', '.', '.', '.', '6'},
-{'.', '6', '.', '.', '.', '.', '2', '8', '.'},
-{'.', '.', '.', '4', '1', '9', '.', '.', '5'},
-{'.', '.', '.', '.', '8', '.', '.', '7', '9'},*/
 // 37. Sudoku Solver
 func SolveSudoku(board [][]byte) {
 	var boards [3][9]int16
@@ -1416,4 +1406,129 @@ func SolveSudoku(board [][]byte) {
 		}
 	}
 	SolveSudokuSub(board, boards, 0, 0)
+}
+
+var countAndSayStrs []string
+
+// 38. Count and Say
+func CountAndSay(n int) string {
+	if n <= 0 {
+		return ""
+	}
+
+	if n < len(countAndSayStrs) {
+		return countAndSayStrs[n-1]
+	}
+
+	if len(countAndSayStrs) == 0 {
+		countAndSayStrs = append(countAndSayStrs, "1")
+	}
+
+	i := len(countAndSayStrs)
+	res := countAndSayStrs[i-1]
+	for i < n {
+		new := make([]byte, 0)
+		last := res[0]
+		lastNum := 1
+		for j := 1; j < len(res); j++ {
+			if last != res[j] {
+				new = append(new, '0'+byte(lastNum))
+				new = append(new, last)
+				last = res[j]
+				lastNum = 1
+			} else {
+				lastNum++
+			}
+		}
+		new = append(new, '0'+byte(lastNum))
+		new = append(new, last)
+		res = string(new)
+		countAndSayStrs = append(countAndSayStrs, res)
+		i++
+	}
+	return res
+}
+
+/*
+Given a set of candidate numbers (candidates) (without duplicates) and a target number (target), find all unique combinations in candidates where the candidate numbers sums to target.
+
+The same repeated number may be chosen from candidates unlimited number of times.
+
+Note:
+
+All numbers (including target) will be positive integers.
+The solution set must not contain duplicate combinations.
+Example 1:
+
+Input: candidates = [2,3,6,7], target = 7,
+A solution set is:
+[
+  [7],
+  [2,2,3]
+]
+Example 2:
+
+Input: candidates = [2,3,5], target = 8,
+A solution set is:
+[
+  [2,2,2,2],
+  [2,3,3],
+  [3,5]
+]
+*/
+// 39. Combination Sum
+func CombinationSum(candidates []int, target int) [][]int {
+	sort.Ints(candidates)
+	res := make([][][]int, target)
+	for i := 1; i <= target; i++ {
+		for _, date := range candidates {
+			if i < date {
+				break
+			}
+			if i == date {
+				res[i-1] = append(res[i-1], [][]int{{i}}...)
+				break
+			}
+
+			curNum := i - date
+			for _, arr := range res[curNum-1] {
+				j := 0
+				curArr := make([]int, len(arr)+1)
+				find := true
+				for _, num := range arr {
+					if date <= num && find {
+						curArr[j] = date
+						j++
+						find = false
+					}
+					curArr[j] = num
+					j++
+				}
+				if find {
+					curArr[len(curArr)-1] = date
+				}
+
+				for _, existArr := range res[i-1] {
+					if len(existArr) != len(curArr) {
+						continue
+					}
+
+					index := 0
+					for index < len(existArr) {
+						if existArr[index] != curArr[index] {
+							break
+						}
+						index++
+					}
+					if index == len(existArr) {
+						goto END
+					}
+				}
+
+				res[i-1] = append(res[i-1], curArr)
+			END:
+			}
+		}
+	}
+	return res[target-1]
 }
