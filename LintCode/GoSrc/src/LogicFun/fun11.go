@@ -1449,33 +1449,6 @@ func CountAndSay(n int) string {
 	return res
 }
 
-/*
-Given a set of candidate numbers (candidates) (without duplicates) and a target number (target), find all unique combinations in candidates where the candidate numbers sums to target.
-
-The same repeated number may be chosen from candidates unlimited number of times.
-
-Note:
-
-All numbers (including target) will be positive integers.
-The solution set must not contain duplicate combinations.
-Example 1:
-
-Input: candidates = [2,3,6,7], target = 7,
-A solution set is:
-[
-  [7],
-  [2,2,3]
-]
-Example 2:
-
-Input: candidates = [2,3,5], target = 8,
-A solution set is:
-[
-  [2,2,2,2],
-  [2,3,3],
-  [3,5]
-]
-*/
 // 39. Combination Sum
 func CombinationSum(candidates []int, target int) [][]int {
 	sort.Ints(candidates)
@@ -1531,4 +1504,80 @@ func CombinationSum(candidates []int, target int) [][]int {
 		}
 	}
 	return res[target-1]
+}
+
+func combinationSumSub2(res *[][]int, curArr, candidates []int, curSum, i, target int) int {
+	if curSum == target {
+		tmp := make([]int, len(curArr))
+		copy(tmp, curArr)
+		*res = append(*res, tmp)
+		return 1
+	}
+
+	if curSum > target {
+		return 1
+	}
+
+	if i > len(candidates)-1 {
+		return -1
+	}
+
+	if target-curSum < candidates[i] {
+		return 0
+	}
+
+	result := -2
+	for j := i; j < len(candidates); j++ {
+		if result == 0 {
+			if candidates[j] == candidates[j-1] {
+				continue
+			}
+			result = -2
+		}
+		curArr = append(curArr, candidates[j])
+		result = combinationSumSub2(res, curArr, candidates, curSum+candidates[j], j+1, target)
+		curArr = curArr[:len(curArr)-1]
+		if result > 0 {
+			result--
+			return result
+		}
+		if result == -1 {
+			result++
+			return result
+		}
+	}
+
+	return 0
+}
+
+// 40. Combination Sum II
+func CombinationSum2(candidates []int, target int) [][]int {
+	if len(candidates) == 0 || target == 0 {
+		return nil
+	}
+	sort.Ints(candidates)
+	var res [][]int
+	var curArr []int
+	var curSum int
+
+	combinationSumSub2(&res, curArr, candidates, curSum, 0, target)
+	return res
+}
+
+// 41. First Missing Positive
+func FirstMissingPositive(nums []int) int {
+	existNum := make([]bool, len(nums))
+
+	res := 1
+	for _, num := range nums {
+		if num > 0 && num <= len(existNum) {
+			existNum[num-1] = true
+			if res == num {
+				for res <= len(existNum) && existNum[res-1] {
+					res++
+				}
+			}
+		}
+	}
+	return res
 }

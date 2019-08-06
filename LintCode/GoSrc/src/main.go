@@ -3,5 +3,5 @@ package main
 import "LogicFun"
 
 func main() {
-	LogicFun.CombinationSum([]int{1, 2}, 4)
+	LogicFun.FirstMissingPositive([]int{3, 4, -1, 1})
 }
