@@ -3,5 +3,6 @@ package main
 import "LogicFun"
 
 func main() {
-	LogicFun.FirstMissingPositive([]int{3, 4, -1, 1})
+	s := LogicFun.Multiply("79362", "217")
+	println(s)
 }

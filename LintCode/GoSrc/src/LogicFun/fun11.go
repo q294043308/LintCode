@@ -1581,3 +1581,141 @@ func FirstMissingPositive(nums []int) int {
 	}
 	return res
 }
+
+// 42. Trapping Rain Water
+func Trap(height []int) int {
+	leftMax := 0
+	rightMax := 0
+	left := 0
+	right := len(height) - 1
+	res := 0
+
+	for left < right {
+		if height[left] <= height[right] {
+			if leftMax < height[left] {
+				leftMax = height[left]
+			} else {
+				res += leftMax - height[left]
+			}
+			left++
+		} else {
+			if rightMax < height[right] {
+				rightMax = height[right]
+			} else {
+				res += rightMax - height[right]
+			}
+			right--
+		}
+	}
+	return res
+}
+
+// 43. Multiply strings (The best solution is FFT快速傅里叶变换, but it's hardly.so using normal funciton)
+func Multiply(num1 string, num2 string) string {
+	i := 0
+	res := []byte{'0'}
+	// remove the zero
+	for i < len(num1) {
+		if num1[i] != '0' {
+			break
+		}
+		i++
+	}
+	if i == len(num1) {
+		return "0"
+	}
+	num1 = num1[i:]
+	i = 0
+	for i < len(num2) {
+		if num2[i] != '0' {
+			break
+		}
+		i++
+	}
+	if i == len(num2) {
+		return "0"
+	}
+	num2 = num2[i:]
+
+	// addition function
+	addFunc := func(num1, num2 []byte) []byte {
+		if len(num2) == 0 {
+			return num1
+		}
+
+		i := len(num1) - 1
+		j := len(num2) - 1
+		var add byte
+		for i >= 0 && j >= 0 {
+			addNum := num1[i] - '0' + num2[j] - '0' + add
+			if addNum >= 10 {
+				addNum -= 10
+				add = 1
+			} else {
+				add = 0
+			}
+			addNum += '0'
+			num1[i] = addNum
+			i--
+			j--
+		}
+
+		if i < 0 && j >= 0 {
+			num1 = append(num2[:j+1], num1...)
+		}
+		if j < 0 && i >= 0 {
+			num1 = append(num1[:i+1], num2...)
+		}
+
+		if add != 0 {
+			for j >= 0 {
+				if num1[j] < '9' {
+					num1[j]++
+					add = 0
+					break
+				} else {
+					num1[j] = '0'
+				}
+				j--
+			}
+			if add != 0 {
+				num1 = append([]byte{'1'}, num1...)
+			}
+		}
+
+		return num1
+	}
+
+	i = len(num1) - 1
+	for i >= 0 {
+		if num1[i] == '0' {
+			i--
+			continue
+		}
+
+		var add byte
+		var mul []byte
+		for j := len(num1) - 1; j > i; j-- {
+			mul = append(mul, '0')
+		}
+
+		for z := len(num2) - 1; z >= 0; z-- {
+			mulNum := (num1[i]-'0')*(byte(num2[z])-'0') + add
+			if mulNum >= 10 {
+				add = mulNum / 10
+				mulNum = mulNum % 10
+			} else {
+				add = 0
+			}
+			mul = append([]byte{mulNum + '0'}, mul...)
+		}
+
+		if add != 0 {
+			mul = append([]byte{add + '0'}, mul...)
+		}
+		res = addFunc(res, mul)
+		i--
+	}
+
+	return string(res)
+}
