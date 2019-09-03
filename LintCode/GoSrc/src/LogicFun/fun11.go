@@ -1719,3 +1719,94 @@ func Multiply(num1 string, num2 string) string {
 
 	return string(res)
 }
+
+// 44. Wildcard Matching
+func IsMatch2(s string, p string) bool {
+	if len(s) == 0 && len(p) == 0 {
+		return true
+	}
+
+	if len(p) == 0 {
+		return false
+	}
+
+	for index, val := range p {
+		if val != '*' {
+			break
+		}
+		if index == len(p)-1 {
+			return true
+		}
+	}
+
+	if len(s) == 0 {
+		return false
+	}
+
+	matchMarix := make([][]bool, len(p))
+	jStart := 0
+	lastJStart := 0
+	for i := 0; i < len(p); i++ {
+		matchMarix[i] = make([]bool, len(s))
+	}
+	for i := 0; i < len(p); i++ {
+		curStart := -1
+		if p[i] == '*' {
+			isSure := false
+			for j := jStart; j < len(s); j++ {
+				if isSure || i == 0 || matchMarix[i-1][j] || matchMarix[i-1][j-1] {
+					matchMarix[i][j] = true
+					isSure = true
+					if curStart == -1 {
+						curStart = j
+					}
+				}
+			}
+		} else {
+			isOver := true
+			for j := jStart; j < len(s); j++ {
+				if j < lastJStart {
+					continue
+				}
+
+				if i == 0 {
+					if s[j] == p[i] || p[i] == '?' {
+						matchMarix[i][j] = true
+						isOver = false
+						if curStart == -1 {
+							curStart = j
+						}
+						break
+					} else {
+						return false
+					}
+				} else if p[i-1] == '*' {
+					if (j == 0 || matchMarix[i-1][j] || matchMarix[i-1][j-1]) && (s[j] == p[i] || p[i] == '?') {
+						matchMarix[i][j] = true
+						isOver = false
+						if curStart == -1 {
+							curStart = j
+						}
+					}
+					continue
+				} else {
+					if (j == 0 || matchMarix[i-1][j-1]) && (s[j] == p[i] || p[i] == '?') {
+						matchMarix[i][j] = true
+						isOver = false
+						if curStart == -1 {
+							curStart = j
+						}
+					}
+					continue
+				}
+			}
+			if isOver {
+				return false
+			}
+			lastJStart = curStart + 1
+		}
+		jStart = curStart
+	}
+
+	return matchMarix[len(p)-1][len(s)-1]
+}
