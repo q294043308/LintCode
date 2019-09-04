@@ -1810,3 +1810,52 @@ func IsMatch2(s string, p string) bool {
 
 	return matchMarix[len(p)-1][len(s)-1]
 }
+
+// 45. Jump Game II
+func Jump(nums []int) int {
+	if len(nums) == 0 {
+		return 0
+	}
+
+	jumpNums := make([]uint16, len(nums))
+	for i := len(nums) - 2; i >= 0; i-- {
+		if nums[i] >= len(nums)-i-1 {
+			jumpNums[i] = 1
+		} else {
+			jumpNums[i] = jumpNums[i+1]
+			for j := 2; j <= nums[i]; j++ {
+				if jumpNums[i] > jumpNums[i+j] {
+					jumpNums[i] = jumpNums[i+j]
+				}
+			}
+			jumpNums[i]++
+		}
+	}
+
+	return int(jumpNums[0])
+}
+
+func JumpOpt(nums []int) int {
+	res := 0
+	i := 0
+
+	for i < len(nums)-1 {
+		if nums[i] >= len(nums)-i-1 {
+			res++
+			break
+		}
+
+		max := nums[i+1]
+		maxIndex := i + 1
+		for j := 2; j <= nums[i]; j++ {
+			if max+maxIndex <= nums[i+j]+i+j {
+				max = nums[i+j]
+				maxIndex = i + j
+			}
+		}
+		i = maxIndex
+		res++
+	}
+
+	return res
+}

@@ -3,5 +3,5 @@ package main
 import "LogicFun"
 
 func main() {
-	println(LogicFun.IsMatch2("abcd", "a*c?d"))
+	LogicFun.JumpOpt([]int{4, 1, 1, 3, 1, 1, 1})
 }
