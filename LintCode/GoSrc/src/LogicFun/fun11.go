@@ -1920,7 +1920,7 @@ func permuteSub2(start int, nums, curNum []int, res *[][]int, boAr []bool) {
 	return
 }
 
-// 46. Permutations
+// 47. Permutations
 func Permute2(nums []int) [][]int {
 	res := make([][]int, 0)
 	boAr := make([]bool, len(nums))
@@ -1928,4 +1928,24 @@ func Permute2(nums []int) [][]int {
 	sort.Ints(nums)
 	permuteSub2(0, nums, curNum, &res, boAr)
 	return res
+}
+
+// 48. Rotate Image
+func Rotate(matrix [][]int) {
+	n := len(matrix)
+	for i := 0; i < n/2; i++ {
+		for j := i; j < n-1-i; j++ {
+			tmp := 0
+			for z := 0; z < 4; z++ {
+				s := matrix[i][j]
+				matrix[i][j] = tmp
+				tmp = s
+				tmpi := j
+				j = n - i - 1
+				i = tmpi
+			}
+			matrix[i][j] = tmp
+		}
+	}
+	println("1111")
 }
