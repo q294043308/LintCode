@@ -1859,3 +1859,73 @@ func JumpOpt(nums []int) int {
 
 	return res
 }
+
+func permuteSub(start int, nums, curNum []int, res *[][]int, boAr []bool) {
+	for i := start; i < len(nums); i++ {
+		if !boAr[i] {
+			curNum = append(curNum, i)
+			if len(curNum) == len(nums) {
+				v := make([]int, len(nums))
+				for k, index := range curNum {
+					v[k] = nums[index]
+				}
+				*res = append(*res, v)
+				curNum = curNum[:len(curNum)-1]
+				return
+			}
+			boAr[i] = true
+			permuteSub(0, nums, curNum, res, boAr)
+			boAr[curNum[len(curNum)-1]] = false
+			curNum = curNum[:len(curNum)-1]
+		} else {
+			continue
+		}
+	}
+	return
+}
+
+// 46. Permutations
+func Permute(nums []int) [][]int {
+	res := make([][]int, 0)
+	boAr := make([]bool, len(nums))
+	var curNum []int
+	permuteSub(0, nums, curNum, &res, boAr)
+	return res
+}
+
+func permuteSub2(start int, nums, curNum []int, res *[][]int, boAr []bool) {
+	for i := start; i < len(nums); i++ {
+		if !boAr[i] {
+			if i > 0 && nums[i] == nums[i-1] && !boAr[i-1] {
+				continue
+			}
+			curNum = append(curNum, i)
+			if len(curNum) == len(nums) {
+				v := make([]int, len(nums))
+				for k, index := range curNum {
+					v[k] = nums[index]
+				}
+				*res = append(*res, v)
+				curNum = curNum[:len(curNum)-1]
+				return
+			}
+			boAr[i] = true
+			permuteSub2(0, nums, curNum, res, boAr)
+			boAr[curNum[len(curNum)-1]] = false
+			curNum = curNum[:len(curNum)-1]
+		} else {
+			continue
+		}
+	}
+	return
+}
+
+// 46. Permutations
+func Permute2(nums []int) [][]int {
+	res := make([][]int, 0)
+	boAr := make([]bool, len(nums))
+	var curNum []int
+	sort.Ints(nums)
+	permuteSub2(0, nums, curNum, &res, boAr)
+	return res
+}
