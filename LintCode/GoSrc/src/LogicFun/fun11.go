@@ -2087,3 +2087,58 @@ func SolveNQueensSub(stepMap [][]bool, qMap [][]bool, res *struct{ a [][]string 
 		}
 	}
 }
+
+// 52. N-Queens2
+func SolveNQueens2(n int) int {
+	stepMap := make([][]bool, 3)
+	qMap := make([][]bool, n)
+	for i, _ := range stepMap {
+		stepMap[i] = make([]bool, 2*n)
+	}
+	for i, _ := range qMap {
+		qMap[i] = make([]bool, n)
+	}
+
+	var num int
+	SolveNQueens2Sub(stepMap, qMap, n, 0, &num)
+	return num
+}
+
+func SolveNQueens2Sub(stepMap [][]bool, qMap [][]bool, n, i int, num *int) {
+	// trans to res
+	if i == n {
+		*num = *num + 1
+		return
+	}
+
+	for j := 0; j < n; j++ {
+		// col + / + \
+		if !stepMap[0][j] && !stepMap[1][i+j] && !stepMap[2][j-i+n] {
+			qMap[i][j] = true
+			stepMap[0][j] = true
+			stepMap[1][i+j] = true
+			stepMap[2][j-i+n] = true
+			SolveNQueens2Sub(stepMap, qMap, n, i+1, num)
+			qMap[i][j] = false
+			stepMap[0][j] = false
+			stepMap[1][i+j] = false
+			stepMap[2][j-i+n] = false
+		}
+	}
+}
+
+// 53. Maximum Subarray
+func MaxSubArray(nums []int) int {
+	sum := 0
+	max := Common.MININTNUM
+	for _, num := range nums {
+		sum = sum + num
+		if sum > max {
+			max = sum
+		}
+		if sum < 0 {
+			sum = 0
+		}
+	}
+	return max
+}
