@@ -41,8 +41,6 @@ public:
 
 int main(int argc, char* argv[])
 {
-    Derive1* a = new(Derive1);
-    a->base1_fun1();
-    Base1* b = (Base1*)a;
-    b->base1_fun1();
+    int a = 4294967294;
+    printf("%d", a);
 };

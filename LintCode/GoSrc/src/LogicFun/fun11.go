@@ -1947,5 +1947,143 @@ func Rotate(matrix [][]int) {
 			matrix[i][j] = tmp
 		}
 	}
-	println("1111")
+}
+
+// 49. Group Anagrams
+func GroupAnagrams(strs []string) [][]string {
+	var res [][]string
+	type node struct {
+		char map[int]int
+		strs []string
+	}
+	groupMap := make(map[int][]*node)
+	for _, str := range strs {
+		var sum int
+		char := make(map[int]int, Common.SMALL_ENGLISH_CHAR_NUM)
+		for _, ch := range str {
+			sum = sum + int(ch)
+			char[int(ch-'a')]++
+		}
+		nodes, ok := groupMap[sum]
+		if ok {
+			br := false
+			for _, n := range nodes {
+				for k, v := range n.char {
+					if va, ok := char[k]; ok && va == v {
+						continue
+					}
+					br = true
+					break
+				}
+				if !br {
+					n.strs = append(n.strs, str)
+					br = true
+					break
+				} else {
+					br = false
+				}
+			}
+			if !br {
+				groupMap[sum] = append(nodes, &node{
+					char: char,
+					strs: []string{str},
+				})
+			}
+		} else {
+			groupMap[sum] = []*node{
+				&node{
+					char: char,
+					strs: []string{str},
+				},
+			}
+		}
+	}
+
+	for _, nodes := range groupMap {
+		for _, node := range nodes {
+			res = append(res, node.strs)
+		}
+	}
+
+	return res
+}
+
+func GroupAnagramsOpt(strs []string) [][]string {
+	var res [][]string
+	strMap := make(map[int][]string)
+	prime := []int{2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97, 101, 103}
+
+	for _, str := range strs {
+		sum := 1
+		for _, char := range str {
+			sum = prime[char-'a'] * sum
+		}
+		if _, ok := strMap[sum]; !ok {
+			strMap[sum] = []string{str}
+		} else {
+			strMap[sum] = append(strMap[sum], str)
+		}
+	}
+
+	for _, v := range strMap {
+		res = append(res, v)
+	}
+
+	return res
+}
+
+// 50. Pow(x, n) i shouldn't want do it
+func MyPow(x float64, n int) float64 {
+	return math.Pow(x, float64(n))
+}
+
+// 51. N-Queens
+func SolveNQueens(n int) [][]string {
+	stepMap := make([][]bool, 3)
+	qMap := make([][]bool, n)
+	for i, _ := range stepMap {
+		stepMap[i] = make([]bool, 2*n)
+	}
+	for i, _ := range qMap {
+		qMap[i] = make([]bool, n)
+	}
+
+	t := &struct{ a [][]string }{a: make([][]string, 0)}
+	SolveNQueensSub(stepMap, qMap, t, n, 0)
+	return t.a
+}
+
+func SolveNQueensSub(stepMap [][]bool, qMap [][]bool, res *struct{ a [][]string }, n, i int) {
+	// trans to res
+	if i == n {
+		var vs []string
+		for _, row := range qMap {
+			v := make([]byte, n)
+			for i, r := range row {
+				if r {
+					v[i] = 'Q'
+				} else {
+					v[i] = '.'
+				}
+			}
+			vs = append(vs, string(v))
+		}
+		res.a = append(res.a, vs)
+		return
+	}
+
+	for j := 0; j < n; j++ {
+		// col + / + \
+		if !stepMap[0][j] && !stepMap[1][i+j] && !stepMap[2][j-i+n] {
+			qMap[i][j] = true
+			stepMap[0][j] = true
+			stepMap[1][i+j] = true
+			stepMap[2][j-i+n] = true
+			SolveNQueensSub(stepMap, qMap, res, n, i+1)
+			qMap[i][j] = false
+			stepMap[0][j] = false
+			stepMap[1][i+j] = false
+			stepMap[2][j-i+n] = false
+		}
+	}
 }
