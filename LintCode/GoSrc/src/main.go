@@ -7,8 +7,5 @@ type aaa struct {
 }
 
 func main() {
-	// aaa := make([]int, 0, 10)
-	// aaa = append(aaa, 10)
-	// println(aaa)
-	LogicFun.SpiralOrder([][]int{{1}, {2}, {3}})
+	LogicFun.Insert([][]int{{1, 5}}, []int{2, 3})
 }
