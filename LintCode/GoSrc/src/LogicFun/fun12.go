@@ -1,6 +1,10 @@
 // keep studying -- 2019.10.30
 package LogicFun
 
+import (
+	"Common"
+)
+
 // 54. Spiral Matrix
 func SpiralOrder(matrix [][]int) []int {
 	row := len(matrix)
@@ -214,4 +218,80 @@ func GenerateMatrix(n int) [][]int {
 
 	}
 	return res
+}
+
+// 60. Permutation Sequence
+func GetPermutation(n int, k int) string {
+	arv := make([]int, n)
+	dev := 1
+	for i := 0; i < n; i++ {
+		arv[i] = i + 1
+		dev = dev * (i + 1)
+	}
+
+	var res []byte
+	for i := 0; i < n; i++ {
+		dev = dev / (n - i)
+		rem := (k-1)%dev + 1
+		mod := (k - 1) / dev
+		v := arv[mod]
+		res = append(res, byte(v)+'0')
+		k = rem
+		arv = append(arv[:mod], arv[mod+1:]...)
+	}
+	return string(res)
+}
+
+// 61. Rotate List
+func RotateRight(head *Common.ListNode, k int) *Common.ListNode {
+	if head == nil || head.Next == nil {
+		return head
+	}
+
+	n := 0
+	for node := head; true; node = node.Next {
+		n++
+		if node.Next == nil {
+			node.Next = head
+			break
+		}
+	}
+
+	k = n - (k % n)
+	tmp := head
+	for i := 1; i < k; i++ {
+		tmp = tmp.Next
+	}
+	res := tmp.Next
+	tmp.Next = nil
+	return res
+}
+
+// 62. Unique Paths
+func UniquePaths(m int, n int) int {
+	if m == 1 || n == 1 {
+		return 1
+	}
+
+	dynamicPath := make([][]int, m-1)
+	for i := 0; i < m; i++ {
+		dynamicPath[i] = make([]int, n-1)
+	}
+
+	for i := 0; i < m-1; i++ {
+		for j := 0; j < n-1; j++ {
+			if i == 0 && j == 0 {
+				dynamicPath[i][j] = 2
+			} else if i == 0 {
+				dynamicPath[i][j] = 1 + dynamicPath[i][j-1]
+			} else if j == 0 {
+				dynamicPath[i][j] = 1 + dynamicPath[i-1][j]
+			} else {
+				dynamicPath[i][j] = dynamicPath[i-1][j] + dynamicPath[i][j-1]
+			}
+		}
+	}
+
+	return dynamicPath[m-2][n-2]
+
 }

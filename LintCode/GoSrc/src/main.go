@@ -1,6 +1,9 @@
 package main
 
-import "LogicFun"
+import (
+	"Common"
+	"LogicFun"
+)
 
 type aaa struct {
 	num1 int
@@ -20,5 +23,8 @@ func (self *cc) Test() {
 }
 
 func main() {
-	println(LogicFun.GenerateMatrix(3))
+	head := &Common.ListNode{Val: 1}
+	head.Next = &Common.ListNode{Val: 2}
+	head.Next.Next = &Common.ListNode{Val: 3}
+	println(LogicFun.RotateRight(head, 1))
 }
