@@ -149,3 +149,69 @@ func Insert(intervals [][]int, newInterval []int) [][]int {
 	res = append(res, newInterval)
 	return res
 }
+
+// 58. Length of Last Word
+func LengthOfLastWord(s string) int {
+	res := 0
+	start := false
+	for i := len(s) - 1; i >= 0; i-- {
+		if s[i] == ' ' {
+			if start {
+				return res
+			}
+		} else {
+			start = true
+			res++
+		}
+	}
+	return res
+}
+
+// 59. Spiral Matrix II
+func GenerateMatrix(n int) [][]int {
+	res := make([][]int, n)
+	for i := 0; i < len(res); i++ {
+		res[i] = make([]int, n)
+	}
+
+	num := 1
+	for start := 0; start < (n+1)/2; start++ {
+		i := start
+		j := start
+		cj := false
+		if i == n-start-1 && j == n-start-1 {
+			res[i][j] = num
+			continue
+		}
+
+		if j == n-start-1 {
+			cj = true
+		}
+		for ; j < n-start-1; j++ {
+			res[i][j] = num
+			num++
+		}
+		if i == n-start-1 {
+			res[i][j] = num
+			continue
+		}
+		for ; i < n-start-1; i++ {
+			res[i][j] = num
+			num++
+		}
+		for ; j > start; j-- {
+			res[i][j] = num
+			num++
+		}
+		if cj {
+			res[i][j] = num
+			continue
+		}
+		for ; i > start; i-- {
+			res[i][j] = num
+			num++
+		}
+
+	}
+	return res
+}
