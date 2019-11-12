@@ -1,7 +1,6 @@
 package main
 
 import (
-	"Common"
 	"LogicFun"
 )
 
@@ -23,8 +22,6 @@ func (self *cc) Test() {
 }
 
 func main() {
-	head := &Common.ListNode{Val: 1}
-	head.Next = &Common.ListNode{Val: 2}
-	head.Next.Next = &Common.ListNode{Val: 3}
-	println(LogicFun.RotateRight(head, 1))
+	a := LogicFun.AddBinary("1", "111")
+	println(a)
 }

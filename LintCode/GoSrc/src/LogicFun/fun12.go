@@ -3,6 +3,7 @@ package LogicFun
 
 import (
 	"Common"
+	"regexp"
 )
 
 // 54. Spiral Matrix
@@ -274,7 +275,7 @@ func UniquePaths(m int, n int) int {
 	}
 
 	dynamicPath := make([][]int, m-1)
-	for i := 0; i < m; i++ {
+	for i := 0; i < m-1; i++ {
 		dynamicPath[i] = make([]int, n-1)
 	}
 
@@ -293,5 +294,226 @@ func UniquePaths(m int, n int) int {
 	}
 
 	return dynamicPath[m-2][n-2]
+}
 
+// 62. Unique Paths
+func uniquePathsWithObstacles(obstacleGrid [][]int) int {
+	if len(obstacleGrid) == 0 || len(obstacleGrid[0]) == 0 {
+		return 0
+	}
+
+	m := len(obstacleGrid)
+	n := len(obstacleGrid[0])
+	dynamicPath := make([][]int, m)
+	for i := 0; i < m; i++ {
+		dynamicPath[i] = make([]int, n)
+	}
+
+	for i := 0; i < m; i++ {
+		for j := 0; j < n; j++ {
+			if obstacleGrid[i][j] == 1 {
+				continue
+			}
+
+			if i == 0 && j == 0 {
+				dynamicPath[i][j] = 1
+			} else if i == 0 {
+				dynamicPath[i][j] = dynamicPath[i][j-1]
+			} else if j == 0 {
+				dynamicPath[i][j] = dynamicPath[i-1][j]
+			} else {
+				dynamicPath[i][j] = dynamicPath[i-1][j] + dynamicPath[i][j-1]
+			}
+		}
+	}
+
+	return dynamicPath[m-1][n-1]
+}
+
+// 64. Minimum Path Sum
+func MinPathSum(grid [][]int) int {
+	if len(grid) == 0 || len(grid[0]) == 0 {
+		return 0
+	}
+
+	m := len(grid)
+	n := len(grid[0])
+	dynamicPath := make([][]int, m)
+	for i := 0; i < m; i++ {
+		dynamicPath[i] = make([]int, n)
+	}
+
+	for i := 0; i < m; i++ {
+		for j := 0; j < n; j++ {
+			if i == 0 && j == 0 {
+				dynamicPath[i][j] = grid[i][j]
+			} else if i == 0 {
+				dynamicPath[i][j] = dynamicPath[i][j-1] + grid[i][j]
+			} else if j == 0 {
+				dynamicPath[i][j] = dynamicPath[i-1][j] + grid[i][j]
+			} else {
+				if dynamicPath[i-1][j] < dynamicPath[i][j-1] {
+					dynamicPath[i][j] = dynamicPath[i-1][j] + grid[i][j]
+				} else {
+					dynamicPath[i][j] = dynamicPath[i][j-1] + grid[i][j]
+				}
+			}
+		}
+	}
+
+	return dynamicPath[m-1][n-1]
+}
+
+// 65. Valid Number (i'm failed)
+func IsNumber(s string) bool {
+	if len(s) == 0 {
+		return false
+	}
+	isSign := false
+	haveE := false
+	havePoint := false
+
+	data := []byte(s)
+	for len(data) > 0 {
+		if data[0] == ' ' {
+			data = data[1:]
+		} else {
+			break
+		}
+	}
+	for len(data)-1 >= 0 {
+		if data[len(data)-1] == ' ' {
+			data = data[:len(data)-1]
+		} else {
+			break
+		}
+	}
+
+	if len(data) == 0 {
+		return false
+	}
+
+	for i := 0; i < len(data); i++ {
+		if data[i] <= '9' && data[i] >= '0' {
+			continue
+		} else if data[i] == 'e' {
+			if haveE {
+				return false
+			} else if i == 0 || i == len(data)-1 {
+				return false
+			}
+			isSign = false
+			haveE = true
+		} else if data[i] == '+' || data[i] == '-' {
+			if isSign {
+				return false
+			}
+			if i != 0 && data[i-1] != 'e' {
+				return false
+			}
+			if i == len(data)-1 {
+				return false
+			}
+			isSign = true
+		} else if data[i] == '.' {
+			if havePoint || haveE {
+				return false
+			}
+			if i == len(data)-1 && i == 0 {
+				return false
+			}
+			if i != len(data)-1 && (data[i+1] > '9' || data[i+1] < '0') {
+				return false
+			}
+			if i != 0 && (data[i-1] > '9' || data[i-1] < '0') && data[i-1] != '+' && data[i-1] != '-' {
+				return false
+			}
+			havePoint = true
+		} else {
+			return false
+		}
+	}
+	return true
+}
+
+// 65. Valid Number
+func IsNumberV2(s string) bool {
+	matched, _ := regexp.Match(`^ *[+-]?(\d+|\d+\.\d+|\d+\.|\.\d+)(e[+-]?\d+)? *$`, []byte(s))
+	return matched
+}
+
+// 66. Plus One
+func PlusOne(digits []int) []int {
+	for i := len(digits) - 1; i >= 0; i-- {
+		if digits[i] < 9 {
+			digits[i]++
+			return digits
+		} else {
+			digits[i] = 0
+		}
+	}
+	return append([]int{1}, digits...)
+}
+
+// 67. Add Binary
+func AddBinary(a string, b string) string {
+	isAdd := false
+	i := len(a) - 1
+	j := len(b) - 1
+	var res []byte
+
+	for i >= 0 && j >= 0 {
+		curV := a[i] - '0' + b[j] - '0'
+		if isAdd {
+			curV = curV + 1
+			isAdd = false
+		}
+		if curV >= '2'-'0' {
+			curV = curV - 2
+			isAdd = true
+		}
+		res = append([]byte{curV + '0'}, res...)
+		i--
+		j--
+	}
+
+	for i >= 0 {
+		if isAdd {
+			curV := a[i] + 1
+			if curV >= '2' {
+				curV = curV - 2
+			} else {
+				isAdd = false
+			}
+			res = append([]byte{curV}, res...)
+		} else {
+			res = append([]byte(a)[:i+1], res...)
+			break
+		}
+		i--
+	}
+
+	for j >= 0 {
+		if isAdd {
+			curV := b[j] + 1
+			if curV >= '2' {
+				curV = curV - 2
+			} else {
+				isAdd = false
+			}
+			res = append([]byte{curV}, res...)
+		} else {
+			res = append([]byte(b)[:j+1], res...)
+			break
+		}
+		j--
+	}
+
+	if isAdd {
+		res = append([]byte{'1'}, res...)
+	}
+	if len(res) == 0 {
+		return "0"
+	}
+	return string(res)
 }
