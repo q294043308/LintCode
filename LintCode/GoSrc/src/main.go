@@ -22,6 +22,5 @@ func (self *cc) Test() {
 }
 
 func main() {
-	a := LogicFun.AddBinary("1", "111")
-	println(a)
+	println(LogicFun.ClimbStairs(4))
 }

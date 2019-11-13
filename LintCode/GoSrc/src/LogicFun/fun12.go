@@ -3,6 +3,7 @@ package LogicFun
 
 import (
 	"Common"
+	"math"
 	"regexp"
 )
 
@@ -516,4 +517,96 @@ func AddBinary(a string, b string) string {
 		return "0"
 	}
 	return string(res)
+}
+
+// 68. Text Justification
+func FullJustify(words []string, maxWidth int) []string {
+	var res []string
+	curV := []string{words[0]}
+	length := len(words[0])
+
+	for i := 1; i <= len(words); i++ {
+		if i == len(words) || length+len(words[i])+1 > maxWidth {
+			if length == 0 {
+				break
+			}
+
+			curStr := ""
+			if i == len(words) {
+				for _, str := range curV {
+					curStr = curStr + str + " "
+				}
+				curStr = curStr[:len(curStr)-1]
+			} else {
+				moreWidth := maxWidth - length
+				allSpace := 0
+				leftSpace := 0
+				if len(curV) != 1 {
+					allSpace = moreWidth / (len(curV) - 1)
+					leftSpace = moreWidth % (len(curV) - 1)
+				}
+
+				for index, str := range curV {
+					if index != len(curV)-1 {
+						num := 1 + allSpace
+						if leftSpace > 0 {
+							leftSpace--
+							num++
+						}
+						spaces := make([]byte, num)
+						for i, _ := range spaces {
+							spaces[i] = ' '
+						}
+						curStr = curStr + str + string(spaces)
+					} else {
+						curStr = curStr + str
+					}
+				}
+			}
+
+			if len(curStr) < maxWidth {
+				spaces := make([]byte, maxWidth-len(curStr))
+				for i, _ := range spaces {
+					spaces[i] = ' '
+				}
+				curStr = curStr + string(spaces)
+			}
+			res = append(res, curStr)
+			if i != len(words) {
+				curV = []string{words[i]}
+				length = len(words[i])
+			}
+
+		} else {
+			length = len(words[i]) + 1 + length
+			curV = append(curV, words[i])
+		}
+	}
+
+	return res
+}
+
+// 69. Sqrt(x)
+func MySqrt(x int) int {
+	// Tailand Method - 泰勒展开式，忘了，得重新学习高数了
+	return int(math.Sqrt(float64(x)))
+}
+
+// 70. Climbing Stairs
+func ClimbStairs(n int) int {
+	if n == 1 || n == 2 {
+		return 1
+	}
+	if n == 2 {
+		return 2
+	}
+
+	start := 1
+	end := 2
+	for i := 3; i <= n; i++ {
+		tmp := start + end
+		start = end
+		end = tmp
+	}
+	return end
 }
