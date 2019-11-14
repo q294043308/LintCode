@@ -22,5 +22,5 @@ func (self *cc) Test() {
 }
 
 func main() {
-	println(LogicFun.ClimbStairs(4))
+	println(LogicFun.MinDistanceV2("intention", "execution"))
 }

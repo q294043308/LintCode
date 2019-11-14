@@ -5,6 +5,7 @@ import (
 	"Common"
 	"math"
 	"regexp"
+	"strings"
 )
 
 // 54. Spiral Matrix
@@ -609,4 +610,93 @@ func ClimbStairs(n int) int {
 		end = tmp
 	}
 	return end
+}
+
+// 71. Simplify Path
+func SimplifyPath(path string) string {
+	res := make([]string, 0)
+	vs := strings.Split(path, "/")
+	for _, s := range vs {
+		if len(s) == 0 {
+			continue
+		}
+
+		if s[0] == '.' {
+			if len(s) == 1 {
+				continue
+			}
+			if len(s) == 2 {
+				if len(res) > 0 {
+					res = res[:len(res)-1]
+				}
+				continue
+			}
+		}
+		res = append(res, s)
+	}
+	return "/" + strings.Join(res, "/")
+}
+
+// 72. Edit Distance
+func MinDistanceV2(word1 string, word2 string) int {
+	if len(word1) == 0 {
+		return len(word2)
+	}
+	if len(word2) == 0 {
+		return len(word1)
+	}
+
+	n := len(word1)
+	m := len(word2)
+	disMap := make([][]int, n)
+	for i := 0; i < n; i++ {
+		disMap[i] = make([]int, m)
+	}
+
+	// first column
+	isUse := false
+	for i := 0; i < n; i++ {
+		disMap[i][0] = i + 1
+		if word1[i] == word2[0] {
+			isUse = true
+		}
+		if isUse {
+			disMap[i][0]--
+		}
+	}
+
+	// first row
+	isUse = false
+	for i := 0; i < m; i++ {
+		disMap[0][i] = i + 1
+		if word1[0] == word2[i] {
+			isUse = true
+		}
+		if isUse {
+			disMap[0][i]--
+		}
+	}
+
+	for i := 1; i < n; i++ {
+		for j := 1; j < m; j++ {
+			dis := Common.MAXINTNUM
+			if word1[i] == word2[j] {
+				if dis > disMap[i-1][j-1] {
+					dis = disMap[i-1][j-1]
+				}
+			} else {
+				if dis > disMap[i-1][j-1]+1 {
+					dis = disMap[i-1][j-1] + 1
+				}
+			}
+			if dis > disMap[i-1][j]+1 {
+				dis = disMap[i-1][j] + 1
+			}
+			if dis > disMap[i][j-1]+1 {
+				dis = disMap[i][j-1] + 1
+			}
+			disMap[i][j] = dis
+		}
+	}
+	return disMap[n-1][m-1]
 }
