@@ -700,3 +700,79 @@ func MinDistanceV2(word1 string, word2 string) int {
 	}
 	return disMap[n-1][m-1]
 }
+
+// 76. Minimum Window Substring
+func MinWindow(s string, t string) string {
+	if len(s) == 0 {
+		return ""
+	}
+
+	type node struct {
+		index int
+		char  byte
+	}
+
+	minstart := -1
+	minend := Common.MAXINTNUM
+	start := -1
+	end := 0
+	SourCharMap := make(map[byte][]int)
+	SourIndexMap := make(map[int]struct{})
+	charMap := make(map[byte]int)
+	existMap := make(map[byte]struct{})
+	for _, v := range t {
+		charMap[byte(v)]++
+		existMap[byte(v)] = struct{}{}
+	}
+
+	for end < len(s) {
+		curV := s[end]
+		if _, ok := existMap[curV]; ok {
+			if start == -1 {
+				start = end
+			}
+
+			num, ok := charMap[curV]
+			if ok {
+				if num == 1 {
+					delete(charMap, curV)
+				} else {
+					charMap[curV]--
+				}
+			} else {
+				if curV == s[start] {
+					for true {
+						start++
+						oldV := s[start]
+						if _, ok := existMap[oldV]; ok {
+							if _, ok := SourIndexMap[start]; ok {
+								SourCharMap[oldV] = SourCharMap[oldV][1:]
+							} else if len(SourCharMap[oldV]) > 0 {
+								delete(SourIndexMap, SourCharMap[oldV][len(SourCharMap[oldV])-1])
+								SourCharMap[oldV] = SourCharMap[oldV][:len(SourCharMap[oldV])-1]
+
+							} else {
+								break
+							}
+						}
+					}
+
+				} else {
+					SourCharMap[curV] = append(SourCharMap[curV], end)
+					SourIndexMap[end] = struct{}{}
+				}
+			}
+
+		}
+		end++
+		if len(charMap) == 0 && (minend-minstart) > (end-start) {
+			minstart = start
+			minend = end
+		}
+	}
+
+	if minend > len(s) {
+		return ""
+	}
+	return s[minstart:minend]
+}

@@ -22,5 +22,5 @@ func (self *cc) Test() {
 }
 
 func main() {
-	println(LogicFun.MinDistanceV2("intention", "execution"))
+	println(LogicFun.MinWindow("ADOBECODEBANC", "ABC"))
 }
