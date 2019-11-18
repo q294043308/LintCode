@@ -5,6 +5,7 @@ import (
 	"Common"
 	"math"
 	"regexp"
+	"sort"
 	"strings"
 )
 
@@ -699,6 +700,74 @@ func MinDistanceV2(word1 string, word2 string) int {
 		}
 	}
 	return disMap[n-1][m-1]
+}
+
+// 73. Set Matrix Zeroes
+func SetZeroes(matrix [][]int) {
+	if len(matrix) == 0 || len(matrix[0]) == 0 {
+		return
+	}
+
+	m := len(matrix)
+	n := len(matrix[0])
+	rows := make([]bool, m)
+	cols := make([]bool, n)
+
+	for i := 0; i < m; i++ {
+		for j := 0; j < n; j++ {
+			if matrix[i][j] == 0 {
+				rows[i] = true
+				cols[j] = true
+			}
+		}
+	}
+
+	for i, v := range rows {
+		if v {
+			for j := 0; j < n; j++ {
+				matrix[i][j] = 0
+			}
+		}
+	}
+	for j, v := range cols {
+		if v {
+			for i := 0; i < m; i++ {
+				matrix[i][j] = 0
+			}
+		}
+	}
+}
+
+// 74. Search a 2D Matrix
+func SearchMatrix(matrix [][]int, target int) bool {
+	if len(matrix) == 0 || len(matrix[0]) == 0 {
+		return false
+	}
+
+	n := len(matrix)
+	m := len(matrix[0])
+	start := 0
+	end := n*m - 1
+
+	for start <= end {
+		mid := (end-start)/2 + start
+		row := mid / m
+		col := mid % m
+		if target == matrix[row][col] {
+			return true
+		} else if target < matrix[row][col] {
+			end = mid - 1
+		} else {
+			start = mid + 1
+		}
+	}
+
+	return false
+}
+
+// 75. Sort Colors
+func SortColors(nums []int) {
+	sort.Ints(nums)
 }
 
 // 76. Minimum Window Substring

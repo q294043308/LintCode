@@ -22,5 +22,5 @@ func (self *cc) Test() {
 }
 
 func main() {
-	println(LogicFun.MinWindow("ADOBECODEBANC", "ABC"))
+	LogicFun.SetZeroes([][]int{{1, 1, 1}, {1, 0, 1}, {1, 1, 1}})
 }
