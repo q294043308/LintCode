@@ -845,3 +845,412 @@ func MinWindow(s string, t string) string {
 	}
 	return s[minstart:minend]
 }
+
+// 77. Combinations
+func Combine(n int, k int) [][]int {
+	var res [][]int
+	if n == 0 || k == 0 {
+		return res
+	}
+	cur := make([]int, 0, k)
+	CombineSub(n, k, cur, &res, 1)
+	return res
+}
+
+func CombineSub(n int, k int, cur []int, res *[][]int, start int) {
+	if len(cur) == k {
+		copyAr := make([]int, k)
+		copy(copyAr, cur)
+		*res = append(*res, copyAr)
+		return
+	}
+
+	for start <= n-k+1+len(cur) {
+		cur = append(cur, start)
+		CombineSub(n, k, cur, res, start+1)
+		cur = cur[:len(cur)-1]
+		start++
+	}
+}
+
+// 78. Subsets
+func Subsets(nums []int) [][]int {
+	res := [][]int{{}}
+	if len(nums) == 0 {
+		return res
+	}
+	var cur []int
+	SubsetsSub(nums, cur, &res, 0)
+	return res
+}
+
+func SubsetsSub(nums, cur []int, res *[][]int, index int) {
+	if len(cur) != 0 {
+		copyAr := make([]int, len(cur))
+		copy(copyAr, cur)
+		*res = append(*res, copyAr)
+	}
+
+	for index < len(nums) {
+		cur = append(cur, nums[index])
+		SubsetsSub(nums, cur, res, index+1)
+		cur = cur[:len(cur)-1]
+		index++
+	}
+}
+
+// 79. Word Search
+func Exist(board [][]byte, word string) bool {
+	if len(board) == 0 || len(board[0]) == 0 || len(word) == 0 {
+		return false
+	}
+
+	signLoad := make([][]bool, len(board))
+	for i := 0; i < len(signLoad); i++ {
+		signLoad[i] = make([]bool, len(board[0]))
+	}
+
+	for i := 0; i < len(board); i++ {
+		for j := 0; j < len(board[0]); j++ {
+			if word[0] == board[i][j] {
+				signLoad[i][j] = true
+				if isOk := ExistSub(board, signLoad, word[1:], i, j); isOk {
+					return true
+				}
+				signLoad[i][j] = false
+			}
+		}
+	}
+	return false
+}
+
+func ExistSub(board [][]byte, signLoad [][]bool, word string, i, j int) bool {
+	if len(word) == 0 {
+		return true
+	}
+
+	if i > 0 && !signLoad[i-1][j] && word[0] == board[i-1][j] {
+		signLoad[i-1][j] = true
+		if isOk := ExistSub(board, signLoad, word[1:], i-1, j); isOk {
+			return true
+		}
+		signLoad[i-1][j] = false
+	}
+
+	if i < len(board)-1 && !signLoad[i+1][j] && word[0] == board[i+1][j] {
+		signLoad[i+1][j] = true
+		if isOk := ExistSub(board, signLoad, word[1:], i+1, j); isOk {
+			return true
+		}
+		signLoad[i+1][j] = false
+	}
+
+	if j > 0 && !signLoad[i][j-1] && word[0] == board[i][j-1] {
+		signLoad[i][j-1] = true
+		if isOk := ExistSub(board, signLoad, word[1:], i, j-1); isOk {
+			return true
+		}
+		signLoad[i][j-1] = false
+	}
+
+	if j < len(board[0])-1 && !signLoad[i][j+1] && word[0] == board[i][j+1] {
+		signLoad[i][j+1] = true
+		if isOk := ExistSub(board, signLoad, word[1:], i, j+1); isOk {
+			return true
+		}
+		signLoad[i][j+1] = false
+	}
+	return false
+}
+
+// 80. Remove Duplicates from Sorted Array II
+func RemoveDuplicatesV2(nums []int) int {
+	if len(nums) == 0 {
+		return 0
+	}
+
+	j := 1
+	lastNum := nums[0]
+	curNum := 1
+	for i := 1; i < len(nums); i++ {
+		if lastNum != nums[i] {
+			nums[j] = nums[i]
+			j++
+			lastNum = nums[i]
+			curNum = 1
+		} else {
+			if curNum < 2 {
+				curNum++
+				nums[j] = nums[i]
+				j++
+			}
+		}
+	}
+
+	return j
+}
+
+// 81. Search in Rotated Sorted Array II
+func SearchV2(nums []int, target int) bool {
+	if len(nums) == 0 {
+		return false
+	}
+
+	start := 0
+	end := len(nums) - 1
+	for start <= end {
+		mid := (end-start)/2 + start
+		if nums[mid] == target {
+			return true
+		}
+
+		for start != mid && nums[mid] == nums[start] {
+			start++
+			if start == mid {
+				start = mid + 1
+				goto OUT
+			}
+		}
+		for end != mid && nums[mid] == nums[end] {
+			end--
+			if end == mid {
+				end = mid - 1
+				goto OUT
+			}
+		}
+
+		if nums[mid] < nums[end] {
+			if target > nums[mid] {
+				if target == nums[end] {
+					return true
+				} else if target < nums[end] {
+					start = mid + 1
+					end--
+				} else {
+					end = mid - 1
+				}
+			} else {
+				end = mid - 1
+			}
+
+		} else {
+			if target < nums[mid] {
+				if target == nums[start] {
+					return true
+				} else if target > nums[start] {
+					start++
+					end = mid - 1
+				} else {
+					start = mid + 1
+				}
+			} else {
+				start = mid + 1
+			}
+		}
+	OUT:
+	}
+	return false
+}
+
+// 82. Remove Duplicates from Sorted List II
+func DeleteDuplicates(head *Common.ListNode) *Common.ListNode {
+	if head == nil {
+		return head
+	}
+
+	var lastNode *Common.ListNode
+	curNode := head
+	isEqual := false
+
+	for curNode.Next != nil {
+		if curNode.Val == curNode.Next.Val {
+			curNode = curNode.Next
+			isEqual = true
+		} else {
+			isEqual = false
+			if lastNode == nil {
+				if head == curNode {
+					lastNode = head
+					curNode = curNode.Next
+				} else {
+					head = curNode.Next
+					curNode = head
+				}
+			} else {
+				if lastNode.Next == curNode {
+					lastNode = curNode
+				} else {
+					lastNode.Next = curNode.Next
+				}
+				curNode = curNode.Next
+			}
+		}
+	}
+
+	if isEqual {
+		if lastNode == nil {
+			return nil
+		} else {
+			lastNode.Next = nil
+		}
+	}
+
+	return head
+}
+
+// 83. Remove Duplicates from Sorted List
+func DeleteDuplicatesV2(head *Common.ListNode) *Common.ListNode {
+	if head == nil || head.Next == nil {
+		return head
+	}
+
+	curNode := head
+	for curNode.Next != nil {
+		if curNode.Val == curNode.Next.Val {
+			curNode.Next = curNode.Next.Next
+		} else {
+			curNode = curNode.Next
+		}
+	}
+	return head
+}
+
+// 84. Largest Rectangle in Histogram
+func LargestRectangleArea(heights []int) int {
+	if len(heights) == 0 {
+		return 0
+	}
+
+	highs := make([]int, 0, len(heights))
+	res := 0
+	for i := 0; i < len(heights); i++ {
+		for j := 0; j < len(highs); j++ {
+			if highs[j] > heights[i] {
+				highs[j] = heights[i]
+			}
+			curArx := highs[j] * (i - j + 1)
+			if curArx > res {
+				res = curArx
+			}
+		}
+		if heights[i] > res {
+			res = heights[i]
+		}
+		highs = append(highs, heights[i])
+	}
+	return res
+}
+
+// 84. Largest Rectangle in Histogram
+func LargestRectangleAreaOpt(heights []int) int {
+	if len(heights) == 0 {
+		return 0
+	}
+	stack := &Common.Stack{}
+	res := 0
+
+	type node struct {
+		index int
+		num   int
+	}
+	stack.Push(&node{index: -1, num: 0})
+	for i := 0; i < len(heights); i++ {
+		for stack.Size() > 1 {
+			top := stack.Top().(*node)
+			if heights[i] >= top.num {
+				break
+			}
+
+			stack.Pop()
+			nextTop := stack.Top().(*node)
+			area := top.num * (i - nextTop.index - 1)
+			if area > res {
+				res = area
+			}
+		}
+		stack.Push(&node{index: i, num: heights[i]})
+	}
+
+	for stack.Size() > 1 {
+		top := stack.Pop().(*node)
+		nextTop := stack.Top().(*node)
+		area := top.num * (len(heights) - 1 - nextTop.index)
+		if area > res {
+			res = area
+		}
+	}
+	return res
+}
+
+// 85. Maximal Rectangle
+func MaximalRectangle(matrix [][]byte) int {
+	if len(matrix) == 0 || len(matrix[0]) == 0 {
+		return 0
+	}
+
+	type node struct {
+		height int
+		left   int
+		right  int
+	}
+	res := 0
+	n := len(matrix)
+	m := len(matrix[0])
+	nodeMat := make([][]node, n)
+	for i := 0; i < n; i++ {
+		nodeMat[i] = make([]node, m)
+	}
+
+	continueNum := 0
+	// full height and left
+	for i := 0; i < n; i++ {
+		for j := 0; j < m; j++ {
+			if matrix[i][j] == '1' {
+				continueNum++
+				if i == 0 {
+					nodeMat[i][j].height = 1
+				} else {
+					nodeMat[i][j].height = 1 + nodeMat[i-1][j].height
+				}
+
+				if j == 0 {
+					nodeMat[i][j].left = 1
+				} else {
+					nodeMat[i][j].left = continueNum
+					if i != 0 && nodeMat[i-1][j].left != 0 && (nodeMat[i-1][j].left < nodeMat[i][j].left) {
+						nodeMat[i][j].left = nodeMat[i-1][j].left
+					}
+				}
+			} else {
+				continueNum = 0
+			}
+		}
+		continueNum = 0
+	}
+
+	// full right
+	for i := 0; i < n; i++ {
+		for j := m - 1; j >= 0; j-- {
+			if matrix[i][j] == '1' {
+				continueNum++
+				if j == m-1 {
+					nodeMat[i][j].right = 1
+				} else {
+					nodeMat[i][j].right = continueNum
+					if i != 0 && nodeMat[i-1][j].right != 0 && (nodeMat[i-1][j].right < nodeMat[i][j].right) {
+						nodeMat[i][j].right = nodeMat[i-1][j].right
+					}
+				}
+				curArx := nodeMat[i][j].height * (nodeMat[i][j].right + nodeMat[i][j].left - 1)
+				if curArx > res {
+					res = curArx
+				}
+			} else {
+				continueNum = 0
+			}
+		}
+		continueNum = 0
+	}
+
+	return res
+}
