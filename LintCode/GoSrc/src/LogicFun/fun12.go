@@ -1254,3 +1254,192 @@ func MaximalRectangle(matrix [][]byte) int {
 
 	return res
 }
+
+// 86. Partition List
+func Partition(head *Common.ListNode, x int) *Common.ListNode {
+	if head == nil {
+		return head
+	}
+
+	var newHead, newCurNode, lastNode, curNode *Common.ListNode
+	if head.Val < x {
+		newHead = head
+		newCurNode = newHead
+		head = head.Next
+	}
+	curNode = head
+
+	for curNode != nil {
+		if curNode.Val >= x {
+			if lastNode == nil {
+				lastNode = head
+			} else {
+				lastNode.Next = curNode
+				lastNode = lastNode.Next
+			}
+		} else {
+			if lastNode == nil {
+				head = head.Next
+			}
+			if newHead == nil {
+				newHead = curNode
+				newCurNode = newHead
+			} else {
+				newCurNode.Next = curNode
+				newCurNode = newCurNode.Next
+			}
+		}
+		curNode = curNode.Next
+	}
+
+	if newHead != nil {
+		newCurNode.Next = head
+	} else {
+		return head
+	}
+
+	if lastNode != nil {
+		lastNode.Next = nil
+	}
+
+	return newHead
+}
+
+// 87. Scramble String
+func IsScramble(s1 string, s2 string) bool {
+	if len(s1) != len(s2) {
+		return false
+	}
+
+	if s1 == s2 {
+		return true
+	}
+
+	charMap := make(map[rune]int, Common.SMALL_ENGLISH_CHAR_NUM)
+	for _, cha := range s1 {
+		charMap[cha]++
+	}
+	for _, cha := range s2 {
+		num, ok := charMap[cha]
+		if !ok {
+			break
+		} else {
+			if num == 1 {
+				delete(charMap, cha)
+			} else {
+				charMap[cha]--
+			}
+		}
+	}
+	if len(charMap) != 0 {
+		return false
+	}
+
+	for i := 1; i < len(s1); i++ {
+		if IsScramble(s1[:i], s2[:i]) && IsScramble(s1[i:], s2[i:]) {
+			return true
+		}
+		if IsScramble(s1[:i], s2[len(s1)-i:]) && IsScramble(s1[i:], s2[:len(s1)-i]) {
+			return true
+		}
+	}
+	return false
+}
+
+// 88. Merge Sorted Array
+func MergeV2(nums1 []int, m int, nums2 []int, n int) {
+	if m == 0 {
+		copy(nums1, nums2)
+		return
+	}
+	if n == 0 {
+		return
+	}
+
+	nums1 = nums1[:m]
+	i := 0
+	j := 0
+	for i < len(nums1) && j < n {
+		if nums1[i] <= nums2[j] {
+			i++
+		} else {
+			tmp := append([]int{nums2[j]}, nums1[i:]...)
+			nums1 = append(nums1[:i], tmp...)
+			i++
+			j++
+		}
+	}
+
+	if j < n {
+		nums1 = append(nums1, nums2[j:]...)
+	}
+}
+
+// 89. Gray Code
+func GrayCode(n int) []int {
+	res := []int{0}
+	if n == 0 {
+		return res
+	}
+	num := 0
+	grayCodeSub(n-1, &num, &res)
+	return res
+}
+
+func grayCodeSub(n int, num *int, res *[]int) {
+	if n < 0 {
+		return
+	}
+
+	grayCodeSub(n-1, num, res)
+	*num = *num ^ (1 << uint(n))
+	*res = append(*res, *num)
+	grayCodeSub(n-1, num, res)
+}
+
+// 90. Subsets II
+
+func SubsetsWithDup(nums []int) [][]int {
+	res := [][]int{{}}
+	if len(nums) == 0 {
+		return res
+	}
+
+	sort.Ints(nums)
+	for i := 0; i < len(nums); i++ {
+		var curNode []int
+		if i >= 1 && nums[i] == nums[i-1] {
+			continue
+		}
+		subsetsWithDupSub(nums, &res, &curNode, i)
+	}
+
+	return res
+}
+
+func subsetsWithDupSub(nums []int, res *[][]int, curNode *[]int, index int) {
+	if index >= len(nums) {
+		return
+	}
+
+	*curNode = append(*curNode, nums[index])
+	tmp := make([]int, len(*curNode))
+	copy(tmp, *curNode)
+	*res = append(*res, tmp)
+	for i := index + 1; i < len(nums); {
+		subsetsWithDupSub(nums, res, curNode, i)
+
+		j := i + 1
+		for j < len(nums) {
+			if j < len(nums) {
+				if (*curNode)[len(*curNode)-1] == nums[j] {
+					j++
+				} else {
+					break
+				}
+			}
+		}
+		i = j
+		*curNode = (*curNode)[:len(*curNode)-1]
+	}
+}
