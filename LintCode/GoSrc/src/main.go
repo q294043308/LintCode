@@ -1,7 +1,15 @@
 package main
 
-import "LogicFun"
+import (
+	"Common"
+	"LogicFun"
+)
 
 func main() {
-	println(LogicFun.NumDecodings("1000"))
+	head := &Common.ListNode{Val: 1, Next: nil}
+	head.Next = &Common.ListNode{Val: 2, Next: nil}
+	head.Next.Next = &Common.ListNode{Val: 3, Next: nil}
+	// head.Next.Next.Next = &Common.ListNode{Val: 4, Next: nil}
+	// head.Next.Next.Next.Next = &Common.ListNode{Val: 5, Next: nil}
+	println(LogicFun.ReverseBetween(head, 1, 3))
 }

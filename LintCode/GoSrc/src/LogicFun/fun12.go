@@ -1483,3 +1483,44 @@ func NumDecodings(s string) int {
 
 	return arr[len(arr)-1]
 }
+
+// 92. Reverse Linked List II
+func ReverseBetween(head *Common.ListNode, m int, n int) *Common.ListNode {
+	if m == n {
+		return head
+	}
+
+	var pre, mNode *Common.ListNode
+	curNode := head
+	for curNode != nil {
+		if m == 1 {
+			mNode = pre
+		}
+
+		if n == 1 {
+			// head
+			if mNode == nil {
+				head.Next = curNode.Next
+				head = curNode
+			} else {
+				mNode.Next.Next = curNode.Next
+				mNode.Next = curNode
+			}
+			curNode.Next = pre
+			return head
+		}
+
+		if m <= 0 {
+			next := curNode.Next
+			curNode.Next = pre
+			pre = curNode
+			curNode = next
+		} else {
+			pre = curNode
+			curNode = curNode.Next
+		}
+		m--
+		n--
+	}
+	return head
+}
