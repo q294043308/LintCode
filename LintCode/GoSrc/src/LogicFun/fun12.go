@@ -1443,3 +1443,43 @@ func subsetsWithDupSub(nums []int, res *[][]int, curNode *[]int, index int) {
 		*curNode = (*curNode)[:len(*curNode)-1]
 	}
 }
+
+// 91. Decode Ways
+func NumDecodings(s string) int {
+	if len(s) == 0 || s[0] == '0' {
+		return 0
+	}
+	if len(s) == 1 {
+		return 1
+	}
+
+	arr := make([]int, len(s))
+	arr[0] = 1
+	if s[1] == '0' && s[0] > '2' {
+		return 0
+	}
+	if s[0] <= '2' {
+		if (s[0] == '1' && s[1] != '0') || (s[1] <= '6' && s[1] > '0') {
+			arr[1] = 2
+		} else {
+			arr[1] = 1
+		}
+	} else {
+		arr[1] = 1
+	}
+	for i := 2; i < len(arr); i++ {
+		if (s[i-1] > '2' || s[i-1] == '0') && s[i] == '0' {
+			return 0
+		}
+
+		if s[i-1] > '2' || (s[i-1] == '2' && s[i] >= '7') || s[i-1] == '0' {
+			arr[i] = arr[i-1]
+		} else if s[i] == '0' {
+			arr[i] = arr[i-2]
+		} else {
+			arr[i] = arr[i-2] + arr[i-1]
+		}
+	}
+
+	return arr[len(arr)-1]
+}
