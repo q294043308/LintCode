@@ -3,9 +3,11 @@ package LogicFun
 
 import (
 	"Common"
+	"fmt"
 	"math"
 	"regexp"
 	"sort"
+	"strconv"
 	"strings"
 )
 
@@ -1523,4 +1525,67 @@ func ReverseBetween(head *Common.ListNode, m int, n int) *Common.ListNode {
 		n--
 	}
 	return head
+}
+
+// 93. Restore IP Addresses 25525511135
+func RestoreIpAddresses(s string) []string {
+	var res []string
+	if len(s) < 4 {
+		return res
+	}
+
+	var cur []int
+	restoreIpAddressesSub(s, 0, &cur, &res)
+	return res
+}
+
+func restoreIpAddressesSub(s string, start int, cur *[]int, res *[]string) {
+	if len(*cur) == 4 {
+		if start >= len(s) {
+			curStr := make([]string, 4)
+			for i, v := range *cur {
+				curStr[i] = fmt.Sprintf("%d", v)
+			}
+			*res = append(*res, strings.Join(curStr, "."))
+			return
+		} else {
+			return
+		}
+	}
+
+	for i := 1; i <= 3 && start+i <= len(s); i++ {
+		curS := s[start : start+i]
+		curV, _ := strconv.Atoi(curS)
+		if (curV == 0 && len(curS) > 1) || (curS[0] == '0' && curV > 0) || curV > 255 {
+			return
+		}
+
+		*cur = append(*cur, curV)
+		restoreIpAddressesSub(s, start+i, cur, res)
+		*cur = (*cur)[:len(*cur)-1]
+	}
+}
+
+// 94. Binary Tree Inorder Traversal
+func InorderTraversal(root *Common.TreeNode) []int {
+	if root == nil {
+		return []int{}
+	}
+
+	var res []int
+	if root.Left != nil {
+		t := InorderTraversal(root.Left)
+		res = append(res, t...)
+	}
+	res = append(res, root.Val)
+	if root.Right != nil {
+		t := InorderTraversal(root.Right)
+		res = append(res, t...)
+	}
+	return res
+}
+
+// 95. Unique Binary Search Trees II
+func generateTrees(n int) []*Common.TreeNode {
+	return nil
 }

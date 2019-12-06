@@ -11,5 +11,5 @@ func main() {
 	head.Next.Next = &Common.ListNode{Val: 3, Next: nil}
 	// head.Next.Next.Next = &Common.ListNode{Val: 4, Next: nil}
 	// head.Next.Next.Next.Next = &Common.ListNode{Val: 5, Next: nil}
-	println(LogicFun.ReverseBetween(head, 1, 3))
+	println(LogicFun.RestoreIpAddresses("010010"))
 }
