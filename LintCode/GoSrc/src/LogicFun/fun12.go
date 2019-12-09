@@ -1591,23 +1591,19 @@ func GenerateTrees(n int) []*Common.TreeNode {
 		return nil
 	}
 
-	res := generateTreesSub(1, n, true)
+	res := generateTreesSub(1, n)
 	return res
 }
 
-func generateTreesSub(start, end int, isleft bool) []*Common.TreeNode {
+func generateTreesSub(start, end int) []*Common.TreeNode {
 	if start > end {
-		if isleft {
-			return []*Common.TreeNode{nil}
-		} else {
-			return []*Common.TreeNode{nil}
-		}
+		return []*Common.TreeNode{nil}
 	}
 
 	var res []*Common.TreeNode
 	for i := start; i <= end; i++ {
-		left := generateTreesSub(start, i-1, true)
-		right := generateTreesSub(i+1, end, false)
+		left := generateTreesSub(start, i-1)
+		right := generateTreesSub(i+1, end)
 		for _, lv := range left {
 			for _, rv := range right {
 				curNode := &Common.TreeNode{
@@ -1621,4 +1617,120 @@ func generateTreesSub(start, end int, isleft bool) []*Common.TreeNode {
 
 	}
 	return res
+}
+
+// 96. Unique Binary Search Trees
+func NumTrees(n int) int {
+	if n == 0 {
+		return 0
+	}
+
+	nums := make([]int, n)
+	nums[0] = 1
+	res := numTreesSub(1, n, &nums)
+	return res
+}
+
+func numTreesSub(start, end int, nums *[]int) int {
+	if start >= end {
+		return 1
+	}
+
+	res := 0
+	for i := start; i <= end; i++ {
+		left := 0
+		if i-1-start <= 0 {
+			left = 1
+		} else if (*nums)[i-1-start] != 0 {
+			left = (*nums)[i-1-start]
+		} else {
+			left = numTreesSub(start, i-1, nums)
+			(*nums)[i-1-start] = left
+		}
+
+		right := 0
+		if end-i-1 <= 0 {
+			right = 1
+		} else if (*nums)[end-i-1] != 0 {
+			right = (*nums)[end-i-1]
+		} else {
+			right = numTreesSub(i+1, end, nums)
+			(*nums)[end-i-1] = right
+		}
+
+		res += left * right
+	}
+	return res
+}
+
+// 97. Interleaving String
+func IsInterleave(s1 string, s2 string, s3 string) bool {
+	if len(s3) == 0 && len(s1) == 0 && len(s2) == 0 {
+		return true
+	}
+	if len(s1)+len(s2) != len(s3) {
+		return false
+	}
+
+	if len(s1) != 0 && s1[0] == s3[0] {
+		if IsInterleave(s1[1:], s2, s3[1:]) {
+			return true
+		}
+	}
+	if len(s2) != 0 && s2[0] == s3[0] {
+		if IsInterleave(s1, s2[1:], s3[1:]) {
+			return true
+		}
+	}
+	return false
+}
+
+func IsInterleaveOpt(s1 string, s2 string, s3 string) bool {
+	if len(s3) == 0 && len(s1) == 0 && len(s2) == 0 {
+		return true
+	}
+	if len(s1)+len(s2) != len(s3) {
+		return false
+	}
+
+	// add more than col and row, for simple logic
+	dp := make([][]bool, len(s1)+1)
+	for i := 0; i < len(dp); i++ {
+		dp[i] = make([]bool, len(s2)+1)
+	}
+	dp[0][0] = true
+
+	for i := 0; i < len(s1); i++ {
+		if s1[i] == s3[i] {
+			dp[i+1][0] = true
+		} else {
+			break
+		}
+	}
+	for j := 0; j < len(s2); j++ {
+		if s2[j] == s3[j] {
+			dp[0][j+1] = true
+		} else {
+			break
+		}
+	}
+
+	for i := 0; i < len(s1); i++ {
+		for j := 0; j < len(s2); j++ {
+			if dp[i][j+1] && s1[i] == s3[i+j+1] {
+				dp[i+1][j+1] = true
+				continue
+			}
+			if dp[i+1][j] && s2[j] == s3[i+j+1] {
+				dp[i+1][j+1] = true
+				continue
+			}
+			if dp[i][j] {
+				if (s1[i] == s3[i+j] && s2[j] == s3[i+j+1]) || (s2[j] == s3[i+j] && s1[i] == s3[i+j+1]) {
+					continue
+				}
+			}
+		}
+	}
+	return dp[len(dp)-1][len(dp[0])-1]
 }
