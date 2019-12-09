@@ -1586,6 +1586,39 @@ func InorderTraversal(root *Common.TreeNode) []int {
 }
 
 // 95. Unique Binary Search Trees II
-func generateTrees(n int) []*Common.TreeNode {
-	return nil
+func GenerateTrees(n int) []*Common.TreeNode {
+	if n == 0 {
+		return nil
+	}
+
+	res := generateTreesSub(1, n, true)
+	return res
+}
+
+func generateTreesSub(start, end int, isleft bool) []*Common.TreeNode {
+	if start > end {
+		if isleft {
+			return []*Common.TreeNode{nil}
+		} else {
+			return []*Common.TreeNode{nil}
+		}
+	}
+
+	var res []*Common.TreeNode
+	for i := start; i <= end; i++ {
+		left := generateTreesSub(start, i-1, true)
+		right := generateTreesSub(i+1, end, false)
+		for _, lv := range left {
+			for _, rv := range right {
+				curNode := &Common.TreeNode{
+					Val: i,
+				}
+				curNode.Left = lv
+				curNode.Right = rv
+				res = append(res, curNode)
+			}
+		}
+
+	}
+	return res
 }

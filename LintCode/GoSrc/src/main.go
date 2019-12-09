@@ -1,15 +1,14 @@
 package main
 
 import (
-	"Common"
 	"LogicFun"
 )
 
 func main() {
-	head := &Common.ListNode{Val: 1, Next: nil}
-	head.Next = &Common.ListNode{Val: 2, Next: nil}
-	head.Next.Next = &Common.ListNode{Val: 3, Next: nil}
+	// head := &Common.ListNode{Val: 1, Next: nil}
+	// head.Next = &Common.ListNode{Val: 2, Next: nil}
+	// head.Next.Next = &Common.ListNode{Val: 3, Next: nil}
 	// head.Next.Next.Next = &Common.ListNode{Val: 4, Next: nil}
 	// head.Next.Next.Next.Next = &Common.ListNode{Val: 5, Next: nil}
-	println(LogicFun.RestoreIpAddresses("010010"))
+	println(LogicFun.GenerateTrees(3))
 }
