@@ -1734,3 +1734,45 @@ func IsInterleaveOpt(s1 string, s2 string, s3 string) bool {
 	}
 	return dp[len(dp)-1][len(dp[0])-1]
 }
+
+// 98. Validate Binary Search Tree    ps:or using In-Order traversal(LMR)
+func IsValidBST(root *Common.TreeNode) bool {
+	_, _, ok := isValidBSTSub(root)
+	return ok
+}
+
+func isValidBSTSub(root *Common.TreeNode) (int, int, bool) {
+	if root == nil {
+		return Common.MAXINTNUM, Common.MININTNUM, true
+	}
+
+	min := root.Val
+	max := root.Val
+	if root.Left != nil {
+		if root.Val <= root.Left.Val {
+			return 0, 0, false
+		}
+		leftmin, leftmax, isOk := isValidBSTSub(root.Left)
+		if leftmax >= root.Val || !isOk {
+			return 0, 0, false
+		}
+		if leftmin < min {
+			min = leftmin
+		}
+	}
+
+	if root.Right != nil {
+		if root.Val >= root.Right.Val {
+			return 0, 0, false
+		}
+		rightMin, rightMax, isOk := isValidBSTSub(root.Right)
+		if rightMin <= root.Val || !isOk {
+			return 0, 0, false
+		}
+		if rightMax > max {
+			max = rightMax
+		}
+	}
+
+	return min, max, true
+}

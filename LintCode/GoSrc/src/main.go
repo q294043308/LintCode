@@ -1,14 +1,15 @@
 package main
 
 import (
+	"Common"
 	"LogicFun"
 )
 
 func main() {
-	// head := &Common.ListNode{Val: 1, Next: nil}
-	// head.Next = &Common.ListNode{Val: 2, Next: nil}
-	// head.Next.Next = &Common.ListNode{Val: 3, Next: nil}
-	// head.Next.Next.Next = &Common.ListNode{Val: 4, Next: nil}
+	head := &Common.TreeNode{Val: 2}
+	head.Left = &Common.TreeNode{Val: 1}
+	head.Right = &Common.TreeNode{Val: 3}
+	// head.Left.Right.Left = &Common.TreeNode{Val: 31}
 	// head.Next.Next.Next.Next = &Common.ListNode{Val: 5, Next: nil}
-	println(LogicFun.GenerateTrees(3))
+	println(LogicFun.IsValidBST(head))
 }
