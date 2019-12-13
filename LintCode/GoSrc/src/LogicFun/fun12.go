@@ -1776,3 +1776,188 @@ func isValidBSTSub(root *Common.TreeNode) (int, int, bool) {
 
 	return min, max, true
 }
+
+// 99. Recover Binary Search Tree
+func RecoverTree(root *Common.TreeNode) {
+	var lastNode, firistNode, secondNode *Common.TreeNode
+	recoverTreeSub(root, &lastNode, &firistNode, &secondNode)
+	tmp := secondNode.Val
+	secondNode.Val = firistNode.Val
+	firistNode.Val = tmp
+}
+
+func recoverTreeSub(root *Common.TreeNode, lastNode, firistNode, secondNode **Common.TreeNode) {
+	if root == nil {
+		return
+	}
+	if root.Left != nil {
+		recoverTreeSub(root.Left, lastNode, firistNode, secondNode)
+	}
+
+	if *lastNode != nil {
+		if *firistNode == nil && root.Val < (*lastNode).Val {
+			(*firistNode) = *lastNode
+		}
+		if *firistNode != nil && root.Val < (*lastNode).Val {
+			(*secondNode) = root
+		}
+	}
+	*lastNode = root
+
+	if root.Right != nil {
+		recoverTreeSub(root.Right, lastNode, firistNode, secondNode)
+	}
+}
+
+// 100. Same Tree
+func IsSameTree(p *Common.TreeNode, q *Common.TreeNode) bool {
+	if p == nil && q == nil {
+		return true
+	} else if p == nil || q == nil {
+		return false
+	}
+
+	if p.Val != q.Val {
+		return false
+	}
+	return IsSameTree(p.Left, q.Left) && IsSameTree(p.Right, q.Right)
+}
+
+// 101. Symmetric Tree
+func IsSymmetric(root *Common.TreeNode) bool {
+	if root == nil {
+		return true
+	}
+
+	return isSymmetricSub(root.Left, root.Right)
+
+}
+
+func isSymmetricSub(left, right *Common.TreeNode) bool {
+	if left == nil && right == nil {
+		return true
+	} else if left == nil || right == nil {
+		return false
+	}
+
+	if left.Val != right.Val {
+		return false
+	}
+	return isSymmetricSub(left.Left, right.Right) && isSymmetricSub(left.Right, right.Left)
+}
+
+// 102. Binary Tree Level Order Traversal
+func LevelOrder(root *Common.TreeNode) [][]int {
+	var res [][]int
+	if root == nil {
+		return res
+	}
+
+	var one, two []*Common.TreeNode
+	one = append(one, root)
+	for len(one)+len(two) > 0 {
+		var curVal []int
+		for _, node := range one {
+			curVal = append(curVal, node.Val)
+			if node.Left != nil {
+				two = append(two, node.Left)
+			}
+			if node.Right != nil {
+				two = append(two, node.Right)
+			}
+		}
+		res = append(res, curVal)
+		one = make([]*Common.TreeNode, 0)
+		curVal = make([]int, 0)
+		for _, node := range two {
+			curVal = append(curVal, node.Val)
+			if node.Left != nil {
+				one = append(one, node.Left)
+			}
+			if node.Right != nil {
+				one = append(one, node.Right)
+			}
+		}
+		if len(curVal) > 0 {
+			res = append(res, curVal)
+		}
+		two = make([]*Common.TreeNode, 0)
+	}
+	return res
+}
+
+// 103. Binary Tree Zigzag Level Order Traversal
+func ZigzagLevelOrder(root *Common.TreeNode) [][]int {
+	var res [][]int
+	if root == nil {
+		return res
+	}
+
+	var one, two []*Common.TreeNode
+	one = append(one, root)
+	for len(one)+len(two) > 0 {
+		var curVal []int
+		for i := len(one) - 1; i >= 0; i-- {
+			curNode := one[i]
+			curVal = append(curVal, curNode.Val)
+			if curNode.Left != nil {
+				two = append(two, curNode.Left)
+			}
+			if curNode.Right != nil {
+				two = append(two, curNode.Right)
+			}
+		}
+		res = append(res, curVal)
+		one = make([]*Common.TreeNode, 0)
+		curVal = make([]int, 0)
+
+		for i := len(two) - 1; i >= 0; i-- {
+			curNode := two[i]
+			curVal = append(curVal, curNode.Val)
+			if curNode.Right != nil {
+				one = append(one, curNode.Right)
+			}
+			if curNode.Left != nil {
+				one = append(one, curNode.Left)
+			}
+		}
+		if len(curVal) > 0 {
+			res = append(res, curVal)
+		}
+		two = make([]*Common.TreeNode, 0)
+	}
+	return res
+}
+
+// 104. Maximum Depth of Binary Tree
+func MaxDepth(root *Common.TreeNode) int {
+	if root == nil {
+		return 0
+	}
+
+	left := MaxDepth(root.Left)
+	right := MaxDepth(root.Right)
+	if left > right {
+		return left + 1
+	} else {
+		return right + 1
+	}
+}
+
+// 105. Construct Binary Tree from Preorder and Inorder Traversal
+func BuildTree(preorder []int, inorder []int) *Common.TreeNode {
+	if len(preorder) == 0 {
+		return nil
+	}
+
+	root := &Common.TreeNode{Val: preorder[0]}
+	for i := 0; i < len(inorder); i++ {
+		if inorder[i] == root.Val {
+			root.Left = BuildTree(preorder[1:1+i], inorder[:i+1])
+			root.Right = BuildTree(preorder[1+i:], inorder[i+1:])
+			break
+		}
+	}
+
+	return root
+}
