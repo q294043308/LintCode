@@ -12,5 +12,5 @@ func main() {
 	// head.Right.Right = &Common.TreeNode{Val: 7}
 	// head.Left.Right.Left = &Common.TreeNode{Val: 31}
 	// head.Next.Next.Next.Next = &Common.ListNode{Val: 5, Next: nil}
-	LogicFun.BuildTree([]int{3, 9, 20, 15, 7}, []int{9, 3, 15, 20, 7})
+	LogicFun.BuildTreeV2([]int{9, 3, 15, 20, 7}, []int{9, 15, 7, 20, 3})
 }

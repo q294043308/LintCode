@@ -1961,3 +1961,77 @@ func BuildTree(preorder []int, inorder []int) *Common.TreeNode {
 
 	return root
 }
+
+// 106. Construct Binary Tree from Inorder and Postorder Traversal
+func BuildTreeV2(inorder []int, postorder []int) *Common.TreeNode {
+	if len(postorder) == 0 {
+		return nil
+	}
+
+	root := &Common.TreeNode{Val: postorder[len(postorder)-1]}
+	for i := 0; i < len(inorder); i++ {
+		if inorder[i] == root.Val {
+			root.Left = BuildTreeV2(inorder[:i], postorder[:i])
+			root.Right = BuildTreeV2(inorder[i+1:], postorder[i:len(postorder)-1])
+			break
+		}
+	}
+
+	return root
+}
+
+// 107. Binary Tree Level Order Traversal II
+func LevelOrderBottom(root *Common.TreeNode) [][]int {
+	var res [][]int
+	if root == nil {
+		return res
+	}
+
+	var one, two []*Common.TreeNode
+	one = append(one, root)
+	for len(one)+len(two) > 0 {
+		var curVal []int
+		for _, node := range one {
+			curVal = append(curVal, node.Val)
+			if node.Left != nil {
+				two = append(two, node.Left)
+			}
+			if node.Right != nil {
+				two = append(two, node.Right)
+			}
+		}
+		res = append([][]int{curVal}, res...)
+		one = make([]*Common.TreeNode, 0)
+		curVal = make([]int, 0)
+		for _, node := range two {
+			curVal = append(curVal, node.Val)
+			if node.Left != nil {
+				one = append(one, node.Left)
+			}
+			if node.Right != nil {
+				one = append(one, node.Right)
+			}
+		}
+		if len(curVal) > 0 {
+			res = append([][]int{curVal}, res...)
+		}
+		two = make([]*Common.TreeNode, 0)
+	}
+	return res
+}
+
+// 108. Convert Sorted Array to Binary Search Tree
+func SortedArrayToBST(nums []int) *Common.TreeNode {
+	if len(nums) == 0 {
+		return nil
+	}
+
+	ind := len(nums) / 2
+	mid := nums[ind]
+	root := &Common.TreeNode{
+		Val:   mid,
+		Left:  SortedArrayToBST(nums[:ind]),
+		Right: SortedArrayToBST(nums[ind+1:]),
+	}
+	return root
+}
