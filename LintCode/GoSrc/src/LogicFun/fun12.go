@@ -2035,3 +2035,116 @@ func SortedArrayToBST(nums []int) *Common.TreeNode {
 	}
 	return root
 }
+
+// 109. Convert Sorted List to Binary Search Tree
+func SortedListToBST(head *Common.ListNode) *Common.TreeNode {
+	var nodeArr []int
+	for head != nil {
+		nodeArr = append(nodeArr, head.Val)
+		head = head.Next
+	}
+	return sortedListToBSTSub(nodeArr)
+}
+
+func sortedListToBSTSub(nums []int) *Common.TreeNode {
+	if len(nums) == 0 {
+		return nil
+	}
+
+	ind := len(nums) / 2
+	mid := nums[ind]
+	root := &Common.TreeNode{
+		Val:   mid,
+		Left:  sortedListToBSTSub(nums[:ind]),
+		Right: sortedListToBSTSub(nums[ind+1:]),
+	}
+	return root
+}
+
+// 110. Balanced Binary Tree
+func IsBalanced(root *Common.TreeNode) bool {
+	if root == nil {
+		return true
+	}
+
+	return isBalancedSub(root) != -1
+}
+
+func isBalancedSub(root *Common.TreeNode) int {
+	leftHight := 0
+	rightHight := 0
+
+	if root.Left != nil {
+		leftHight = isBalancedSub(root.Left)
+		if leftHight == -1 {
+			return leftHight
+		}
+	}
+	if root.Right != nil {
+		rightHight = isBalancedSub(root.Right)
+		if rightHight == -1 {
+			return rightHight
+		}
+	}
+
+	if leftHight > rightHight {
+		if leftHight-rightHight > 1 {
+			return -1
+		} else {
+			return leftHight + 1
+		}
+	} else {
+		if rightHight-leftHight > 1 {
+			return -1
+		} else {
+			return rightHight + 1
+		}
+	}
+}
+
+// 111. Minimum Depth of Binary Tree
+func minDepth(root *Common.TreeNode) int {
+	if root == nil {
+		return 0
+	}
+
+	left := 0
+	right := 0
+	if root.Left != nil {
+		left = minDepth(root.Left)
+	}
+	if root.Right != nil {
+		right = minDepth(root.Right)
+	}
+
+	if left == 0 {
+		return right + 1
+	} else if right == 0 {
+		return left + 1
+	}
+
+	if left < right {
+		return left + 1
+	} else {
+		return right + 1
+	}
+}
+
+// 112. Path Sum
+func hasPathSum(root *Common.TreeNode, sum int) bool {
+	if root == nil {
+		return false
+	}
+	if sum == root.Val && root.Left == nil && root.Right == nil {
+		return true
+	}
+
+	if hasPathSum(root.Left, sum-root.Val) {
+		return true
+	}
+	if hasPathSum(root.Right, sum-root.Val) {
+		return true
+	}
+
+	return false
+}
