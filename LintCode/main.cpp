@@ -41,6 +41,12 @@ public:
 
 int main(int argc, char* argv[])
 {
-    int a = 4294967294;
-    printf("%d", a);
+    TreeNode<int>* root = &TreeNode<int>(1);
+    root->left = &TreeNode<int>(2);
+    root->right = &TreeNode<int>(3);
+    root->left->left = &TreeNode<int>(4);
+    root->left->right = &TreeNode<int>(5);
+    root->right->left = &TreeNode<int>(6);
+    root->right->right = &TreeNode<int>(7);
+    connect(root);
 };

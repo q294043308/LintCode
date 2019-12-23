@@ -269,6 +269,8 @@ func LongestPalindromeMaLaCher(s string) string {
 	}
 }
 
+// 6 to C++
+
 // 7. Reverse Integer
 func Reverse(x int) int {
 	var res int64
@@ -282,6 +284,8 @@ func Reverse(x int) int {
 
 	return int(res)
 }
+
+// 8.9 to C++
 
 // 10. Regular Expression Matching
 func IsMatch(s string, p string) bool {

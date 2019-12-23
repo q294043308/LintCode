@@ -2103,7 +2103,7 @@ func isBalancedSub(root *Common.TreeNode) int {
 }
 
 // 111. Minimum Depth of Binary Tree
-func minDepth(root *Common.TreeNode) int {
+func MinDepth(root *Common.TreeNode) int {
 	if root == nil {
 		return 0
 	}
@@ -2111,10 +2111,10 @@ func minDepth(root *Common.TreeNode) int {
 	left := 0
 	right := 0
 	if root.Left != nil {
-		left = minDepth(root.Left)
+		left = MinDepth(root.Left)
 	}
 	if root.Right != nil {
-		right = minDepth(root.Right)
+		right = MinDepth(root.Right)
 	}
 
 	if left == 0 {
@@ -2131,7 +2131,7 @@ func minDepth(root *Common.TreeNode) int {
 }
 
 // 112. Path Sum
-func hasPathSum(root *Common.TreeNode, sum int) bool {
+func HasPathSum(root *Common.TreeNode, sum int) bool {
 	if root == nil {
 		return false
 	}
@@ -2139,12 +2139,141 @@ func hasPathSum(root *Common.TreeNode, sum int) bool {
 		return true
 	}
 
-	if hasPathSum(root.Left, sum-root.Val) {
+	if HasPathSum(root.Left, sum-root.Val) {
 		return true
 	}
-	if hasPathSum(root.Right, sum-root.Val) {
+	if HasPathSum(root.Right, sum-root.Val) {
 		return true
 	}
 
 	return false
+}
+
+// 113. Path Sum II
+func PathSum(root *Common.TreeNode, sum int) [][]int {
+	var cur []int
+	var res [][]int
+	pathSumSub(root, sum, cur, &res)
+	return res
+}
+
+func pathSumSub(root *Common.TreeNode, sum int, cur []int, res *[][]int) {
+	if root == nil {
+		return
+	}
+	cur = append(cur, root.Val)
+	if sum == root.Val && root.Left == nil && root.Right == nil {
+		tmp := make([]int, len(cur))
+		copy(tmp, cur)
+		*res = append(*res, tmp)
+		return
+	}
+	pathSumSub(root.Left, sum-root.Val, cur, res)
+	pathSumSub(root.Right, sum-root.Val, cur, res)
+	return
+}
+
+// 114. Flatten Binary Tree to Linked List
+func Flatten(root *Common.TreeNode) {
+	var lastNode *Common.TreeNode
+	flattenSub(root, &lastNode)
+}
+
+func flattenSub(root *Common.TreeNode, lastNode **Common.TreeNode) *Common.TreeNode {
+	if root == nil {
+		return root
+	}
+
+	right := root.Right
+	*lastNode = root
+	root.Right = flattenSub(root.Left, lastNode)
+	if root.Left == nil {
+		*lastNode = root
+	} else {
+		root.Left = nil
+	}
+	old := *lastNode
+	old.Right = flattenSub(right, lastNode)
+	return root
+}
+
+// 115. Distinct Subsequences
+func NumDistinct(s string, t string) int {
+	if len(s) == 0 || len(t) == 0 {
+		return 0
+	}
+
+	NumOp := make([][]int, len(t))
+	for i := 0; i < len(NumOp); i++ {
+		NumOp[i] = make([]int, len(s))
+	}
+
+	for j := 0; j < len(s); j++ {
+		for i := 0; i < len(t); i++ {
+			base := 0
+			if j != 0 {
+				base = NumOp[i][j-1]
+			}
+			if s[j] == t[i] {
+				if i == 0 || j == 0 {
+					if i == 0 {
+						NumOp[i][j] = base + 1
+					} else {
+						NumOp[i][j] = base
+					}
+				} else {
+					NumOp[i][j] = base + NumOp[i-1][j-1]
+				}
+			} else {
+				NumOp[i][j] = base
+			}
+		}
+	}
+
+	return NumOp[len(NumOp)-1][len(s)-1]
+}
+
+// 116.117 to C++
+// 118. Pascal's Triangle
+func Generate(numRows int) [][]int {
+	if numRows == 0 {
+		return nil
+	}
+
+	res := make([][]int, numRows)
+	for i := 0; i < numRows; i++ {
+		res[i] = make([]int, i+1)
+		res[i][0] = 1
+		res[i][len(res[i])-1] = 1
+	}
+
+	for i := 2; i < numRows; i++ {
+		for j := 1; j < i; j++ {
+			res[i][j] = res[i-1][j-1] + res[i-1][j]
+		}
+	}
+
+	return res
+}
+
+// 119. Pascal's Triangle II
+func Generate2(rowIndex int) []int {
+	if rowIndex < 0 {
+		return nil
+	}
+
+	res := make([][]int, rowIndex+1)
+	for i := 0; i < rowIndex+1; i++ {
+		res[i] = make([]int, i+1)
+		res[i][0] = 1
+		res[i][len(res[i])-1] = 1
+	}
+
+	for i := 2; i < rowIndex+1; i++ {
+		for j := 1; j < i; j++ {
+			res[i][j] = res[i-1][j-1] + res[i-1][j]
+		}
+	}
+
+	return res[rowIndex]
 }

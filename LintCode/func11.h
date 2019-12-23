@@ -108,4 +108,64 @@ bool isPalindrome(int x) {
     return x == s;
 }
 
+// 116.117 Populating Next Right Pointers in Each Node
+TreeNode<int>* connect(TreeNode<int>* root) {
+    if (root == NULL) {
+        return root;
+    }
+
+    queue<TreeNode<int>*> a, b;
+    a.push(root);
+    while (!a.empty() || !b.empty()){
+        TreeNode<int>* last = a.front();
+        if (last->left){
+            b.push(last->left);
+        }
+        if (last->right){
+            b.push(last->right);
+        }
+        a.pop();
+        while (!a.empty()){
+            TreeNode<int>* cur = a.front();
+            last->next = cur;
+            last = cur;
+            if (last->left){
+                b.push(last->left);
+            }
+            if (last->right){
+                b.push(last->right);
+            }
+            a.pop();
+        }
+        last->next = NULL;
+
+        if (b.empty()){
+            break;
+        }
+        last = b.front();
+        if (last->left){
+            a.push(last->left);
+        }
+        if (last->right){
+            a.push(last->right);
+        }
+        b.pop();
+        while (!b.empty()){
+            TreeNode<int>* cur = b.front();
+            last->next = cur;
+            last = cur;
+            if (last->left){
+                a.push(last->left);
+            }
+            if (last->right){
+                a.push(last->right);
+            }
+            b.pop();
+        }
+        last->next = NULL;
+    }
+    return root;
+
+}
+
 #endif

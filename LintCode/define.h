@@ -41,11 +41,11 @@ typedef unsigned int                                    uint;
 template<class val_type> class TreeNode {
 public:
     val_type val;
-    TreeNode *left, *right;
+    TreeNode *left, *right, *next;
     TreeNode(val_type val)
     {
         this->val = val;
-        this->left = this->right = NULL;
+        this->left = this->right = this->next = NULL;
     }
 };
 
