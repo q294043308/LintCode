@@ -2277,3 +2277,70 @@ func Generate2(rowIndex int) []int {
 
 	return res[rowIndex]
 }
+
+// 120. Triangle
+func MinimumTotal(triangle [][]int) int {
+	if triangle == nil || len(triangle) == 0 {
+		return 0
+	}
+
+	for i := len(triangle) - 2; i >= 0; i-- {
+		for j := 0; j < len(triangle[i]); j++ {
+			base := triangle[i+1][j]
+			if triangle[i+1][j+1] < base {
+				base = triangle[i+1][j+1]
+			}
+			triangle[i][j] += base
+		}
+	}
+	return triangle[0][0]
+}
+
+// 121. Best Time to Buy and Sell Stock
+func MaxProfit(prices []int) int {
+	res := 0
+	if len(prices) == 0 || len(prices) == 1 {
+		return res
+	}
+
+	min := prices[0]
+	for i := 1; i < len(prices); i++ {
+		if prices[i]-min > res {
+			res = prices[i] - min
+		}
+
+		if prices[i] < min {
+			min = prices[i]
+		}
+	}
+	return res
+}
+
+// 122. Best Time to Buy and Sell Stock II
+func MaxProfitV2(prices []int) int {
+	res := 0
+	if len(prices) == 0 || len(prices) == 1 {
+		return res
+	}
+
+	last := -1
+	for i := 0; i < len(prices); i++ {
+		if i+1 < len(prices) {
+			if prices[i+1] > prices[i] {
+				if last == -1 {
+					last = prices[i]
+				}
+			} else if prices[i+1] < prices[i] {
+				if last != -1 {
+					res += prices[i] - last
+					last = -1
+				}
+			}
+		} else {
+			if last != -1 {
+				res += prices[i] - last
+			}
+		}
+	}
+	return res
+}

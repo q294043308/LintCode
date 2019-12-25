@@ -12,5 +12,5 @@ func main() {
 	// head.Left.Right = &Common.TreeNode{Val: 4}
 	// head.Right.Right = &Common.TreeNode{Val: 6}
 	// head.Left.Right.Left = &Common.TreeNode{Val: 31}
-	LogicFun.Generate2(4)
+	LogicFun.MaxProfitV2([]int{2, 1, 2, 0, 1})
 }
