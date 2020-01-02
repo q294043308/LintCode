@@ -5,12 +5,13 @@ import (
 )
 
 func main() {
-	// head := &Common.TreeNode{Val: 1}
+	// head := &Common.TreeNode{Val: -3}
 	// head.Left = &Common.TreeNode{Val: 2}
-	// head.Right = &Common.TreeNode{Val: 5}
+	// head.Right = &Common.TreeNode{Val: 3}
 	// head.Left.Left = &Common.TreeNode{Val: 3}
 	// head.Left.Right = &Common.TreeNode{Val: 4}
-	// head.Right.Right = &Common.TreeNode{Val: 6}
+	// head.Right.Left = &Common.TreeNode{Val: 15}
+	// head.Right.Right = &Common.TreeNode{Val: 7}
 	// head.Left.Right.Left = &Common.TreeNode{Val: 31}
-	LogicFun.MaxProfitV2([]int{2, 1, 2, 0, 1})
+	LogicFun.LadderLength("hit", "cog", []string{"hot", "dot", "dog", "lot", "log", "cog"})
 }

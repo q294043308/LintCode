@@ -2344,3 +2344,59 @@ func MaxProfitV2(prices []int) int {
 	}
 	return res
 }
+
+// 122. Best Time to Buy and Sell Stock III
+func MaxProfitV3(prices []int) int {
+	if len(prices) < 2 {
+		return 0
+	}
+	res := 0
+
+	pricesOp := make([][]int, 4)
+	for i := 0; i < len(pricesOp); i++ {
+		pricesOp[i] = make([]int, len(prices))
+	}
+
+	// buy
+	for i := 0; i < len(prices); i++ {
+		pricesOp[0][i] = -prices[i]
+	}
+
+	// sale
+	maxnum := Common.MININTNUM
+	for i := 1; i < len(prices); i++ {
+		if pricesOp[0][i-1] > maxnum {
+			maxnum = pricesOp[0][i-1]
+		}
+		pricesOp[1][i] = maxnum + prices[i]
+		if res < pricesOp[1][i] {
+			res = pricesOp[1][i]
+		}
+	}
+	if len(prices) < 4 {
+		return res
+	}
+
+	// buy
+	maxnum = Common.MININTNUM
+	for i := 2; i < len(prices); i++ {
+		if pricesOp[1][i-1] > maxnum {
+			maxnum = pricesOp[1][i-1]
+		}
+		pricesOp[2][i] = maxnum - prices[i]
+	}
+
+	// sale
+	maxnum = Common.MININTNUM
+	for i := 3; i < len(prices); i++ {
+		if pricesOp[2][i-1] > maxnum {
+			maxnum = pricesOp[2][i-1]
+		}
+		pricesOp[3][i] = maxnum + prices[i]
+		if res < pricesOp[3][i] {
+			res = pricesOp[3][i]
+		}
+	}
+
+	return res
+}
