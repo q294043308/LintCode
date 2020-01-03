@@ -1,7 +1,9 @@
 // keep studying(i will go to company for my dream, the last day of the year) -- 2019.12.30
 package LogicFun
 
-import "Common"
+import (
+	"Common"
+)
 
 // 124. Binary Tree Maximum Path Sum
 func MaxPathSum(root *Common.TreeNode) int {
@@ -302,4 +304,122 @@ func LadderLength(beginWord string, endWord string, wordList []string) int {
 		endTmpMap = make(map[string]struct{})
 	}
 	return res
+}
+
+// 128. Longest Consecutive Sequence
+func LongestConsecutiveV2(nums []int) int {
+	if len(nums) == 0 || len(nums) == 1 {
+		return 0
+	}
+
+	res := 1
+	numMap := make(map[int]int, len(nums))
+	for _, num := range nums {
+		numMap[num] = 1
+	}
+
+	for num, _ := range numMap {
+		val := num + 1
+		_, ok := numMap[val]
+		for ; ok; _, ok = numMap[val] {
+			numMap[num] = numMap[val] + numMap[num]
+			if numMap[num] > res {
+				res = numMap[num]
+			}
+			delete(numMap, val)
+			val++
+		}
+
+	}
+	return res
+}
+
+// 129. Sum Root to Leaf Numbers
+func SumNumbers(root *Common.TreeNode) int {
+	if root == nil {
+		return 0
+	}
+	if root.Left == nil && root.Right == nil {
+		return root.Val
+	}
+
+	res := 0
+	curNum := root.Val
+	if root.Left != nil {
+		sumNumbersSub(root.Left, curNum, &res)
+	}
+	if root.Right != nil {
+		sumNumbersSub(root.Right, curNum, &res)
+	}
+
+	return res
+}
+
+func sumNumbersSub(root *Common.TreeNode, curNum int, res *int) {
+	curNum = curNum*10 + root.Val
+	if root.Left == nil && root.Right == nil {
+		*res = *res + curNum
+		return
+	}
+
+	if root.Left != nil {
+		sumNumbersSub(root.Left, curNum, res)
+	}
+	if root.Right != nil {
+		sumNumbersSub(root.Right, curNum, res)
+	}
+}
+
+// 130. Surrounded Regions
+func Solve(board [][]byte) {
+	if len(board) <= 2 || len(board[0]) <= 2 {
+		return
+	}
+
+	for i := 1; i < len(board[0])-1; i++ {
+		if board[0][i] == 'O' {
+			SolveSub(board, 1, i)
+		}
+		if board[len(board)-1][i] == 'O' {
+			SolveSub(board, len(board)-2, i)
+		}
+	}
+	for i := 1; i < len(board)-1; i++ {
+		if board[i][0] == 'O' {
+			SolveSub(board, i, 1)
+		}
+		if board[i][len(board[0])-1] == 'O' {
+			SolveSub(board, i, len(board[0])-2)
+		}
+	}
+
+	for i := 1; i < len(board)-1; i++ {
+		for j := 1; j < len(board[0])-1; j++ {
+			if board[i][j] == 'O' {
+				board[i][j] = 'X'
+			} else if board[i][j] == '#' {
+				board[i][j] = 'O'
+			}
+		}
+	}
+}
+
+func SolveSub(board [][]byte, i, j int) {
+	if board[i][j] != 'O' {
+		return
+	}
+
+	board[i][j] = '#'
+	if i-1 > 0 && board[i-1][j] != '#' {
+		SolveSub(board, i-1, j)
+	}
+	if j-1 > 0 && board[i][j-1] != '#' {
+		SolveSub(board, i, j-1)
+	}
+	if i+1 < len(board)-1 && board[i+1][j] != '#' {
+		SolveSub(board, i+1, j)
+	}
+	if j+1 < len(board[0])-1 && board[i][j+1] != '#' {
+		SolveSub(board, i, j+1)
+	}
 }
