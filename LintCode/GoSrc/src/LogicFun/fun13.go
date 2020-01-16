@@ -423,3 +423,168 @@ func SolveSub(board [][]byte, i, j int) {
 		SolveSub(board, i, j+1)
 	}
 }
+
+// 131. Palindrome Partitioning
+func PartitionV2(s string) [][]string {
+	var res [][]string
+	if len(s) == 0 {
+		return res
+	}
+
+	var curStr []string
+	partitionDp := partitionDP(s)
+	partitionSub(s, 0, &curStr, &res, partitionDp)
+	return res
+}
+
+func partitionDP(s string) [][]bool {
+	res := make([][]bool, len(s))
+	for i, _ := range res {
+		res[i] = make([]bool, len(s))
+		res[i][i] = true
+	}
+
+	for j := 1; j < len(s); j++ {
+		for i := 0; i < j; i++ {
+			if j-i == 1 || res[i+1][j-1] {
+				if s[i] == s[j] {
+					res[i][j] = true
+				} else {
+					res[i][j] = false
+				}
+			} else {
+				res[i][j] = false
+			}
+		}
+	}
+
+	return res
+}
+
+func partitionSub(s string, start int, curStr *[]string, res *[][]string, dp [][]bool) {
+	if start == len(s) {
+		curRes := make([]string, len(*curStr))
+		copy(curRes, *curStr)
+		*res = append(*res, curRes)
+		return
+	}
+
+	for i := start; i < len(s); i++ {
+		if dp[start][i] {
+			*curStr = append(*curStr, s[start:i+1])
+			partitionSub(s, i+1, curStr, res, dp)
+			*curStr = (*curStr)[:len(*curStr)-1]
+		}
+	}
+}
+
+/* error-> not partition,is sum chars
+func partitionSub(s string, start int, curStr *[]string, res *[][]string) {
+	if start == len(s) {
+		curRes := make([]string, len(*curStr))
+		copy(curRes, *curStr)
+		*res = append(*res, curRes)
+		return
+	}
+
+	*curStr = append(*curStr, s[start:start+1])
+	partitionSub(s, start+1, curStr, res)
+	*curStr = (*curStr)[:len(*curStr)-1]
+	charMap := map[byte]int{s[start]: 1}
+	mid := -1
+
+	for i := start + 1; i < len(s); i++ {
+		if (i-start)%2 == 1 && mid == -1 {
+			charMap[s[i]]--
+			if charMap[s[i]] == 0 {
+				delete(charMap, s[i])
+			}
+			mid = i
+		} else {
+			charMap[s[mid]]++
+			charMap[s[i]]--
+			if charMap[s[mid]] == 0 {
+				delete(charMap, s[mid])
+			}
+			if charMap[s[i]] == 0 {
+				delete(charMap, s[i])
+			}
+
+			if (i-start)%2 == 1 {
+				mid++
+			}
+		}
+
+		if len(charMap) == 0 {
+			*curStr = append(*curStr, s[start:i+1])
+			partitionSub(s, i+1, curStr, res)
+			*curStr = (*curStr)[:len(*curStr)-1]
+		}
+	}
+}
+*/
+
+// 132. Palindrome Partitioning II
+func MinCut(s string) int {
+	if len(s) == 0 || len(s) == 1 {
+		return 0
+	}
+
+	partitionDp := partitionDP(s)
+	dp := make([]int, len(s))
+	for i := 0; i < len(s); i++ {
+		dp[i] = i
+	}
+
+	for i := 1; i < len(s); i++ {
+		if partitionDp[0][i] {
+			dp[i] = 0
+			continue
+		}
+
+		for j := 0; j < i; j++ {
+			if partitionDp[j+1][i] {
+				if dp[i] > dp[j]+1 {
+					dp[i] = dp[j] + 1
+				}
+			}
+		}
+	}
+	return dp[len(s)-1]
+}
+
+// 133 to PY(errors, wait for fix the bug)
+// 134. Gas Station
+func CanCompleteCircuit(gas []int, cost []int) int {
+	start := -1
+	sum := 0
+
+	for i := 0; i < len(gas); i++ {
+		if sum+gas[i]-cost[i] < 0 {
+			if gas[i]-cost[i] < 0 {
+				sum = 0
+				start = -1
+			} else {
+				sum = gas[i] - cost[i]
+				start = i
+			}
+		} else {
+			sum += gas[i] - cost[i]
+			if start == -1 {
+				start = i
+			}
+		}
+	}
+
+	if start == -1 {
+		return -1
+	}
+
+	for i := 0; i < start; i++ {
+		sum += gas[i] - cost[i]
+		if sum < 0 {
+			return -1
+		}
+	}
+	return start
+}
