@@ -588,3 +588,91 @@ func CanCompleteCircuit(gas []int, cost []int) int {
 	}
 	return start
 }
+
+// 135. Candy
+func Candy(ratings []int) int {
+	if len(ratings) == 0 {
+		return 0
+	}
+
+	candySet := make([]int, len(ratings))
+	for i := 1; i < len(ratings); i++ {
+		if ratings[i] > ratings[i-1] {
+			candySet[i] = candySet[i-1] + 1
+		}
+	}
+
+	sum := candySet[len(ratings)-1] + 1
+	for i := len(ratings) - 2; i >= 0; i-- {
+		if ratings[i] > ratings[i+1] {
+			if candySet[i] < candySet[i+1]+1 {
+				candySet[i] = candySet[i+1] + 1
+			}
+		}
+		sum += candySet[i] + 1
+	}
+
+	return sum
+}
+
+// 136. Single Number
+func singleNumber(nums []int) int {
+	numMap := make(map[int]struct{})
+	for _, num := range nums {
+		if _, ok := numMap[num]; ok {
+			delete(numMap, num)
+		} else {
+			numMap[num] = struct{}{}
+		}
+	}
+
+	for num, _ := range numMap {
+		return num
+	}
+
+	return -1
+}
+
+// why slowly by using map ??
+func singleNumberOpt(nums []int) int {
+	res := 0
+	for _, num := range nums {
+		res = res ^ num
+	}
+	return res
+}
+
+// 137. Single Number II
+func SingleNumberV2(nums []int) int {
+	numMap := make(map[int]int)
+	for _, num := range nums {
+		if v, ok := numMap[num]; ok && v == 2 {
+			delete(numMap, num)
+		} else {
+			numMap[num]++
+		}
+	}
+
+	for num, _ := range numMap {
+		return num
+	}
+
+	return -1
+}
+
+func SingleNumberV2Opt(nums []int) int {
+	a := 0
+	b := 0
+
+	for _, num := range nums {
+		tmp := a & num
+		a = a ^ num
+		b = b ^ tmp
+
+		tmp = a & b
+		a = a - tmp
+		b = b - tmp
+	}
+
+	return a ^ b
+}
