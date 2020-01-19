@@ -13,5 +13,5 @@ func main() {
 	// head.Right.Left = &Common.TreeNode{Val: 15}
 	// head.Right.Right = &Common.TreeNode{Val: 7}
 	// head.Left.Right.Left = &Common.TreeNode{Val: 31}
-	println(LogicFun.SingleNumberV2Opt([]int{2, 2, 3, 2}))
+	println(LogicFun.WordBreakV2("catsanddog", []string{"cat", "cats", "and", "sand", "dog"}))
 }

@@ -674,5 +674,58 @@ func SingleNumberV2Opt(nums []int) int {
 		b = b - tmp
 	}
 
-	return a ^ b
+	return a
+}
+
+// 138 to PY
+// 139. Word Break
+func WordBreak(s string, wordDict []string) bool {
+	wordMap := make(map[string]struct{}, len(wordDict))
+	for _, v := range wordDict {
+		wordMap[v] = struct{}{}
+	}
+
+	dp := make([]bool, len(s)+1)
+	dp[0] = true
+	for i := 1; i < len(dp); i++ {
+		for j := i - 1; j >= 0; j-- {
+			if dp[j] {
+				str := s[j:i]
+				if _, ok := wordMap[str]; ok {
+					dp[i] = true
+					break
+				}
+			}
+		}
+	}
+	return dp[len(s)]
+}
+
+// 140. Word Break II (timeout)
+func WordBreakV2(s string, wordDict []string) []string {
+	wordMap := make(map[string]struct{}, len(wordDict))
+	for _, v := range wordDict {
+		wordMap[v] = struct{}{}
+	}
+
+	dp := make([][]string, len(s)+1)
+	dp[0] = []string{""}
+	for i := 1; i < len(dp); i++ {
+		for j := i - 1; j >= 0; j-- {
+			if dp[j] != nil && len(dp[j]) != 0 {
+				str := s[j:i]
+				if _, ok := wordMap[str]; ok {
+					for _, path := range dp[j] {
+						if path == "" {
+							dp[i] = append(dp[i], str)
+						} else {
+							dp[i] = append(dp[i], path+" "+str)
+						}
+
+					}
+				}
+			}
+		}
+	}
+	return dp[len(s)]
 }
