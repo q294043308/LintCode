@@ -1,11 +1,16 @@
 package main
 
 import (
+	"Common"
 	"LogicFun"
 )
 
 func main() {
-	// head := &Common.TreeNode{Val: 1}
+	head := &Common.ListNode{Val: 3}
+	head.Next = &Common.ListNode{Val: 2}
+	head.Next.Next = &Common.ListNode{Val: 0}
+	head.Next.Next.Next = &Common.ListNode{Val: -4}
+	head.Next.Next.Next.Next = head.Next
 	// head.Left = &Common.TreeNode{Val: 2}
 	// head.Right = &Common.TreeNode{Val: 3}
 	// head.Left.Left = &Common.TreeNode{Val: 3}
@@ -13,5 +18,5 @@ func main() {
 	// head.Right.Left = &Common.TreeNode{Val: 15}
 	// head.Right.Right = &Common.TreeNode{Val: 7}
 	// head.Left.Right.Left = &Common.TreeNode{Val: 31}
-	println(LogicFun.WordBreakV2("catsanddog", []string{"cat", "cats", "and", "sand", "dog"}))
+	println(LogicFun.HasCycleOpt(head))
 }

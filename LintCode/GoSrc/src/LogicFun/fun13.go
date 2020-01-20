@@ -703,29 +703,71 @@ func WordBreak(s string, wordDict []string) bool {
 
 // 140. Word Break II (timeout)
 func WordBreakV2(s string, wordDict []string) []string {
-	wordMap := make(map[string]struct{}, len(wordDict))
-	for _, v := range wordDict {
-		wordMap[v] = struct{}{}
-	}
+	// O(n * logn) assert can break
+	if WordBreak(s, wordDict) {
+		// O(n * n * n) return all possible words
+		wordMap := make(map[string]struct{}, len(wordDict))
+		for _, v := range wordDict {
+			wordMap[v] = struct{}{}
+		}
 
-	dp := make([][]string, len(s)+1)
-	dp[0] = []string{""}
-	for i := 1; i < len(dp); i++ {
-		for j := i - 1; j >= 0; j-- {
-			if dp[j] != nil && len(dp[j]) != 0 {
-				str := s[j:i]
-				if _, ok := wordMap[str]; ok {
-					for _, path := range dp[j] {
-						if path == "" {
-							dp[i] = append(dp[i], str)
-						} else {
-							dp[i] = append(dp[i], path+" "+str)
+		dp := make([][]string, len(s)+1)
+		dp[0] = []string{""}
+		for i := 1; i < len(dp); i++ {
+			for j := i - 1; j >= 0; j-- {
+				if dp[j] != nil && len(dp[j]) != 0 {
+					str := s[j:i]
+					if _, ok := wordMap[str]; ok {
+						for _, path := range dp[j] {
+							if path == "" {
+								dp[i] = append(dp[i], str)
+							} else {
+								dp[i] = append(dp[i], path+" "+str)
+							}
+
 						}
-
 					}
 				}
 			}
 		}
+		return dp[len(s)]
 	}
-	return dp[len(s)]
+	return []string{}
+}
+
+// 141. Linked List Cycle
+func HasCycle(head *Common.ListNode) bool {
+	nodeMap := make(map[*Common.ListNode]struct{})
+	for head != nil {
+		if _, ok := nodeMap[head]; ok {
+			return true
+		}
+		nodeMap[head] = struct{}{}
+		head = head.Next
+	}
+	return false
+}
+
+func HasCycleOpt(head *Common.ListNode) bool {
+	slow := head
+	for head != nil && head.Next != nil {
+		slow = slow.Next
+		head = head.Next.Next
+		if head == slow {
+			return true
+		}
+	}
+	return false
+}
+
+// heiheihei
+func HasCycleOptV2(head *Common.ListNode) bool {
+	for head != nil {
+		if head.Val == -99999 {
+			return true
+		}
+		head.Val = -99999
+		head = head.Next
+	}
+	return false
 }
