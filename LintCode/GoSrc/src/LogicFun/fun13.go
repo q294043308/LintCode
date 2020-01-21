@@ -771,3 +771,90 @@ func HasCycleOptV2(head *Common.ListNode) bool {
 	}
 	return false
 }
+
+// 142. Linked List Cycle II
+func DetectCycle(head *Common.ListNode) *Common.ListNode {
+	if head == nil {
+		return head
+	}
+
+	nodeMap := map[*Common.ListNode]struct{}{head: struct{}{}}
+	for head != nil {
+		head = head.Next
+		if _, ok := nodeMap[head]; ok {
+			return head
+		} else {
+			nodeMap[head] = struct{}{}
+		}
+	}
+
+	return nil
+}
+
+func DetectCycleOpt(head *Common.ListNode) *Common.ListNode {
+	slow := head
+	quik := head
+	for quik != nil && quik.Next != nil {
+		slow = slow.Next
+		quik = quik.Next.Next
+		if quik == slow {
+			slow := head
+			for quik != slow {
+				quik = quik.Next
+				slow = slow.Next
+			}
+			return slow
+		}
+	}
+
+	return nil
+}
+
+// 143. Reorder List
+func ReorderList(head *Common.ListNode) {
+	if head == nil || head.Next == nil {
+		return
+	}
+
+	var stack []*Common.ListNode
+	lenth := 0
+	node := head
+	for node != nil {
+		stack = append(stack, node)
+		node = node.Next
+		lenth++
+	}
+
+	node = head
+	j := len(stack) - 1
+	for i := 0; i < lenth/2; i++ {
+		tmp := node.Next
+		node.Next = stack[j]
+		j--
+		node.Next.Next = tmp
+		node = tmp
+	}
+	node.Next = nil
+}
+
+// 144. Binary Tree Preorder Traversal
+func PreorderTraversal(root *Common.TreeNode) []int {
+	if root == nil {
+		return []int{}
+	}
+
+	left := PreorderTraversal(root.Left)
+	right := PreorderTraversal(root.Right)
+	return append(append([]int{root.Val}, left...), right...)
+}
+
+// 145. Binary Tree Postorder Traversal
+func PostorderTraversal(root *Common.TreeNode) []int {
+	if root == nil {
+		return []int{}
+	}
+
+	left := PostorderTraversal(root.Left)
+	right := PostorderTraversal(root.Right)
+	return append(append(left, right...), root.Val)
+}
