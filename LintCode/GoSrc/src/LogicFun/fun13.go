@@ -860,3 +860,123 @@ func PostorderTraversal(root *Common.TreeNode) []int {
 }
 
 // 146. LRU Cache -> to lru.go
+// 147. Insertion Sort List
+func InsertionSortList(head *Common.ListNode) *Common.ListNode {
+	if head == nil {
+		return head
+	}
+
+	move := head.Next
+	head.Next = nil
+	for move != nil {
+		tmp := move
+		move = move.Next
+		if tmp.Val <= head.Val {
+			tmp.Next = head
+			head = tmp
+		} else {
+			last := head
+			for last.Next != nil && last.Next.Val < tmp.Val {
+				last = last.Next
+			}
+			tmp.Next = last.Next
+			last.Next = tmp
+		}
+	}
+
+	return head
+}
+
+// 148. Sort List
+func SortList(head *Common.ListNode) *Common.ListNode {
+	if head == nil || head.Next == nil {
+		return head
+	}
+
+	move := head
+	lenth := 0
+	for move != nil {
+		move = move.Next
+		lenth++
+	}
+
+	v := 1
+	for v < lenth {
+		move := head
+		var right, left, last *Common.ListNode
+		for true {
+			left = move
+			if last != nil {
+				last.Next = left
+			}
+			if left == nil {
+				break
+			}
+			for i := 0; i < v; i++ {
+				if move == nil {
+					break
+				}
+				move = move.Next
+			}
+			right = move
+			for i := 0; i < v && move != nil; i++ {
+				move = move.Next
+			}
+			if right == nil {
+				break
+			}
+
+			lv := 0
+			rv := 0
+			var new, newMove *Common.ListNode
+			for lv < v && rv < v && right != nil {
+				if left.Val <= right.Val {
+					if new == nil {
+						new = left
+						newMove = new
+					} else {
+						newMove.Next = left
+						newMove = newMove.Next
+					}
+					left = left.Next
+					lv++
+				} else {
+					if new == nil {
+						new = right
+						newMove = new
+					} else {
+						newMove.Next = right
+						newMove = newMove.Next
+					}
+					right = right.Next
+					rv++
+				}
+
+			}
+
+			for lv < v {
+				newMove.Next = left
+				newMove = newMove.Next
+				left = left.Next
+				lv++
+			}
+
+			for rv < v && right != nil {
+				newMove.Next = right
+				newMove = newMove.Next
+				right = right.Next
+				rv++
+			}
+
+			if last != nil {
+				last.Next = new
+			} else {
+				head = new
+			}
+
+			last = newMove
+		}
+		v = v * 2
+	}
+	return head
+}

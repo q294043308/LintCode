@@ -6,7 +6,7 @@ class Solution():
 
     # 133. Clone Graph
     def cloneGraph(self, node):
-        nodeDict = {}
+        nodeDict = {None:None}
         return self.cloneGraphSub(node, nodeDict)
 
     def cloneGraphSub(self, node, nodeDict):
