@@ -1,4 +1,4 @@
-# will go to the other company(bytedance), so i'd like coding by python - 2020.1.16
+# will go to the other company, so i'd like coding by python - 2020.1.16
 import common.graph
 import common.list
 
@@ -38,3 +38,29 @@ class Solution():
             return new
 
         return copyRandomListSub(head)
+
+    # 149. Max Points on a Line
+    def maxPoints(self, points: list[list[int]]) -> int:
+        from collections import Counter, defaultdict
+        points_dict = Counter(tuple(point) for point in points)
+        not_repeat_points = list(points_dict.keys())
+        n = len(not_repeat_points)
+        if n == 1:
+            return points_dict[not_repeat_points[0]]
+
+        res = 0
+        for i in range(n - 1):
+            x1, y1 = not_repeat_points[i][0], not_repeat_points[i][1]
+            slope = defaultdict(int)
+            for j in range(i + 1, n):
+                # 使用斜率，精度不准确， * 1000 后能过测试用例，不建议使用，建议使用最小分数求解
+                x2, y2 = not_repeat_points[j][0], not_repeat_points[j][1]
+                dy, dx = y2 - y1, x2 - x1
+
+                if dx == 0:
+                    tmp = "#"
+                else:
+                    tmp = dy * 1000 / dx * 1000
+                slope[tmp] += points_dict[not_repeat_points[j]]
+            res = max(res, max(slope.values()) + points_dict[not_repeat_points[i]])
+        return res

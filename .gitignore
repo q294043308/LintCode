@@ -2,3 +2,13 @@
 Debug
 LintCode.opensdf
 windows_amd64
+LintCode/GoSrc/.vscode
+LintCode/GoSrc/bin
+LintCode/GoSrc/pkg
+LintCode/GoSrc/.idea
+LintCode/PySrc/.idea
+LintCode/PySrc/src/.idea
+LintCode/PySrc/src/common/__pycache__
+LintCode/PySrc/src/logicfun/__pycache__
+bin
+pkg
