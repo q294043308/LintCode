@@ -40,7 +40,7 @@ class Solution():
         return copyRandomListSub(head)
 
     # 149. Max Points on a Line
-    def maxPoints(self, points: list[list[int]]) -> int:
+    def maxPoints(self, points) -> int:
         from collections import Counter, defaultdict
         points_dict = Counter(tuple(point) for point in points)
         not_repeat_points = list(points_dict.keys())
@@ -64,3 +64,36 @@ class Solution():
                 slope[tmp] += points_dict[not_repeat_points[j]]
             res = max(res, max(slope.values()) + points_dict[not_repeat_points[i]])
         return res
+
+    # 150. Evaluate Reverse Polish Notation
+    def evalRPN(self, tokens) -> int:
+        nums = []
+
+        for token in tokens:
+            if len(token) == 1 and (token[0] < '0' or token[0] > '9'):
+                top = nums.pop()
+                if token == "+":
+                    nums.append(top + nums.pop())
+                elif token == "-":
+                    nums.append(nums.pop() - top)
+                elif token == "*":
+                    nums.append(nums.pop() * top)
+                elif token == "/":
+                    nums.append(int(nums.pop() / top))
+            else:
+                nums.append(int(token))
+
+        return nums[0]
+
+    # 151. Reverse Words in a String
+    def reverseWords(self, s: str) -> str:
+        res = ""
+        arr = s.split(" ")
+        if len(arr) == 0:
+            return res
+
+        for v in reversed(arr):
+            if len(v) != 0:
+                res = res + v + " "
+
+        return res[:len(res)-1]
