@@ -1,6 +1,7 @@
 # will go to the other company, so i'd like coding by python - 2020.1.16
 import common.graph
 import common.list
+import common.const as Const
 
 class Solution():
 
@@ -97,3 +98,26 @@ class Solution():
                 res = res + v + " "
 
         return res[:len(res)-1]
+
+    # 152. Maximum Product Subarray
+    def maxProduct(self, nums: list[int]) -> int:
+        imax = 1
+        imin = 1
+        res = Const.MIN_INT_NUM
+
+        for num in nums:
+            if not num:
+                imax = 1
+                imin = 1
+                res = max(0, res)
+            else:
+                t = imax
+                imax = max(imax * num, num, imin * num)
+                imin = min(imin * num, num, t * num)
+                res = max(imax, res)
+        return res
+
+    # 153. Find Minimum in Rotated Sorted Array(cut down, continue)
+    def findMin(self, nums: List[int]) -> int:
+        mid = nums[len(nums)/2]
+        return mid
