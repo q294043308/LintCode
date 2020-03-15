@@ -100,7 +100,7 @@ class Solution():
         return res[:len(res)-1]
 
     # 152. Maximum Product Subarray
-    def maxProduct(self, nums: list[int]) -> int:
+    def maxProduct(self, nums) -> int:
         imax = 1
         imin = 1
         res = Const.MIN_INT_NUM
@@ -118,6 +118,23 @@ class Solution():
         return res
 
     # 153. Find Minimum in Rotated Sorted Array(cut down, continue)
-    def findMin(self, nums: List[int]) -> int:
-        mid = nums[len(nums)/2]
-        return mid
+    def findMin(self, nums) -> int:
+        if not nums:
+            return 0
+        n = len(nums)
+        if n == 1:
+            return nums[0]
+        if n == 2:
+            return min(nums[0], nums[1])
+
+        mid = n//2
+        num = nums[mid]
+        start = nums[0]
+        end = nums[n-1]
+        if start <= num:
+            if end <= start:
+                return self.findMin(nums[mid:])
+            else:
+                return self.findMin(nums[:mid+1])
+        else:
+            return self.findMin(nums[:mid+1])
