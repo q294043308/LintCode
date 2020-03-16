@@ -138,3 +138,30 @@ class Solution():
                 return self.findMin(nums[:mid+1])
         else:
             return self.findMin(nums[:mid+1])
+    
+    # 154. Find Minimum in Rotated Sorted Array II
+    def findMin2(self, nums) -> int:
+        if not nums:
+            return 0
+        n = len(nums)
+        if n == 1:
+            return nums[0]
+        if n == 2:
+            return min(nums[0], nums[1])
+
+        mid = n//2
+        num = nums[mid]
+        start = nums[0]
+        end = nums[n-1]
+        if start < num:
+            if end <= start:
+                return self.findMin(nums[mid:])
+            else:
+                return self.findMin(nums[:mid+1])
+        elif start > num:
+            return self.findMin(nums[:mid+1])
+        else:
+            return self.findMin(nums[1:])
+
+
+    # 155. Min Stack -> common.stack
