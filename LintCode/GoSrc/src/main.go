@@ -1,15 +1,15 @@
 package main
 
-import (
-	"Common"
-	"LogicFun"
-)
+import logicfun "Logicfun"
 
 func main() {
-	head := &Common.ListNode{Val: 4}
-	head.Next = &Common.ListNode{Val: 2}
-	head.Next.Next = &Common.ListNode{Val: 1}
-	head.Next.Next.Next = &Common.ListNode{Val: 3}
+	// head := &Common.ListNode{Val: 4}
+	// head.Next = &Common.ListNode{Val: 1}
+	// head.Next.Next = &Common.ListNode{Val: 8}
+	// head.Next.Next.Next = &Common.ListNode{Val: 4}
+
+	// head2 := &Common.ListNode{Val: 2}
+	// head2.Next = head.Next
 	// head.Next.Next.Next.Next = &Common.ListNode{Val: 0}
 	// // head.Left = &Common.TreeNode{Val: 2}
 	// // head.Right = &Common.TreeNode{Val: 3}
@@ -17,6 +17,7 @@ func main() {
 	// // head.Left.Right = &Common.TreeNode{Val: 4}
 	// // head.Right.Left = &Common.TreeNode{Val: 15}
 	// // head.Right.Right = &Common.TreeNode{Val: 7}
-	// // head.Left.Right.Left = &Common.TreeNode{Val: 31}
-	LogicFun.SortList(head)
+	// close(test)
+
+	print(logicfun.FractionToDecimal(-50, 8))
 }

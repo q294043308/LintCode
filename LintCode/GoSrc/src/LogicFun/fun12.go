@@ -1,5 +1,5 @@
 // keep studying -- 2019.10.30
-package LogicFun
+package logicfun
 
 import (
 	"Common"

@@ -1,7 +1,7 @@
 // the first letter of function must be bigger, beacause of the special of go-language, I want debug the function in main.go
 // so ..  I lose my love .. fighting ~  ^v^
 
-package LogicFun
+package logicfun
 
 import (
 	"Common"

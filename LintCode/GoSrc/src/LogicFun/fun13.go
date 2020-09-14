@@ -1,5 +1,5 @@
 // keep studying(i will go to company for my dream, the last day of the year) -- 2019.12.30
-package LogicFun
+package logicfun
 
 import (
 	"Common"
@@ -980,4 +980,5 @@ func SortList(head *Common.ListNode) *Common.ListNode {
 	}
 	return head
 }
+
 // it's final, go to py

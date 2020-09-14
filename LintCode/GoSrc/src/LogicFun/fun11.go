@@ -1,6 +1,6 @@
 // There have a lot of bugs in LintCode; i feeled like eating shit！
 // escape LintCode, Go LeetCode -- 2019.3.7
-package LogicFun
+package logicfun
 
 import (
 	"Common"

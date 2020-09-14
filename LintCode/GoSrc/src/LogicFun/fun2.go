@@ -1,4 +1,4 @@
-package LogicFun
+package logicfun
 
 import (
 	"Common"
