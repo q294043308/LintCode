@@ -19,5 +19,5 @@ func main() {
 	// // head.Right.Right = &Common.TreeNode{Val: 7}
 	// close(test)
 
-	print(logicfun.FractionToDecimal(-50, 8))
+	print(logicfun.TrailingZeroes(25))
 }

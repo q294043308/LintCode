@@ -176,3 +176,89 @@ func FractionToDecimal(numerator int, denominator int) string {
 
 	return res
 }
+
+// 168. Excel Sheet Column Title
+func ConvertToTitle(n int) string {
+	res := ""
+	for n > 0 {
+		if n == Common.BIG_ENGLISH_CHAR_NUM {
+			res = "Z" + res
+			return res
+		}
+
+		dev := n % Common.BIG_ENGLISH_CHAR_NUM
+		if dev > 0 {
+			res = string('A'+dev-1) + res
+		} else {
+			res = "Z" + res
+			n -= Common.BIG_ENGLISH_CHAR_NUM
+		}
+		n /= Common.BIG_ENGLISH_CHAR_NUM
+	}
+	return res
+}
+
+// 169. Majority Element
+func MajorityElement(nums []int) int {
+	lastNum := nums[0]
+	lastAce := 1
+
+	for i := 1; i < len(nums); i++ {
+		if nums[i] != lastNum {
+			lastAce--
+			if lastAce == 0 {
+				lastNum = nums[i]
+				lastAce = 1
+			}
+		} else {
+			lastAce++
+		}
+	}
+	return lastNum
+}
+
+// 171. Excel Sheet Column Number
+func TitleToNumber(s string) int {
+	res := 0
+	for i := 0; i < len(s); i++ {
+		res *= Common.BIG_ENGLISH_CHAR_NUM
+		res += int(s[i]-'A') + 1
+	}
+	return res
+}
+
+// 172. Factorial Trailing Zeroes
+func TrailingZeroes(n int) int {
+	sub := 5
+	res := 0
+	for n >= sub {
+		res += n / sub
+		sub *= 5
+	}
+	return res
+}
+
+// 174. Dungeon Game
+/*
+The demons had captured the princess (P) and imprisoned her in the bottom-right corner of a dungeon. The dungeon consists of M x N rooms laid out in a 2D grid. Our valiant knight (K) was initially positioned in the top-left room and must fight his way through the dungeon to rescue the princess.
+
+The knight has an initial health point represented by a positive integer. If at any point his health point drops to 0 or below, he dies immediately.
+
+Some of the rooms are guarded by demons, so the knight loses health (negative integers) upon entering these rooms; other rooms are either empty (0's) or contain magic orbs that increase the knight's health (positive integers).
+
+In order to reach the princess as quickly as possible, the knight decides to move only rightward or downward in each step.
+
+
+
+Write a function to determine the knight's minimum initial health so that he is able to rescue the princess.
+
+For example, given the dungeon below, the initial health of the knight must be at least 7 if he follows the optimal path RIGHT-> RIGHT -> DOWN -> DOWN.
+
+-2 (K)	-3	3
+-5	-10	1
+10	30	-5 (P)
+
+*/
+func CalculateMinimumHP(dungeon [][]int) int {
+	return 0
+}
