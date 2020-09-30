@@ -19,5 +19,5 @@ func main() {
 	// // head.Right.Right = &Common.TreeNode{Val: 7}
 	// close(test)
 
-	print(logicfun.TrailingZeroes(25))
+	print(logicfun.CalculateMinimumHP([][]int{{-2, -3, 3}, {-5, -10, 1}, {10, 30, -5}}))
 }

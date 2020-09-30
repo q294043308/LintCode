@@ -4,6 +4,7 @@ package logicfun
 
 import (
 	"Common"
+	"math"
 	"sort"
 	"strconv"
 	"strings"
@@ -239,26 +240,71 @@ func TrailingZeroes(n int) int {
 }
 
 // 174. Dungeon Game
-/*
-The demons had captured the princess (P) and imprisoned her in the bottom-right corner of a dungeon. The dungeon consists of M x N rooms laid out in a 2D grid. Our valiant knight (K) was initially positioned in the top-left room and must fight his way through the dungeon to rescue the princess.
-
-The knight has an initial health point represented by a positive integer. If at any point his health point drops to 0 or below, he dies immediately.
-
-Some of the rooms are guarded by demons, so the knight loses health (negative integers) upon entering these rooms; other rooms are either empty (0's) or contain magic orbs that increase the knight's health (positive integers).
-
-In order to reach the princess as quickly as possible, the knight decides to move only rightward or downward in each step.
-
-
-
-Write a function to determine the knight's minimum initial health so that he is able to rescue the princess.
-
-For example, given the dungeon below, the initial health of the knight must be at least 7 if he follows the optimal path RIGHT-> RIGHT -> DOWN -> DOWN.
-
--2 (K)	-3	3
--5	-10	1
-10	30	-5 (P)
-
-*/
 func CalculateMinimumHP(dungeon [][]int) int {
-	return 0
+	type hpHistory struct {
+		hp  int
+		min int
+	}
+
+	n := len(dungeon)
+	m := len(dungeon[0])
+	dpDungeon := make([][][]hpHistory, n)
+	for i := 0; i < n; i++ {
+		dpDungeon[i] = make([][]hpHistory, m)
+	}
+	dpDungeon[0][0] = append(dpDungeon[0][0], hpHistory{hp: dungeon[0][0], min: dungeon[0][0]})
+
+	for i := 0; i < n; i++ {
+		for j := 0; j < m; j++ {
+			curDp := dpDungeon[i][j]
+			if i > 0 {
+				for z := 0; z < len(dpDungeon[i-1][j]); z++ {
+					curDp = append(curDp, hpHistory{hp: dpDungeon[i-1][j][z].hp + dungeon[i][j]})
+					curDp[len(curDp)-1].min = int(math.Min(float64(curDp[len(curDp)-1].hp), float64(dpDungeon[i-1][j][z].min)))
+				}
+			}
+			if j > 0 {
+				for z := 0; z < len(dpDungeon[i][j-1]); z++ {
+					isAdd := true
+					newDp := hpHistory{
+						hp:  dpDungeon[i][j-1][z].hp + dungeon[i][j],
+						min: int(math.Min(float64(dpDungeon[i][j-1][z].hp+dungeon[i][j]), float64(dpDungeon[i][j-1][z].min))),
+					}
+
+					for s := 0; s < len(curDp); s++ {
+						if newDp.hp <= curDp[s].hp && newDp.min <= curDp[s].min {
+							isAdd = false
+							break
+						}
+						if newDp.hp >= curDp[s].hp && newDp.min >= curDp[s].min {
+							curDp[s].hp = newDp.hp
+							curDp[s].min = newDp.min
+							isAdd = false
+							break
+						}
+					}
+					if isAdd {
+						curDp = append(curDp, newDp)
+					}
+				}
+			}
+			dpDungeon[i][j] = curDp
+		}
+	}
+	res := Common.MAXINTNUM
+	for i := 0; i < len(dpDungeon[n-1][m-1]); i++ {
+		if dpDungeon[n-1][m-1][i].min > 0 {
+			return 1
+		}
+		if -dpDungeon[n-1][m-1][i].min+1 < res {
+			res = -dpDungeon[n-1][m-1][i].min + 1
+		}
+	}
+	return res
 }
+
+// 175. Combine Two Tables # cool: sql question ?
+// select FirstName, LastName, City, State from Person left join Address using (PersonId)
+
+// 176. Second Highest Salary
+// select IFNULL((select distinct Salary as SecondHighestSalary from Employee order by Salary desc limit 1,1), NULL) as SecondHighestSalary
