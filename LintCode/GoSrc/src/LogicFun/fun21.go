@@ -308,3 +308,78 @@ func CalculateMinimumHP(dungeon [][]int) int {
 
 // 176. Second Highest Salary
 // select IFNULL((select distinct Salary as SecondHighestSalary from Employee order by Salary desc limit 1,1), NULL) as SecondHighestSalary
+
+// 177. Nth Highest Salary
+/*
+CREATE FUNCTION getNthHighestSalary(N INT) RETURNS INT
+BEGIN
+  SET N = N-1;
+  RETURN (
+	  select IFNULL((select distinct Salary as SecondHighestSalary from Employee order by Salary desc limit  N,1), NULL)
+  );
+END
+*/
+
+// 178. Rank Scores
+/*
+SELECT Score, rr as 'Rank' from
+(SELECT s1.Score, count(distinct(s2.Score)) as rr
+FROM Scores s1,Scores s2
+WHERE s1.Score<=s2.Score
+GROUP BY s1.Id) as t1
+ORDER BY rr
+*/
+
+// 179. Largest Number
+type dumpNumber struct {
+	childs map[int]*dumpNumber
+	vals   [10]string
+}
+
+func LargestNumber(nums []int) string {
+	sortDump := &dumpNumber{childs: make(map[int]*dumpNumber)}
+	for i := 0; i < len(nums); i++ {
+		curDump := sortDump
+		curNum := strconv.Itoa(nums[i])
+		for j := 0; j < 10; j++ {
+			index := int(curNum[j%len(curNum)] - '0')
+			if _, ok := curDump.childs[index]; !ok {
+				curDump.childs[index] = &dumpNumber{childs: make(map[int]*dumpNumber)}
+			}
+			curDump = curDump.childs[index]
+		}
+		curDump.vals[len(curNum)-1] += curNum
+	}
+
+	i := 0
+	res := backDump(sortDump, 0)
+	for i = 0; i < len(res); i++ {
+		if res[i] != '0' {
+			break
+		}
+	}
+	if i == len(res) {
+		return "0"
+	}
+	return res[i:]
+}
+
+func backDump(dump *dumpNumber, n int) string {
+	res := ""
+	childs := dump.childs
+	if n == 10 {
+		// 叶子层
+		for i := 0; i <= 9; i++ {
+			res = res + dump.vals[i]
+		}
+	} else {
+		for i := 9; i >= 0; i-- {
+			if child, ok := childs[i]; ok {
+				n++
+				res = res + backDump(child, n)
+				n--
+			}
+		}
+	}
+	return res
+}
