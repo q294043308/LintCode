@@ -1,8 +1,6 @@
 package main
 
-import (
-	logicfun "Logicfun"
-)
+import logicfun "Logicfun"
 
 func main() {
 	// head := &Common.ListNode{Val: 4}
@@ -20,6 +18,5 @@ func main() {
 	// // head.Right.Left = &Common.TreeNode{Val: 15}
 	// // head.Right.Right = &Common.TreeNode{Val: 7}
 	// close(test)
-
 	print(logicfun.LargestNumber([]int{0, 0}))
 }

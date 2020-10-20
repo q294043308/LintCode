@@ -383,3 +383,31 @@ func backDump(dump *dumpNumber, n int) string {
 	}
 	return res
 }
+
+// 180. Consecutive Numbers
+/*
+SELECT distinct Num as ConsecutiveNums
+from (
+  select Num,
+    case
+      when @prev = Num then @count := @count + 1
+      when (@prev := Num) is not null then @count := 1
+    end as CNT
+  from Logs, (select @prev := null,@count := null) as t
+) as temp
+where temp.CNT >= 3
+*/
+
+// 181. Employees Earning More Than Their Managers
+/*
+SELECT a.Name as 'Employee'
+FROM Employee a,Employee b
+WHERE a.ManagerId IS NOT NULL and b.Id = a.ManagerId and a.Salary > b.Salary
+*/
+
+// 182. Duplicate Emails
+/*
+SELECT DISTINCT(a.Email) as 'Email'
+FROM Person a, Person b
+WHERE a.Email = b.Email and a.Id != B.Id
+*/
