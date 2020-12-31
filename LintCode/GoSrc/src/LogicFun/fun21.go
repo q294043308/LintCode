@@ -1,5 +1,3 @@
-// keep studying(py is a special language,i don't love with it) -- 2020.05.13
-
 package logicfun
 
 import (
@@ -124,24 +122,21 @@ func TwoSum2(numbers []int, target int) []int {
 		return nil
 	}
 
-	left := 1
-	right := 2
+	left := 0
+	right := len(numbers) - 1
 
-	for true {
-		if numbers[left-1]+numbers[right-1] > target {
-			return nil
+	for left < right {
+		if numbers[left]+numbers[right] == target {
+			return []int{left + 1, right + 1}
 		}
-		if numbers[left-1]+numbers[right-1] == target {
-			break
-		}
-		if right < len(numbers) && (numbers[left-1]+numbers[right] <= target) {
-			right++
-		} else {
+		if numbers[left]+numbers[right] < target {
 			left++
+		} else {
+			right--
 		}
 	}
 
-	return []int{left, right}
+	return []int{}
 }
 
 // 166. Fraction to Recurring Decimal
@@ -411,3 +406,111 @@ SELECT DISTINCT(a.Email) as 'Email'
 FROM Person a, Person b
 WHERE a.Email = b.Email and a.Id != B.Id
 */
+
+// 183. Customers Who Never Order
+/*
+SELECT Name as 'Customers'
+FROM Customers
+WHERE Id
+not in (
+    SELECT DISTINCT(CustomerId) FROM Orders
+)
+*/
+
+// 184. Department Highest Salary
+/*
+SELECT Department.Name as Department, Employee.Name as Employee, Employee.Salary as Salary
+FROM Department LEFT JOIN Employee
+ON Department.Id = Employee.DepartmentId
+WHERE (Employee.Salary, Employee.DepartmentId) IN (SELECT Max(Salary), DepartmentId From Employee GROUP BY DepartmentId)
+*/
+
+// 185. Department Top Three Salaries
+/*
+SELECT T2.Name AS "Department", T1.Name AS "Employee", T1.Salary AS "Salary"
+FROM
+(
+    SELECT *
+    FROM Employee
+    WHERE (DepartmentId, Salary) IN (
+        SELECT a.DepartmentId, a.Salary FROM (
+            SELECT * FROM Employee GROUP BY Salary, DepartmentId
+        ) as a
+        WHERE (
+            SELECT count(*) FROM
+            (
+                SELECT * FROM Employee GROUP BY Salary, DepartmentId
+            ) AS b WHERE a.DepartmentId = b.DepartmentId AND a.Salary < b.Salary
+        ) < 3
+    )
+) AS T1 LEFT JOIN Department AS T2 ON T1.DepartmentId = T2.Id
+WHERE T2.Name IS NOT NULL
+*/
+
+// 187. Repeated DNA Sequences
+func FindRepeatedDnaSequences(s string) []string {
+	transNum := map[byte]int{'A': 0, 'C': 1, 'G': 2, 'T': 3}
+	transByte := []byte{'A', 'C', 'G', 'T'}
+	transStr := func(v int) string {
+		res := ""
+		for len(res) < 10 {
+			res = string(transByte[v%4]) + res
+			v /= 4
+		}
+		return res
+	}
+	DNAMap := make(map[int]bool)
+	curSize := 0
+	curDNA := 0
+	for i := 0; i < len(s); i++ {
+		if curSize < 10 {
+			curDNA = (curDNA << 2) + transNum[s[i]]
+			curSize++
+		} else {
+			curDNA = curDNA % (1 << 18)
+			curDNA = (curDNA << 2) + transNum[s[i]]
+		}
+		if curSize == 10 {
+			if _, ok := DNAMap[curDNA]; ok {
+				DNAMap[curDNA] = true
+			} else {
+				DNAMap[curDNA] = false
+			}
+		}
+	}
+
+	res := []string{}
+	for DNA, v := range DNAMap {
+		if v {
+			res = append(res, transStr(DNA))
+		}
+	}
+	return res
+}
+
+// 188. Best Time to Buy and Sell Stock IV
+func MaxProfitV4(k int, prices []int) int {
+	if k == 0 {
+		return 0
+	}
+
+	if k >= len(prices)/2 {
+		return MaxProfitV2(prices)
+	}
+
+	pricesMatrix := make([][2]int, k)
+	for i := 0; i < k; i++ {
+		pricesMatrix[i][0] = Common.MININTNUM
+	}
+
+	for i := 0; i < len(prices); i++ {
+		pricesMatrix[0][0] = int(math.Max(float64(pricesMatrix[0][0]), float64(-prices[i])))
+		pricesMatrix[0][1] = int(math.Max(float64(pricesMatrix[0][1]), float64(pricesMatrix[0][0]+prices[i])))
+		for j := 1; j < k; j++ {
+			pricesMatrix[j][0] = int(math.Max(float64(pricesMatrix[j][0]), float64(pricesMatrix[j-1][1]-prices[i])))
+			pricesMatrix[j][1] = int(math.Max(float64(pricesMatrix[j][1]), float64(pricesMatrix[j][0]+prices[i])))
+		}
+	}
+
+	return pricesMatrix[k-1][1]
+}

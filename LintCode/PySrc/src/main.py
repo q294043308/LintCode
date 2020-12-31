@@ -22,12 +22,28 @@ def testss(a):
 def tests2(a):
     a[0] = 20
 
+testa = 10000
+
 def main():
+    print(str(0))
+    arr = {0: [100001, 100002, 100003, 100004, 100005, 100006, 100007], 1000040: [100001]}
+    print(json.dumps(arr))
+    print(arr[0])
+    stra = "{\"0\":[100001,100002,100003,100004,100005,100006,100007],\"1000040\":[100001]}"
+    aaa = json.loads(stra)
+    print(aaa)
+    print(aaa['0'])
     # node1 = common.list.Node(1)
     # node2 = common.list.Node(2,node1,node1)
     # node1.next = node2
     # node1.random = node2
     # res = logicfun.fun1.Solution().reverseWords(\"  hello world!  \")
+    connect_str = 'mysql://:@{consul}/{db_name}?charset={charset}&use_unicode=1'.format(consul='123123',
+                                                                                        db_name='0000000',
+                                                                                        charset='6666666')
+    print(connect_str)
+    print(testa)
+
     class test1(object):
         def __init__(self):
             self.ll = 10
