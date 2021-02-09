@@ -514,3 +514,21 @@ func MaxProfitV4(k int, prices []int) int {
 
 	return pricesMatrix[k-1][1]
 }
+
+// 189. Rotate Array
+func RotateArr(nums []int, k int) {
+	k = k % len(nums)
+	a := make([]int, k)
+	for i := len(nums) - 1; i >= 0; i-- {
+		if len(nums)-i <= k {
+			a[k-len(nums)+i] = nums[i]
+		}
+
+		if i >= k {
+			nums[i] = nums[i-k]
+		} else {
+			nums[i] = a[i]
+		}
+	}
+	print(nums)
+}
